@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d25">
+  <title>Capico — Crypto trading with bots and smart tools</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="site-shell">
+    <section class="hero-frame" id="top">
+      <header class="navbar">
+        <a class="logo" href="#top" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
+        <div class="language-picker">
+          <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()">
+            <span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span>
+          </button>
+          <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
+            <button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en', this)">en</button>
+            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru', this)">ru</button>
+            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('es', this)">es</button>
+            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('cz', this)">cz</button>
+          </div>
+        </div>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#features">features</a><a href="#prices">prices</a><a href="#partners">partners</a><a href="#knowledge">knowledge base</a><a href="#academy">academy</a>
+        </nav>
+        <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+      </header>
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <h1 class="hero-title">Crypto trading<br><span>with bots and<br>smart seals</span></h1>
+        <button class="btn-primary" type="button" onclick="toggleModal(true)">Sign up now <span aria-hidden="true">⟶</span></button>
+      </div>
+      <div class="exchanges-wrapper">
+        <p class="exchanges-title">Trade for free on your<br>favorite exchanges</p>
+        <div class="exchange-cards" aria-label="Supported exchanges">
+          <div class="exchange-card"><img src="../img/Vector (11).png" alt="Binance"></div>
+          <div class="exchange-card"><img src="../img/Vector (12).png" alt="FTX"></div>
+          <div class="exchange-card"><img src="../img/Vector (13).png" alt="Huobi"></div>
+          <div class="exchange-card"><span class="exchange-name">EXMO</span></div>
+          <div class="exchange-card"><img src="../img/Vector (14).png" alt="OKX"></div>
+          <div class="exchange-card disabled">BYBIT <span class="badge-soon">Soon</span></div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#video" aria-label="Scroll to explore">↓</a>
+    </section>
+
+    <section class="video-section" id="video" aria-label="Manage positions on different exchanges from one window">
+      <img src="../img/002.png" alt="Manage positions across exchanges from one window using Capico on desktop and mobile">
+    </section>
+    <section class="numbers-section" aria-label="Capico platform statistics">
+      <img src="../img/003-numbers.png" alt="Capico statistics: 18.5 billion dollars trading volume, 36 million online, 21.5 thousand traders and 325 million deals">
+    </section>
+    <section class="benefits-showcase" aria-label="Capico benefits: Interface Builder, MultiChart, Portfolio and Statistics">
+      <img src="../img/004.png" alt="Customize your trading interface, view multiple cryptocurrency charts and manage portfolio statistics in one place">
+    </section>
+
+    <section class="comfortable-work-section">
+      <div class="work-header">
+        <h2 class="work-title">Everything for your<br><span class="purple-text">comfortable work</span></h2>
+        <div class="slider-nav-buttons">
+          <button class="slider-btn" type="button" aria-label="Previous benefits" onclick="scrollBenefits(-1)">←</button>
+          <button class="slider-btn slider-btn-wide" type="button" aria-label="Next benefits" onclick="scrollBenefits(1)">⟶</button>
+        </div>
+      </div>
+      <div class="cards-grid" id="benefitCards">
+        <article class="work-card"><h3>Speed</h3><img src="../img/Vector.png" alt="" class="work-icon"><p>Your assets on all connected exchanges are collected in one place</p></article>
+        <article class="work-card"><h3>Hotkeys</h3><img src="../img/Vector (1).png" alt="" class="work-icon"><p>Use hot keys to work faster</p></article>
+        <article class="work-card"><h3>Notifications</h3><img src="../img/Vector (2).png" alt="" class="work-icon"><p>Get important email and Telegram notifications</p></article>
+        <article class="work-card"><h3>Demo Account</h3><img src="../img/Vector (3).png" alt="" class="work-icon"><p>Train. Learn. Test any features. Free and without risks</p></article>
+        <article class="work-card"><h3>Cloud Service</h3><img src="../img/Vector (7).png" alt="" class="work-icon"><p>Updates are usually invisible. No break from trade.</p></article>
+        <article class="work-card"><h3>Dark theme</h3><img src="../img/Vector (5).png" alt="" class="work-icon"><p>Trade anytime. Even at night.</p></article>
+      </div>
+      <div class="progress-bar-line"><div class="progress-active"></div></div>
+    </section>
+
+    <section class="features-purple-section" id="features">
+      <div class="section-topline"><h2>features</h2><span>Manage positions on</span></div>
+      <div class="features-split-layout">
+        <ul class="features-list-menu">
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(0)">Stop Loss and Take Profit</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(1)">Trailing</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(2)">Timeout and Candle Stop Loss</button></li>
+          <li class="active"><button type="button" class="feature-tab" aria-pressed="true" onclick="selectFeature(3)">Pending orders</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(4)">Trading on the chart</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(5)">Channel bot</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(6)">Ladder and averaging</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(7)">Automatic breakeven</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(8)">Booster</button></li>
+          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(9)">Panic Sell</button></li>
+        </ul>
+        <article class="feature-active-display" aria-live="polite">
+          <div class="display-card-bg">
+            <span class="bg-faded-title" id="featureBackdropTitle" aria-hidden="true">Pending orders</span>
+            <div class="active-card-content">
+              <div class="card-top-header"><h3 id="featureTitle">Pending<br>orders</h3><span class="orders-icon" id="featureIcon" aria-hidden="true"></span></div>
+              <p id="featureDescription">You can create orders both above the current price and below. Funds on the balance sheet are not blocked. Such orders are “not seen” by the exchange.</p>
+              <a class="btn-learn-more" href="#prices">Learn more <span aria-hidden="true">⟶</span></a>
+            </div>
+          </div>
+          <div class="vertical-scroll-indicators">
+            <button type="button" aria-label="Previous feature" onclick="selectFeature(activeFeatureIndex - 1)">↑</button>
+            <button type="button" aria-label="Next feature" onclick="selectFeature(activeFeatureIndex + 1)">↓</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mobile-section">
+      <div class="mobile-copy">
+        <span class="section-eyebrow">ALL FUNCTIONALITY IS ALWAYS AT HAND</span>
+        <h2>Trade<br>anywhere</h2>
+        <p>The service is fully adapted to work through a browser on your smartphone or tablet.</p>
+        <button class="btn-primary btn-mobile" type="button" onclick="toggleModal(true)">Create an account <span aria-hidden="true">⟶</span></button>
+      </div>
+      <img class="mobile-art" src="../img/23 1.png" alt="Capico trading dashboard on mobile with cryptocurrency cards">
+    </section>
+
+    <section class="security-section" id="knowledge">
+      <div class="security-heading"><span class="section-eyebrow">API, 2FA AND TECHNOLOGY</span><h2>high security<br>platform</h2></div>
+      <img class="security-art" src="../img/untitled332 1.png" alt="Layered shield and padlock representing account security">
+      <div class="security-cards">
+        <article class="security-card"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
+        <article class="security-card"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
+        <article class="security-card"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
+      </div>
+    </section>
+
+    <section class="partners-section" id="partners">
+      <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
+      <div class="partner-logos">
+        <div class="partner-logo"><img src="../img/Vector (1).png" alt="Binance"></div>
+        <div class="partner-logo"><img src="../img/Vector (2).png" alt="FTX"></div>
+        <div class="partner-logo"><img src="../img/Vector (3).png" alt="Huobi"></div>
+        <div class="partner-logo"><img src="../img/Vector (4).png" alt="OKX"></div>
+      </div>
+    </section>
+
+    <p class="pricing-note" id="prices">Free use per month</p>
+    <section class="final-cta" id="academy">
+      <img src="../img/circl33dxe 1.png" alt="" aria-hidden="true">
+      <h2>Try Capico <span>for free<br>per month</span></h2>
+      <button class="btn-primary btn-final" type="button" onclick="toggleModal(true)">Create an account <span aria-hidden="true">⟶</span></button>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-brand"><a class="logo" href="#top" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
+      <div class="footer-column"><h3>We are in social networks</h3><div class="social-links"><a href="#partners" aria-label="Twitter">𝕏</a><a href="#partners" aria-label="Facebook">f</a><a href="#partners" aria-label="YouTube">▶</a><a href="#partners" aria-label="Telegram">➤</a></div><a href="mailto:info@capico.app">info@capico.app</a></div>
+      <div class="footer-column"><h3>Documents</h3><a href="#knowledge">Terms of use</a><a href="#knowledge">Privacy Policy</a><a href="#knowledge">Referral Agreement</a></div>
+      <div class="footer-column"><h3>Platform</h3><a href="#features">Functions</a><a href="#prices">Tariffs</a><a href="#partners">Partners</a><a href="#academy">Academy</a><a href="#knowledge">Knowledge base</a></div>
+      <div class="footer-column"><h3><button type="button" class="footer-signin" onclick="toggleModal(true)">Sign in</button></h3><button type="button" class="footer-signin" onclick="toggleModal(true)">Create an account</button></div>
+    </footer>
+  </main>
+
+  <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
+    <div class="modal-box">
+      <button class="modal-close-icon" type="button" aria-label="Close sign in" onclick="toggleModal(false)">&times;</button>
+      <h2 class="modal-heading" id="modalHeading">Sign in</h2>
+      <form class="signin-form" onsubmit="event.preventDefault()">
+        <div class="form-field"><label class="field-label" for="login">Login or email</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="username" required></div>
+        <div class="form-field"><label class="field-label" for="password">Password</label><input id="password" type="password" class="field-input" placeholder="Password" autocomplete="current-password" required></div>
+        <a href="#knowledge" class="forgot-password-link">Forgot password?</a>
+        <button type="submit" class="btn-submit-signin">Sign in <span aria-hidden="true">⟶</span></button>
+      </form>
+      <div class="modal-bottom"><p class="no-account-text">Don't have an account yet?</p><button type="button" class="btn-create-account" onclick="document.getElementById('login').focus()">Create an account <span aria-hidden="true">⟶</span></button></div>
+    </div>
+  </div>
+  <script>
+    const featureSlides = [
+      {
+        title: 'Stop Loss and<br>Take Profit',
+        description: 'Limit your risks and earn more by setting a Stop Loss and several Take Profit levels for each trade.',
+        icon: '<path d="M12 2v20M5 6h14v4H5zM7 12h10v4H7zM9 18h6v3H9z"/>'
+      },
+      {
+        title: 'Trailing',
+        description: 'Buy and sell assets at better prices with flexible trailing options that follow the market.',
+        icon: '<path d="M5 4v16M12 2v20M19 5v14M2 8h6v7H2zM9 11h6v7H9zM16 7h6v6h-6z"/>'
+      },
+      {
+        title: 'Timeout and<br>Candle Stop Loss',
+        description: 'Close a position after a set time or when the selected candle closes to protect your trading strategy.',
+        icon: '<circle cx="12" cy="13" r="8"/><path d="M12 9v5l3 2M9 2h6M12 2v3M4 5l2 2"/>'
+      },
+      {
+        title: 'Pending<br>orders',
+        description: 'You can create orders both above the current price and below. Funds on the balance sheet are not blocked. Such orders are “not seen” by the exchange.',
+        icon: '<rect x="3" y="9" width="8" height="6" rx="1"/><rect x="15" y="2" width="6" height="5" rx="1"/><rect x="16" y="17" width="6" height="5" rx="1"/><path d="M11 12h3a2 2 0 002-2V7M14 12h1a2 2 0 012 2v3"/>'
+      },
+      {
+        title: 'Trading on<br>the chart',
+        description: 'Create and edit trades or bots directly on the chart. See your positions and manage them visually.',
+        icon: '<path d="M3 20V4M3 20h19M7 16l4-5 3 2 6-8M17 5h3v3"/>'
+      },
+      {
+        title: 'Channel bot',
+        description: 'Automatically trade within a selected price channel and keep your strategy running around the clock.',
+        icon: '<rect x="5" y="3" width="14" height="12" rx="3"/><path d="M9 8h.01M15 8h.01M8 19v-4h8v4M3 7l2 2M21 7l-2 2M19 18l2 2M5 18l-2 2M12 0v3M20 5l2-2"/>'
+      },
+      {
+        title: 'Ladder and<br>averaging',
+        description: 'Build a grid of entry and exit orders. Capico calculates the average entry price and potential result for you.',
+        icon: '<circle cx="12" cy="12" r="8"/><path d="M12 7v10M8 9h8M8 15h8M3 3l3 3M21 3l-3 3M3 21l3-3M21 21l-3-3"/>'
+      },
+      {
+        title: 'Automatic<br>breakeven',
+        description: 'After the first take-profit executes, automatically move Stop Loss to breakeven and protect your position.',
+        icon: '<path d="M5 4h14v16H5zM8 8h8M8 12h5M8 16h3M3 12l2 2 4-4"/>'
+      },
+      {
+        title: 'Booster',
+        description: 'Trade Binance Futures with just two buttons to enter a trade and manage positions. Switch between long and short instantly.',
+        icon: '<path d="M20 7h-9M20 7l-3-3M20 7l-3 3M4 17h9M4 17l3-3M4 17l3 3"/><circle cx="12" cy="12" r="10"/>'
+      },
+      {
+        title: 'Panic Sell',
+        description: 'Quickly close all active smart trades and exit positions at the current market price.',
+        icon: '<circle cx="8" cy="8" r="5"/><circle cx="17" cy="16" r="5"/><path d="M8 5v6M5 8h6M17 13v6M14 16h6"/>'
+      }
+    ];
+    let activeFeatureIndex = 3;
+
+    function selectFeature(index) {
+      activeFeatureIndex = (index + featureSlides.length) % featureSlides.length;
+      const feature = featureSlides[activeFeatureIndex];
+      document.getElementById('featureTitle').innerHTML = feature.title;
+      document.getElementById('featureDescription').textContent = feature.description;
+      document.getElementById('featureBackdropTitle').textContent = feature.title.replace('<br>', ' ');
+      document.getElementById('featureIcon').innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        feature.icon + '</svg>';
+
+      document.querySelectorAll('.features-list-menu li').forEach(function (item, itemIndex) {
+        const selected = itemIndex === activeFeatureIndex;
+        item.classList.toggle('active', selected);
+        item.querySelector('button').setAttribute('aria-pressed', String(selected));
+      });
+    }
+
+    function toggleLanguages(forceOpen) {
+      const picker = document.querySelector('.language-picker');
+      const button = picker.querySelector('.lang-selector');
+      const options = picker.querySelector('.language-options');
+      const isOpen = typeof forceOpen === 'boolean' ? forceOpen : options.hidden;
+      options.hidden = !isOpen;
+      button.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    function selectLanguage(language, option) {
+      document.getElementById('currentLanguage').textContent = language;
+      document.querySelectorAll('.language-option').forEach(function (item) {
+        const selected = item === option;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      document.querySelector('.lang-selector').setAttribute('aria-label', 'Language: ' + language.toUpperCase());
+      toggleLanguages(false);
+    }
+
+    function scrollBenefits(direction) {
+      const cards = document.getElementById('benefitCards');
+      const card = cards.querySelector('.work-card');
+      const gap = parseFloat(getComputedStyle(cards).columnGap) || 0;
+      cards.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: 'smooth' });
+    }
+
+    function updateBenefitsProgress() {
+      const cards = document.getElementById('benefitCards');
+      const progress = document.querySelector('.progress-active');
+      const maxScroll = cards.scrollWidth - cards.clientWidth;
+      const travel = progress.parentElement.clientWidth - progress.clientWidth;
+      const position = maxScroll > 0 ? cards.scrollLeft / maxScroll : 0;
+      progress.style.transform = 'translateX(' + travel * position + 'px)';
+    }
+
+    function toggleModal(show) {
+      const modal = document.getElementById('signInModal');
+      modal.style.display = show ? 'flex' : 'none';
+      document.body.classList.toggle('modal-open', show);
+      if (show) modal.querySelector('input').focus();
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        toggleLanguages(false);
+        toggleModal(false);
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('.language-picker')) toggleLanguages(false);
+    });
+
+    selectFeature(activeFeatureIndex);
+    document.getElementById('benefitCards').addEventListener('scroll', updateBenefitsProgress, { passive: true });
+    window.addEventListener('resize', updateBenefitsProgress);
+    updateBenefitsProgress();
+  </script>
+</body>
+</html>
