@@ -85,28 +85,28 @@
             <span class="feature-wheel-title" id="featureWheelTitle">Pending orders</span>
           </div>
           <div class="feature-wheel-options" role="group" aria-label="Choose a feature">
-            <button class="feature-wheel-button" type="button" aria-label="Stop Loss and Take Profit" aria-pressed="false" onclick="selectFeature(0)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Trailing" aria-pressed="false" onclick="selectFeature(1)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Timeout and Candle Stop Loss" aria-pressed="false" onclick="selectFeature(2)"></button>
-            <button class="feature-wheel-button active" type="button" aria-label="Pending orders" aria-pressed="true" onclick="selectFeature(3)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Trading on the chart" aria-pressed="false" onclick="selectFeature(4)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Channel bot" aria-pressed="false" onclick="selectFeature(5)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Ladder and averaging" aria-pressed="false" onclick="selectFeature(6)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Automatic breakeven" aria-pressed="false" onclick="selectFeature(7)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Booster" aria-pressed="false" onclick="selectFeature(8)"></button>
-            <button class="feature-wheel-button" type="button" aria-label="Panic Sell" aria-pressed="false" onclick="selectFeature(9)"></button>
+            <button class="feature-wheel-button" data-feature-index="0" type="button" aria-label="Stop Loss and Take Profit" aria-pressed="false" onclick="selectFeature(0)"></button>
+            <button class="feature-wheel-button" data-feature-index="1" type="button" aria-label="Trailing" aria-pressed="false" onclick="selectFeature(1)"></button>
+            <button class="feature-wheel-button" data-feature-index="2" type="button" aria-label="Timeout and Candle Stop Loss" aria-pressed="false" onclick="selectFeature(2)"></button>
+            <button class="feature-wheel-button active" data-feature-index="3" type="button" aria-label="Pending orders" aria-pressed="true" onclick="selectFeature(3)"></button>
+            <button class="feature-wheel-button" data-feature-index="4" type="button" aria-label="Trading on the chart" aria-pressed="false" onclick="selectFeature(4)"></button>
+            <button class="feature-wheel-button" data-feature-index="5" type="button" aria-label="Channel bot" aria-pressed="false" onclick="selectFeature(5)"></button>
+            <button class="feature-wheel-button" data-feature-index="6" type="button" aria-label="Ladder and averaging" aria-pressed="false" onclick="selectFeature(6)"></button>
+            <button class="feature-wheel-button" data-feature-index="7" type="button" aria-label="Automatic breakeven" aria-pressed="false" onclick="selectFeature(7)"></button>
+            <button class="feature-wheel-button" data-feature-index="8" type="button" aria-label="Booster" aria-pressed="false" onclick="selectFeature(8)"></button>
+            <button class="feature-wheel-button" data-feature-index="9" type="button" aria-label="Panic Sell" aria-pressed="false" onclick="selectFeature(9)"></button>
           </div>
           <div class="feature-wheel-labels" aria-hidden="true">
-            <span><span>Stop Loss and Take Profit</span></span>
-            <span><span>Trailing</span></span>
-            <span><span>Timeout and Candle Stop Loss</span></span>
-            <span><span>Pending orders</span></span>
-            <span><span>Trading on the chart</span></span>
-            <span><span>Channel bot</span></span>
-            <span><span>Ladder and averaging</span></span>
-            <span><span>Automatic breakeven</span></span>
-            <span><span>Booster</span></span>
-            <span><span>Panic Sell</span></span>
+            <span data-feature-index="0"><span>Stop Loss and Take Profit</span></span>
+            <span data-feature-index="1"><span>Trailing</span></span>
+            <span data-feature-index="2"><span>Timeout and Candle Stop Loss</span></span>
+            <span data-feature-index="3"><span>Pending orders</span></span>
+            <span data-feature-index="4"><span>Trading on the chart</span></span>
+            <span data-feature-index="5"><span>Channel bot</span></span>
+            <span data-feature-index="6"><span>Ladder and averaging</span></span>
+            <span data-feature-index="7"><span>Automatic breakeven</span></span>
+            <span data-feature-index="8"><span>Booster</span></span>
+            <span data-feature-index="9"><span>Panic Sell</span></span>
           </div>
         </div>
         <article class="feature-active-display" aria-live="polite">
@@ -383,39 +383,70 @@
       }
     ];
     let activeFeatureIndex = 3;
-    let featureWheelReady = false;
+    let featureWheelReady = true;
+    const featureWheelAnchorIndex = 4;
+    const featureWheelAnchorAngle = 73;
+
+    function moveFeatureWheelItem(container, toEnd) {
+      if (toEnd) {
+        container.appendChild(container.firstElementChild);
+      } else {
+        container.insertBefore(container.lastElementChild, container.firstElementChild);
+      }
+    }
+
+    function rotateFeatureWheelTo(index, animate) {
+      const options = document.querySelector('.feature-wheel-options');
+      const labels = document.querySelector('.feature-wheel-labels');
+      const labelPositions = new Map();
+      labels.querySelectorAll(':scope > span').forEach(function (label) {
+        label.getAnimations().forEach(function (animation) {
+          animation.cancel();
+        });
+        labelPositions.set(label.dataset.featureIndex, label.getBoundingClientRect());
+      });
+
+      let selectedSlot = Array.from(options.children).findIndex(function (button) {
+        return Number(button.dataset.featureIndex) === index;
+      });
+      while (selectedSlot > featureWheelAnchorIndex) {
+        moveFeatureWheelItem(options, true);
+        moveFeatureWheelItem(labels, true);
+        selectedSlot--;
+      }
+      while (selectedSlot < featureWheelAnchorIndex) {
+        moveFeatureWheelItem(options, false);
+        moveFeatureWheelItem(labels, false);
+        selectedSlot++;
+      }
+
+      if (animate !== false && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        labels.querySelectorAll(':scope > span').forEach(function (label) {
+          const previous = labelPositions.get(label.dataset.featureIndex);
+          const current = label.getBoundingClientRect();
+          const deltaX = previous.left - current.left;
+          const deltaY = previous.top - current.top;
+          if (deltaX || deltaY) {
+            label.animate(
+              [{ translate: deltaX + 'px ' + deltaY + 'px' }, { translate: '0px 0px' }],
+              { duration: 600, easing: 'cubic-bezier(.2, .75, .25, 1)' }
+            );
+          }
+        });
+      }
+    }
 
     function selectFeature(index) {
       const previousFeatureIndex = activeFeatureIndex;
       activeFeatureIndex = (index + featureSlides.length) % featureSlides.length;
       const feature = featureSlides[activeFeatureIndex];
-      const featureWheelRotor = document.getElementById('featureWheelRotor');
-      const featureWheelOptions = document.querySelector('.feature-wheel-options');
-      if (featureWheelReady && activeFeatureIndex !== previousFeatureIndex &&
-          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        [featureWheelRotor, featureWheelOptions, document.querySelector('.feature-wheel-labels')].forEach(function (element) {
-          element.getAnimations().forEach(function (animation) {
-            animation.cancel();
-          });
-          element.animate(
-            [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }],
-            { duration: 850, easing: 'cubic-bezier(.2, .75, .25, 1)' }
-          );
-        });
-        document.querySelectorAll('.feature-wheel-labels > span > span').forEach(function (label) {
-          label.getAnimations().forEach(function (animation) {
-            animation.cancel();
-          });
-          label.animate(
-            [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-360deg)' }],
-            { duration: 850, easing: 'cubic-bezier(.2, .75, .25, 1)' }
-          );
-        });
+      if (featureWheelReady && activeFeatureIndex !== previousFeatureIndex) {
+        rotateFeatureWheelTo(activeFeatureIndex);
       }
       featureWheelReady = true;
       document.querySelector('.feature-wheel').style.setProperty(
         '--active-slice-angle',
-        (activeFeatureIndex * 18) + 'deg'
+        featureWheelAnchorAngle + 'deg'
       );
       document.getElementById('featureTitle').innerHTML = window.translateText
         ? window.translateText(feature.title)
@@ -435,11 +466,13 @@
         ? window.translateText(wheelTitle)
         : wheelTitle;
 
-      document.querySelectorAll('.feature-wheel-options .feature-wheel-button').forEach(function (button, buttonIndex) {
-        const selected = buttonIndex === activeFeatureIndex;
+      document.querySelectorAll('.feature-wheel-options .feature-wheel-button').forEach(function (button) {
+        const selected = Number(button.dataset.featureIndex) === activeFeatureIndex;
         button.classList.toggle('active', selected);
         button.setAttribute('aria-pressed', String(selected));
-        document.querySelectorAll('.feature-wheel-labels > span')[buttonIndex].classList.toggle('active', selected);
+      });
+      document.querySelectorAll('.feature-wheel-labels > span').forEach(function (label) {
+        label.classList.toggle('active', Number(label.dataset.featureIndex) === activeFeatureIndex);
       });
     }
 
@@ -497,6 +530,7 @@
       if (!event.target.closest('.language-picker')) toggleLanguages(false);
     });
 
+    rotateFeatureWheelTo(activeFeatureIndex, false);
     selectFeature(activeFeatureIndex);
     document.getElementById('benefitCards').addEventListener('scroll', updateBenefitsProgress, { passive: true });
     window.addEventListener('resize', updateBenefitsProgress);

@@ -1514,7 +1514,7 @@ input:focus-visible {
   height: 560px;
   overflow: hidden;
   justify-self: center;
-  --active-slice-angle: 54deg;
+  --active-slice-angle: 73deg;
 }
 
 .feature-wheel-rotor {
@@ -1574,7 +1574,7 @@ input:focus-visible {
   cursor: pointer;
   pointer-events: auto;
   clip-path: polygon(var(--slice-shape));
-  transition: color 180ms ease, background-color 180ms ease, filter 180ms ease;
+  transition: color 180ms ease, background-color 180ms ease, filter 180ms ease, clip-path 600ms cubic-bezier(.2, .75, .25, 1);
 }
 
 .feature-wheel-labels {
@@ -1598,6 +1598,7 @@ input:focus-visible {
   line-height: 1.15;
   text-align: center;
   transform: translate(-50%, -50%) rotate(var(--slice-angle));
+  transition: transform 300ms ease 600ms;
 }
 
 .feature-wheel-labels > span > span {
@@ -1609,6 +1610,7 @@ input:focus-visible {
   background: #a77be6;
   color: #fff;
   box-shadow: 0 0 14px rgba(206, 166, 255, .72);
+  transform: translate(-50%, -50%) rotate(var(--slice-angle));
 }
 
 .feature-wheel-labels > span:nth-child(1) { --slice-x: 10%; --slice-y: 17.4%; --slice-angle: -81deg; }
@@ -1681,6 +1683,7 @@ input:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .feature-wheel-rotor,
   .feature-wheel-button,
+  .feature-wheel-labels > span,
   .feature-wheel-labels > span > span {
     transition: none;
   }
