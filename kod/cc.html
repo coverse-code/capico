@@ -20,20 +20,19 @@
             <span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span>
           </button>
           <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
-            <button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en', this)">en</button>
-            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru', this)">ru</button>
-            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('es', this)">es</button>
-            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('cz', this)">cz</button>
+            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button>
+            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button>
+            <button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
           </div>
         </div>
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="#features">features</a><a href="#prices">prices</a><a href="#partners">partners</a><a href="#knowledge">knowledge base</a><a href="#academy">academy</a>
+          <a href="features.html">features</a><a href="prices.html">prices</a><a href="partners.html">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html">academy</a>
         </nav>
         <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
       </header>
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <h1 class="hero-title">Crypto trading<br><span>with bots and<br>smart seals</span></h1>
+        <h1 class="hero-title">Crypto trading<br><span>with bots and<br>smart tools</span></h1>
         <button class="btn-primary" type="button" onclick="toggleModal(true)">Sign up now <span aria-hidden="true">⟶</span></button>
       </div>
       <div class="exchanges-wrapper">
@@ -44,13 +43,12 @@
           <div class="exchange-card"><img src="../img/Vector (13).png" alt="Huobi"></div>
           <div class="exchange-card"><span class="exchange-name">EXMO</span></div>
           <div class="exchange-card"><img src="../img/Vector (14).png" alt="OKX"></div>
-          <div class="exchange-card disabled">BYBIT <span class="badge-soon">Soon</span></div>
         </div>
       </div>
-      <a class="scroll-cue" href="#video" aria-label="Scroll to explore">↓</a>
+      <a class="scroll-cue" href="#features" aria-label="Scroll to explore">↓</a>
     </section>
 
-    <section class="video-section" id="video" aria-label="Manage positions on different exchanges from one window">
+    <section class="video-section" aria-label="Manage positions on different exchanges from one window">
       <img src="../img/002.png" alt="Manage positions across exchanges from one window using Capico on desktop and mobile">
     </section>
     <section class="numbers-section" aria-label="Capico platform statistics">
@@ -72,35 +70,52 @@
         <article class="work-card"><h3>Speed</h3><img src="../img/Vector.png" alt="" class="work-icon"><p>Your assets on all connected exchanges are collected in one place</p></article>
         <article class="work-card"><h3>Hotkeys</h3><img src="../img/Vector (1).png" alt="" class="work-icon"><p>Use hot keys to work faster</p></article>
         <article class="work-card"><h3>Notifications</h3><img src="../img/Vector (2).png" alt="" class="work-icon"><p>Get important email and Telegram notifications</p></article>
-        <article class="work-card"><h3>Demo Account</h3><img src="../img/Vector (3).png" alt="" class="work-icon"><p>Train. Learn. Test any features. Free and without risks</p></article>
-        <article class="work-card"><h3>Cloud Service</h3><img src="../img/Vector (7).png" alt="" class="work-icon"><p>Updates are usually invisible. No break from trade.</p></article>
-        <article class="work-card"><h3>Dark theme</h3><img src="../img/Vector (5).png" alt="" class="work-icon"><p>Trade anytime. Even at night.</p></article>
+        <article class="work-card"><h3>Cloud Service</h3><img src="../img/Vector (26).png" alt="" class="work-icon"><p>Updates are usually invisible. No break from trade.</p></article>
+        <article class="work-card"><h3>Dark theme</h3><img src="../img/Vector (27).png" alt="" class="work-icon"><p>Trade anytime. Even at night.</p></article>
       </div>
       <div class="progress-bar-line"><div class="progress-active"></div></div>
     </section>
 
     <section class="features-purple-section" id="features">
-      <div class="section-topline"><h2>features</h2><span>Manage positions on</span></div>
+      <div class="section-topline"><h2>features</h2></div>
       <div class="features-split-layout">
-        <ul class="features-list-menu">
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(0)">Stop Loss and Take Profit</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(1)">Trailing</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(2)">Timeout and Candle Stop Loss</button></li>
-          <li class="active"><button type="button" class="feature-tab" aria-pressed="true" onclick="selectFeature(3)">Pending orders</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(4)">Trading on the chart</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(5)">Channel bot</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(6)">Ladder and averaging</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(7)">Automatic breakeven</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(8)">Booster</button></li>
-          <li><button type="button" class="feature-tab" aria-pressed="false" onclick="selectFeature(9)">Panic Sell</button></li>
-        </ul>
+        <div class="feature-wheel">
+          <div class="feature-wheel-rotor" id="featureWheelRotor" aria-hidden="true"></div>
+          <div class="feature-wheel-center" aria-live="polite">
+            <span class="feature-wheel-title" id="featureWheelTitle">Pending orders</span>
+          </div>
+          <div class="feature-wheel-options" role="group" aria-label="Choose a feature">
+            <button class="feature-wheel-button" type="button" aria-label="Stop Loss and Take Profit" aria-pressed="false" onclick="selectFeature(0)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Trailing" aria-pressed="false" onclick="selectFeature(1)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Timeout and Candle Stop Loss" aria-pressed="false" onclick="selectFeature(2)"></button>
+            <button class="feature-wheel-button active" type="button" aria-label="Pending orders" aria-pressed="true" onclick="selectFeature(3)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Trading on the chart" aria-pressed="false" onclick="selectFeature(4)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Channel bot" aria-pressed="false" onclick="selectFeature(5)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Ladder and averaging" aria-pressed="false" onclick="selectFeature(6)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Automatic breakeven" aria-pressed="false" onclick="selectFeature(7)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Booster" aria-pressed="false" onclick="selectFeature(8)"></button>
+            <button class="feature-wheel-button" type="button" aria-label="Panic Sell" aria-pressed="false" onclick="selectFeature(9)"></button>
+          </div>
+          <div class="feature-wheel-labels" aria-hidden="true">
+            <span><span>Stop Loss and Take Profit</span></span>
+            <span><span>Trailing</span></span>
+            <span><span>Timeout and Candle Stop Loss</span></span>
+            <span><span>Pending orders</span></span>
+            <span><span>Trading on the chart</span></span>
+            <span><span>Channel bot</span></span>
+            <span><span>Ladder and averaging</span></span>
+            <span><span>Automatic breakeven</span></span>
+            <span><span>Booster</span></span>
+            <span><span>Panic Sell</span></span>
+          </div>
+        </div>
         <article class="feature-active-display" aria-live="polite">
           <div class="display-card-bg">
             <span class="bg-faded-title" id="featureBackdropTitle" aria-hidden="true">Pending orders</span>
             <div class="active-card-content">
               <div class="card-top-header"><h3 id="featureTitle">Pending<br>orders</h3><span class="orders-icon" id="featureIcon" aria-hidden="true"></span></div>
               <p id="featureDescription">You can create orders both above the current price and below. Funds on the balance sheet are not blocked. Such orders are “not seen” by the exchange.</p>
-              <a class="btn-learn-more" href="#prices">Learn more <span aria-hidden="true">⟶</span></a>
+              <a class="btn-learn-more" href="prices.html">Learn more <span aria-hidden="true">⟶</span></a>
             </div>
           </div>
           <div class="vertical-scroll-indicators">
@@ -122,7 +137,7 @@
     </section>
 
     <section class="security-section" id="knowledge">
-      <div class="security-heading"><span class="section-eyebrow">API, 2FA AND TECHNOLOGY</span><h2>high security<br>platform</h2></div>
+      <div class="security-heading"><span class="section-eyebrow">KNOWLEDGE BASE</span><h2>high security<br>platform</h2></div>
       <img class="security-art" src="../img/untitled332 1.png" alt="Layered shield and padlock representing account security">
       <div class="security-cards">
         <article class="security-card"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
@@ -131,43 +146,187 @@
       </div>
     </section>
 
-    <section class="partners-section" id="partners">
+    <section id="partners" aria-label="Partners">
+      <section class="partners-section">
       <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
       <div class="partner-logos">
-        <div class="partner-logo"><img src="../img/Vector (1).png" alt="Binance"></div>
-        <div class="partner-logo"><img src="../img/Vector (2).png" alt="FTX"></div>
-        <div class="partner-logo"><img src="../img/Vector (3).png" alt="Huobi"></div>
-        <div class="partner-logo"><img src="../img/Vector (4).png" alt="OKX"></div>
+        <div class="partner-logo"><img src="../img/Vector (11).png" alt="Binance"></div>
+        <div class="partner-logo"><img src="../img/Vector (12).png" alt="FTX"></div>
+        <div class="partner-logo"><img src="../img/Vector (13).png" alt="Huobi"></div>
+        <div class="partner-logo"><img src="../img/Vector (14).png" alt="OKX"></div>
+      </div>
+      </section>
+
+      <section class="partner-community-section" aria-labelledby="partner-community-title">
+      <header class="partner-community-heading">
+        <h2 id="partner-community-title">Our<br>partners</h2>
+        <p>Popular crypto communities and well-known traders trade on the Capico platform.</p>
+      </header>
+      <div class="partner-community-panel">
+        <p class="partner-community-intro">Join our partners, read their analytics, and explore the world of trading and cryptocurrencies.</p>
+        <div class="partner-community-content">
+          <nav class="partner-community-nav" aria-label="Partner community members">
+            <ul>
+              <li><button class="partner-community-button active" type="button" aria-pressed="true" data-partner="Cryptomaximum Group">Cryptomaximum Group</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Solo">Solo</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="CryptoArk">CryptoArk</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Vilarso">Vilarso</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Ego trading">Ego trading</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Livin off trade">Livin off trade</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Schneider official">Schneider official</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Drevnik Sereji">Drevnik Sereji</button></li>
+              <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Ivan Alekseev">Ivan Alekseev</button></li>
+            </ul>
+          </nav>
+          <article class="partner-community-card" aria-live="polite">
+            <h3 class="partner-community-title">Cryptomaximum<br>Group</h3>
+            <ul class="partner-community-details">
+              <li>Team of professional traders in the stock and cryptocurrency markets</li>
+              <li>Crypto startup advisors</li>
+              <li>Training and sales teams</li>
+              <li>Cryptocurrency media</li>
+            </ul>
+            <p class="partner-community-placeholder" hidden>This partner is listed in Capico’s partner community. More profile details and links will be added when available.</p>
+            <div class="partner-community-links" aria-label="Cryptomaximum Group social channels">
+              <span aria-label="Twitter">𝕏</span>
+              <span aria-label="Facebook">f</span>
+              <span aria-label="VK">ᴠκ</span>
+              <span class="partner-community-domain">cryptomax.io</span>
+            </div>
+          </article>
+        </div>
+      </div>
+      </section>
+    </section>
+
+    <section id="prices" aria-label="Prices">
+    <section class="pricing-section" aria-labelledby="pricing-title">
+      <h2 class="pricing-title" id="pricing-title">Prices</h2>
+      <div class="demo-pricing-panel">
+        <div class="demo-pricing-copy">
+          <h3>demo account</h3>
+          <p>Available immediately <span>after registering with Capico.</span></p>
+          <a href="#trial-period">Read more <span aria-hidden="true">⟶</span></a>
+        </div>
+        <div class="demo-pricing-features">
+          <article class="demo-feature demo-feature-balance">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="20"/><path d="M22 25c5-7 19-7 22 0 3 8-7 9-12 11-7 2-8 7-2 10 5 3 14 1 18-3M32 17v30M12 32a20 20 0 0 1 34-14M52 32a20 20 0 0 1-34 14"/></svg>
+            <p>Virtual 10,000 USDT<br>on balance</p>
+          </article>
+          <article class="demo-feature">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="m32 7 6 3 6-1 4 6 6 3v7l4 5-4 6v7l-6 3-4 6-6-1-6 3-6-3-6 1-4-6-6-3v-7l-4-5 4-6v-7l6-3 4-6 6 1z"/><circle cx="32" cy="32" r="11"/><path d="M27 32h10M32 27v10"/></svg>
+            <p>Works without subscription<br>and time limits</p>
+          </article>
+          <article class="demo-feature">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="22" r="10"/><path d="M14 54c1-10 8-16 18-16s17 6 18 16M8 8h48v48H8zM17 48h6m8 0h6m8 0h6"/></svg>
+            <p>You can create multiple<br>accounts for different purposes</p>
+          </article>
+        </div>
+        <div class="demo-orbit demo-orbit-one" aria-hidden="true"></div>
+        <div class="demo-orbit demo-orbit-two" aria-hidden="true"></div>
+        <div class="demo-orbit demo-orbit-three" aria-hidden="true"></div>
       </div>
     </section>
 
-    <p class="pricing-note" id="prices">Free use per month</p>
-    <section class="final-cta" id="academy">
-      <img src="../img/circl33dxe 1.png" alt="" aria-hidden="true">
-      <h2>Try Capico <span>for free<br>per month</span></h2>
+    <section class="trial-section" id="trial-period" aria-labelledby="trial-title">
+      <h2 id="trial-title">trial period</h2>
+      <p>When adding an API key from a real exchange, a 7-day trial period starts. Upon completion, you can have a paid subscription or continue working at a free rate.</p>
+      <button class="btn-primary trial-button" type="button" onclick="toggleModal(true)">Try Capico free <span aria-hidden="true">⟶</span></button>
+      <div class="trial-orbit trial-orbit-one" aria-hidden="true"></div>
+      <div class="trial-orbit trial-orbit-two" aria-hidden="true"></div>
+      <div class="trial-orbit trial-orbit-three" aria-hidden="true"></div>
+      <div class="trial-orbit trial-orbit-core" aria-hidden="true"></div>
+    </section>
+
+    <section class="subscription-section" id="subscriptions" aria-labelledby="subscription-title">
+      <h2 id="subscription-title">subscription</h2>
+      <div class="subscription-plans">
+        <article class="subscription-plan">
+          <h3>Month</h3>
+          <p class="subscription-price">$15</p>
+          <p class="subscription-caption">Get started right now</p>
+        </article>
+        <article class="subscription-plan">
+          <h3>3 months</h3>
+          <p class="subscription-price">$39</p>
+          <p class="subscription-monthly">$11.5/mo</p>
+          <p class="subscription-caption">$6 economy <span>-13%</span></p>
+        </article>
+        <article class="subscription-plan">
+          <h3>6 months</h3>
+          <p class="subscription-price">$69</p>
+          <p class="subscription-monthly">$13/mo</p>
+          <p class="subscription-caption">$21 economy <span>-23%</span></p>
+        </article>
+        <article class="subscription-plan subscription-plan-yearly">
+          <h3>Yearly subscribe</h3>
+          <p class="subscription-price">$119</p>
+          <p class="subscription-monthly">$9.9/mo</p>
+          <p class="subscription-caption">$51 economy <span>-33%</span></p>
+        </article>
+      </div>
+      <p class="subscription-renewal">You can subscribe and renew your<br>subscription in <a href="#signInModal" onclick="toggleModal(true); return false;">your account</a></p>
+      <p class="subscription-details">More details and payment instructions can be found in <a href="knowledge.html">this article</a></p>
+    </section>
+
+    <section class="free-use-section" id="free-use" aria-labelledby="free-use-title">
+      <h2 id="free-use-title">free use</h2>
+      <p class="free-use-description">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</p>
+      <p class="free-use-instructions">Click on the desired exchange and find out the conditions for connecting to the free plan:</p>
+      <div class="free-use-exchanges" aria-label="Exchanges with free access">
+        <div><img src="../img/Vector (11).png" alt="Binance"></div>
+        <div><img src="../img/Vector (12).png" alt="FTX"></div>
+        <div><img src="../img/Vector (13).png" alt="Huobi"></div>
+        <div><img src="../img/Vector (14).png" alt="OKX"></div>
+      </div>
+      <div class="free-use-benefits">
+        <h3>Regardless of the use case of the platform, you get full access to all the features</h3>
+        <p>Including horizontal volume indicator (VPVR), multi-chart mode on one screen (Multichart), as well as the ability to connect up to 7 accounts of each exchange, which is available from Capico. Need more limits? Send us an email: <a href="mailto:support@capico.app">support@capico.app</a></p>
+      </div>
+    </section>
+    </section>
+
+    <section class="academy-section" id="academy" aria-labelledby="academy-title">
+      <div class="section-topline"><h2 id="academy-title">academy</h2></div>
+      <article class="work-card academy-card">
+        <h3>Demo Account</h3>
+        <img src="../img/Vector (3).png" alt="" class="work-icon">
+        <p>Train. Learn. Test any features. Free and without risks</p>
+      </article>
+    </section>
+
+    <section class="final-cta">
+      <img src="../img/18b86db333fb42703f79be402c0747f7c2c25baa.png" alt="" aria-hidden="true">
+      <h2>Try Capico for free per month</h2>
       <button class="btn-primary btn-final" type="button" onclick="toggleModal(true)">Create an account <span aria-hidden="true">⟶</span></button>
     </section>
 
     <footer class="site-footer">
       <div class="footer-brand"><a class="logo" href="#top" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
-      <div class="footer-column"><h3>We are in social networks</h3><div class="social-links"><a href="#partners" aria-label="Twitter">𝕏</a><a href="#partners" aria-label="Facebook">f</a><a href="#partners" aria-label="YouTube">▶</a><a href="#partners" aria-label="Telegram">➤</a></div><a href="mailto:info@capico.app">info@capico.app</a></div>
-      <div class="footer-column"><h3>Documents</h3><a href="#knowledge">Terms of use</a><a href="#knowledge">Privacy Policy</a><a href="#knowledge">Referral Agreement</a></div>
-      <div class="footer-column"><h3>Platform</h3><a href="#features">Functions</a><a href="#prices">Tariffs</a><a href="#partners">Partners</a><a href="#academy">Academy</a><a href="#knowledge">Knowledge base</a></div>
+      <div class="footer-column"><h3>We are in social networks</h3><div class="social-links"><a href="partners.html" aria-label="Twitter">𝕏</a><a href="partners.html" aria-label="Facebook">f</a><a href="partners.html" aria-label="YouTube">▶</a><a href="partners.html" aria-label="Telegram">➤</a></div><a href="mailto:info@capico.app">info@capico.app</a></div>
+      <div class="footer-column"><h3>Documents</h3><a href="knowledge.html">Terms of use</a><a href="knowledge.html">Privacy Policy</a><a href="knowledge.html">Referral Agreement</a></div>
+      <div class="footer-column"><h3>Platform</h3><a href="features.html">Functions</a><a href="prices.html">Tariffs</a><a href="partners.html">Partners</a><a href="academy.html">Academy</a><a href="knowledge.html">Knowledge base</a></div>
       <div class="footer-column"><h3><button type="button" class="footer-signin" onclick="toggleModal(true)">Sign in</button></h3><button type="button" class="footer-signin" onclick="toggleModal(true)">Create an account</button></div>
     </footer>
   </main>
 
-  <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
+  <div
+  class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
     <div class="modal-box">
       <button class="modal-close-icon" type="button" aria-label="Close sign in" onclick="toggleModal(false)">&times;</button>
       <h2 class="modal-heading" id="modalHeading">Sign in</h2>
-      <form class="signin-form" onsubmit="event.preventDefault()">
-        <div class="form-field"><label class="field-label" for="login">Login or email</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="username" required></div>
-        <div class="form-field"><label class="field-label" for="password">Password</label><input id="password" type="password" class="field-input" placeholder="Password" autocomplete="current-password" required></div>
-        <a href="#knowledge" class="forgot-password-link">Forgot password?</a>
-        <button type="submit" class="btn-submit-signin">Sign in <span aria-hidden="true">⟶</span></button>
+      <p class="auth-instructions">Enter your email and we’ll send you a secure sign-in link. New accounts are created automatically.</p>
+      <form class="signin-form">
+        <div class="form-field"><label class="field-label" for="login">Email address</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="email" required></div>
+        <button type="submit" class="btn-submit-signin">Send sign-in link <span aria-hidden="true">⟶</span></button>
       </form>
-      <div class="modal-bottom"><p class="no-account-text">Don't have an account yet?</p><button type="button" class="btn-create-account" onclick="document.getElementById('login').focus()">Create an account <span aria-hidden="true">⟶</span></button></div>
+      <div class="auth-divider"><span>or</span></div>
+      <button type="button" class="btn-google-signin" id="googleSignInButton"><span class="google-mark" aria-hidden="true">G</span>Continue with Google</button>
+      <p class="auth-message" id="authMessage" role="status" aria-live="polite" hidden></p>
+      <div class="auth-session" id="authSession" aria-live="polite" hidden>
+        <p>You are signed in as <strong id="authEmail"></strong></p>
+        <button type="button" class="btn-create-account" id="signOutButton">Sign out</button>
+      </div>
     </div>
   </div>
   <script>
@@ -224,42 +383,64 @@
       }
     ];
     let activeFeatureIndex = 3;
+    let featureWheelReady = false;
 
     function selectFeature(index) {
+      const previousFeatureIndex = activeFeatureIndex;
       activeFeatureIndex = (index + featureSlides.length) % featureSlides.length;
       const feature = featureSlides[activeFeatureIndex];
-      document.getElementById('featureTitle').innerHTML = feature.title;
-      document.getElementById('featureDescription').textContent = feature.description;
-      document.getElementById('featureBackdropTitle').textContent = feature.title.replace('<br>', ' ');
+      const featureWheelRotor = document.getElementById('featureWheelRotor');
+      const featureWheelOptions = document.querySelector('.feature-wheel-options');
+      if (featureWheelReady && activeFeatureIndex !== previousFeatureIndex &&
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        [featureWheelRotor, featureWheelOptions, document.querySelector('.feature-wheel-labels')].forEach(function (element) {
+          element.getAnimations().forEach(function (animation) {
+            animation.cancel();
+          });
+          element.animate(
+            [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }],
+            { duration: 850, easing: 'cubic-bezier(.2, .75, .25, 1)' }
+          );
+        });
+        document.querySelectorAll('.feature-wheel-labels > span > span').forEach(function (label) {
+          label.getAnimations().forEach(function (animation) {
+            animation.cancel();
+          });
+          label.animate(
+            [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-360deg)' }],
+            { duration: 850, easing: 'cubic-bezier(.2, .75, .25, 1)' }
+          );
+        });
+      }
+      featureWheelReady = true;
+      document.querySelector('.feature-wheel').style.setProperty(
+        '--active-slice-angle',
+        (activeFeatureIndex * 18) + 'deg'
+      );
+      document.getElementById('featureTitle').innerHTML = window.translateText
+        ? window.translateText(feature.title)
+        : feature.title;
+      document.getElementById('featureDescription').textContent = window.translateText
+        ? window.translateText(feature.description)
+        : feature.description;
+      document.getElementById('featureBackdropTitle').textContent = window.translateText
+        ? window.translateText(feature.title.replace('<br>', ' '))
+        : feature.title.replace('<br>', ' ');
       document.getElementById('featureIcon').innerHTML =
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
         feature.icon + '</svg>';
 
-      document.querySelectorAll('.features-list-menu li').forEach(function (item, itemIndex) {
-        const selected = itemIndex === activeFeatureIndex;
-        item.classList.toggle('active', selected);
-        item.querySelector('button').setAttribute('aria-pressed', String(selected));
-      });
-    }
+      const wheelTitle = feature.title.replace('<br>', ' ');
+      document.getElementById('featureWheelTitle').textContent = window.translateText
+        ? window.translateText(wheelTitle)
+        : wheelTitle;
 
-    function toggleLanguages(forceOpen) {
-      const picker = document.querySelector('.language-picker');
-      const button = picker.querySelector('.lang-selector');
-      const options = picker.querySelector('.language-options');
-      const isOpen = typeof forceOpen === 'boolean' ? forceOpen : options.hidden;
-      options.hidden = !isOpen;
-      button.setAttribute('aria-expanded', String(isOpen));
-    }
-
-    function selectLanguage(language, option) {
-      document.getElementById('currentLanguage').textContent = language;
-      document.querySelectorAll('.language-option').forEach(function (item) {
-        const selected = item === option;
-        item.classList.toggle('active', selected);
-        item.setAttribute('aria-pressed', String(selected));
+      document.querySelectorAll('.feature-wheel-options .feature-wheel-button').forEach(function (button, buttonIndex) {
+        const selected = buttonIndex === activeFeatureIndex;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', String(selected));
+        document.querySelectorAll('.feature-wheel-labels > span')[buttonIndex].classList.toggle('active', selected);
       });
-      document.querySelector('.lang-selector').setAttribute('aria-label', 'Language: ' + language.toUpperCase());
-      toggleLanguages(false);
     }
 
     function scrollBenefits(direction) {
@@ -285,6 +466,26 @@
       if (show) modal.querySelector('input').focus();
     }
 
+    document.querySelectorAll('.partner-community-button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const selected = button.dataset.partner;
+        const card = button.closest('.partner-community-content').querySelector('.partner-community-card');
+        const isCryptomaximum = selected === 'Cryptomaximum Group';
+
+        button.closest('.partner-community-nav').querySelectorAll('.partner-community-button').forEach(function (item) {
+          const isActive = item === button;
+          item.classList.toggle('active', isActive);
+          item.setAttribute('aria-pressed', String(isActive));
+        });
+        card.querySelector('.partner-community-title').textContent = window.translateText
+          ? window.translateText(selected)
+          : selected;
+        card.querySelector('.partner-community-details').hidden = !isCryptomaximum;
+        card.querySelector('.partner-community-links').hidden = !isCryptomaximum;
+        card.querySelector('.partner-community-placeholder').hidden = isCryptomaximum;
+      });
+    });
+
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') {
         toggleLanguages(false);
@@ -301,5 +502,9 @@
     window.addEventListener('resize', updateBenefitsProgress);
     updateBenefitsProgress();
   </script>
+  <script src="language.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
 </body>
 </html>

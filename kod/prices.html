@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d25">
+  <title>Prices — Capico</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="navbar section-page-navbar">
+      <a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
+      <div class="language-picker">
+        <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()"><span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span></button>
+        <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
+          <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button><button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button><button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
+        </div>
+      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="features.html">features</a><a href="prices.html" aria-current="page">prices</a><a href="partners.html">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html">academy</a>
+      </nav>
+      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+    </header>
+    <main class="section-page-main">
+      <h1 class="section-page-heading">Prices</h1>
+      <section class="pricing-section" aria-labelledby="pricing-title">
+        <h2 class="pricing-title" id="pricing-title">Demo account</h2>
+        <div class="demo-pricing-panel">
+          <div class="demo-pricing-copy">
+            <h3>demo account</h3>
+            <p>Available immediately <span>after registering with Capico.</span></p>
+            <a href="academy.html">Learn how to get started <span aria-hidden="true">⟶</span></a>
+          </div>
+          <div class="demo-pricing-features">
+            <article class="demo-feature demo-feature-balance"><p>Virtual 10,000 USDT<br>on balance</p></article>
+            <article class="demo-feature"><p>Works without subscription<br>and time limits</p></article>
+            <article class="demo-feature"><p>Create multiple accounts<br>for different purposes</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="trial-section" aria-labelledby="trial-title">
+        <h2 id="trial-title">trial period</h2>
+        <p>When adding an API key from a real exchange, a 7-day trial period starts. Upon completion, you can have a paid subscription or continue working at a free rate.</p>
+        <button class="btn-primary trial-button" type="button" onclick="toggleModal(true)">Try Capico free <span aria-hidden="true">⟶</span></button>
+      </section>
+      <section class="subscription-section" aria-labelledby="subscription-title">
+        <h2 id="subscription-title">subscription</h2>
+        <div class="subscription-plans">
+          <article class="subscription-plan"><h3>Month</h3><p class="subscription-price">$15</p><p class="subscription-caption">Get started right now</p></article>
+          <article class="subscription-plan"><h3>3 months</h3><p class="subscription-price">$39</p><p class="subscription-monthly">$13/mo</p><p class="subscription-caption">$6 economy <span>-13%</span></p></article>
+          <article class="subscription-plan"><h3>6 months</h3><p class="subscription-price">$69</p><p class="subscription-monthly">$11.5/mo</p><p class="subscription-caption">$21 economy <span>-23%</span></p></article>
+          <article class="subscription-plan subscription-plan-yearly"><h3>Yearly subscribe</h3><p class="subscription-price">$119</p><p class="subscription-monthly">$9.9/mo</p><p class="subscription-caption">$51 economy <span>-33%</span></p></article>
+        </div>
+        <p class="subscription-details">More details and payment instructions can be found in the <a href="knowledge.html">knowledge base</a>.</p>
+      </section>
+      <section class="free-use-section" aria-labelledby="free-use-title">
+        <h2 id="free-use-title">free use</h2>
+        <p class="free-use-description">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</p>
+        <p class="free-use-instructions">Connect to a supported exchange to learn about free access:</p>
+        <div class="free-use-exchanges" aria-label="Supported exchanges">
+          <div><img src="../img/Vector (11).png" alt="Binance"></div><div><img src="../img/Vector (12).png" alt="FTX"></div><div><img src="../img/Vector (13).png" alt="Huobi"></div><div><img src="../img/Vector (14).png" alt="OKX"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
+      <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
+    </footer>
+  </div>
+  <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
+    <div class="modal-box">
+      <button class="modal-close-icon" type="button" aria-label="Close sign in" onclick="toggleModal(false)">&times;</button>
+      <h2 class="modal-heading" id="modalHeading">Sign in</h2>
+      <p class="auth-instructions">Enter your email and we’ll send you a secure sign-in link. New accounts are created automatically.</p>
+      <form class="signin-form">
+        <div class="form-field"><label class="field-label" for="login">Email address</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="email" required></div>
+        <button type="submit" class="btn-submit-signin">Send sign-in link <span aria-hidden="true">⟶</span></button>
+      </form>
+      <div class="auth-divider"><span>or</span></div>
+      <button type="button" class="btn-google-signin" id="googleSignInButton"><span class="google-mark" aria-hidden="true">G</span>Continue with Google</button>
+      <p class="auth-message" id="authMessage" role="status" aria-live="polite" hidden></p>
+      <div class="auth-session" id="authSession" aria-live="polite" hidden>
+        <p>You are signed in as <strong id="authEmail"></strong></p>
+        <button type="button" class="btn-create-account" id="signOutButton">Sign out</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleModal(show) {
+      const modal = document.getElementById('signInModal');
+      modal.style.display = show ? 'flex' : 'none';
+      document.body.classList.toggle('modal-open', show);
+      if (show) modal.querySelector('input').focus();
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') toggleModal(false);
+    });
+  </script>
+  <script src="language.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

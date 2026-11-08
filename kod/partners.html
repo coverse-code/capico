@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d25">
+  <title>Partners — Capico</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="navbar section-page-navbar">
+      <a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
+      <div class="language-picker">
+        <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()"><span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span></button>
+        <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
+          <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button><button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button><button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
+        </div>
+      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="features.html">features</a><a href="prices.html">prices</a><a href="partners.html" aria-current="page">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html">academy</a>
+      </nav>
+      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+    </header>
+    <main class="section-page-main">
+      <h1 class="section-page-heading">Partners</h1>
+      <section class="partners-section">
+        <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
+        <div class="partner-logos">
+          <div class="partner-logo"><img src="../img/Vector (11).png" alt="Binance"></div>
+          <div class="partner-logo"><img src="../img/Vector (12).png" alt="FTX"></div>
+          <div class="partner-logo"><img src="../img/Vector (13).png" alt="Huobi"></div>
+          <div class="partner-logo"><img src="../img/Vector (14).png" alt="OKX"></div>
+        </div>
+      </section>
+      <section class="partner-community-section" aria-labelledby="partner-community-title">
+        <header class="partner-community-heading">
+          <h2 id="partner-community-title">Our<br>partners</h2>
+          <p>Popular crypto communities and well-known traders trade on the Capico platform.</p>
+        </header>
+        <div class="partner-community-panel">
+          <p class="partner-community-intro">Join our partners, read their analytics, and explore the world of trading and cryptocurrencies.</p>
+          <div class="partner-community-content">
+            <nav class="partner-community-nav" aria-label="Partner community members">
+              <ul>
+                <li><button class="partner-community-button active" type="button" aria-pressed="true" data-partner="Cryptomaximum Group">Cryptomaximum Group</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Solo">Solo</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="CryptoArk">CryptoArk</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Vilarso">Vilarso</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Ego trading">Ego trading</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Livin off trade">Livin off trade</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Schneider official">Schneider official</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Drevnik Sereji">Drevnik Sereji</button></li>
+                <li><button class="partner-community-button" type="button" aria-pressed="false" data-partner="Ivan Alekseev">Ivan Alekseev</button></li>
+              </ul>
+            </nav>
+            <article class="partner-community-card" aria-live="polite">
+              <h3 class="partner-community-title">Cryptomaximum<br>Group</h3>
+              <ul class="partner-community-details"><li>Team of professional traders in the stock and cryptocurrency markets</li><li>Crypto startup advisors</li><li>Training and sales teams</li><li>Cryptocurrency media</li></ul>
+              <p class="partner-community-placeholder" hidden>This partner is listed in Capico’s partner community. More profile details and links will be added when available.</p>
+              <div class="partner-community-links" aria-label="Cryptomaximum Group social channels"><span aria-label="Twitter">𝕏</span><span aria-label="Facebook">f</span><span aria-label="VK">ᴠκ</span><span class="partner-community-domain">cryptomax.io</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
+      <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
+    </footer>
+  </div>
+  <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
+    <div class="modal-box">
+      <button class="modal-close-icon" type="button" aria-label="Close sign in" onclick="toggleModal(false)">&times;</button>
+      <h2 class="modal-heading" id="modalHeading">Sign in</h2>
+      <p class="auth-instructions">Enter your email and we’ll send you a secure sign-in link. New accounts are created automatically.</p>
+      <form class="signin-form">
+        <div class="form-field"><label class="field-label" for="login">Email address</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="email" required></div>
+        <button type="submit" class="btn-submit-signin">Send sign-in link <span aria-hidden="true">⟶</span></button>
+      </form>
+      <div class="auth-divider"><span>or</span></div>
+      <button type="button" class="btn-google-signin" id="googleSignInButton"><span class="google-mark" aria-hidden="true">G</span>Continue with Google</button>
+      <p class="auth-message" id="authMessage" role="status" aria-live="polite" hidden></p>
+      <div class="auth-session" id="authSession" aria-live="polite" hidden>
+        <p>You are signed in as <strong id="authEmail"></strong></p>
+        <button type="button" class="btn-create-account" id="signOutButton">Sign out</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleModal(show) {
+      const modal = document.getElementById('signInModal');
+      modal.style.display = show ? 'flex' : 'none';
+      document.body.classList.toggle('modal-open', show);
+      if (show) modal.querySelector('input').focus();
+    }
+
+    document.querySelectorAll('.partner-community-button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const selected = button.dataset.partner;
+        const card = button.closest('.partner-community-content').querySelector('.partner-community-card');
+        const isCryptomaximum = selected === 'Cryptomaximum Group';
+
+        button.closest('.partner-community-nav').querySelectorAll('.partner-community-button').forEach(function (item) {
+          const isActive = item === button;
+          item.classList.toggle('active', isActive);
+          item.setAttribute('aria-pressed', String(isActive));
+        });
+        card.querySelector('.partner-community-title').textContent = window.translateText
+          ? window.translateText(selected)
+          : selected;
+        card.querySelector('.partner-community-details').hidden = !isCryptomaximum;
+        card.querySelector('.partner-community-links').hidden = !isCryptomaximum;
+        card.querySelector('.partner-community-placeholder').hidden = isCryptomaximum;
+      });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') toggleModal(false);
+    });
+  </script>
+  <script src="language.js"></script>
+  <script src="auth-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
