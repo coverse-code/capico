@@ -4,6 +4,8 @@
 
 Publish the repository root as the site root. Keep the `kod` and `img` folders together; the pages load images from `../img`. The root `index.html` redirects visitors to `kod/cc.html`.
 
+The root `404.html` is the custom not-found page for static hosts that support this convention (including GitHub Pages). It is shown when a requested page or URL is missing; a full hosting outage or lost network connection cannot serve any site page.
+
 Use the production URL over HTTPS. Do not deploy the site by opening the HTML files as `file://`.
 
 ## Supabase configuration

@@ -38,12 +38,13 @@
       <div class="exchanges-wrapper">
         <p class="exchanges-title">Trade for free on your<br>favorite exchanges</p>
         <div class="exchange-cards" aria-label="Supported exchanges">
-          <div class="exchange-card"><img src="../img/Vector (11).png" alt="Binance"></div>
-          <div class="exchange-card"><img src="../img/Vector (12).png" alt="FTX"></div>
-          <div class="exchange-card"><img src="../img/Vector (13).png" alt="Huobi"></div>
-          <div class="exchange-card"><span class="exchange-name">EXMO</span></div>
-          <div class="exchange-card"><img src="../img/Vector (14).png" alt="OKX"></div>
+          <button class="exchange-card exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
+          <button class="exchange-card exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
+          <button class="exchange-card exchange-select-button" type="button" aria-label="Select Huobi" aria-pressed="false"><img src="../img/Vector (13).png" alt="Huobi"></button>
+          <button class="exchange-card exchange-select-button" type="button" aria-label="Select EXMO" aria-pressed="false"><span class="exchange-name">EXMO</span></button>
+          <button class="exchange-card exchange-select-button" type="button" aria-label="Select OKX" aria-pressed="false"><img src="../img/Vector (14).png" alt="OKX"></button>
         </div>
+        <p class="exchange-selection-status" aria-live="polite"></p>
       </div>
       <a class="scroll-cue" href="#features" aria-label="Scroll to explore">↓</a>
     </section>
@@ -67,11 +68,11 @@
         </div>
       </div>
       <div class="cards-grid" id="benefitCards">
-        <article class="work-card"><h3>Speed</h3><img src="../img/Vector.png" alt="" class="work-icon"><p>Your assets on all connected exchanges are collected in one place</p></article>
-        <article class="work-card"><h3>Hotkeys</h3><img src="../img/Vector (1).png" alt="" class="work-icon"><p>Use hot keys to work faster</p></article>
-        <article class="work-card"><h3>Notifications</h3><img src="../img/Vector (2).png" alt="" class="work-icon"><p>Get important email and Telegram notifications</p></article>
-        <article class="work-card"><h3>Cloud Service</h3><img src="../img/Vector (26).png" alt="" class="work-icon"><p>Updates are usually invisible. No break from trade.</p></article>
-        <article class="work-card"><h3>Dark theme</h3><img src="../img/Vector (27).png" alt="" class="work-icon"><p>Trade anytime. Even at night.</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Speed" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Speed</h3><img src="../img/Vector.png" alt="" class="work-icon"><p>Your assets on all connected exchanges are collected in one place</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Hotkeys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Hotkeys</h3><img src="../img/Vector (1).png" alt="" class="work-icon"><p>Use hot keys to work faster</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Notifications" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Notifications</h3><img src="../img/Vector (2).png" alt="" class="work-icon"><p>Get important email and Telegram notifications</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Cloud Service" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Cloud Service</h3><img src="../img/Vector (26).png" alt="" class="work-icon"><p>Updates are usually invisible. No break from trade.</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Dark theme" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Dark theme</h3><img src="../img/Vector (27).png" alt="" class="work-icon"><p>Trade anytime. Even at night.</p></article>
       </div>
       <div class="progress-bar-line"><div class="progress-active"></div></div>
     </section>
@@ -140,9 +141,9 @@
       <div class="security-heading"><span class="section-eyebrow">KNOWLEDGE BASE</span><h2>high security<br>platform</h2></div>
       <img class="security-art" src="../img/untitled332 1.png" alt="Layered shield and padlock representing account security">
       <div class="security-cards">
-        <article class="security-card"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
-        <article class="security-card"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
-        <article class="security-card"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
+        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about API Keys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
+        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Server" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
+        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about 2FA" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
       </div>
     </section>
 
@@ -150,11 +151,12 @@
       <section class="partners-section">
       <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
       <div class="partner-logos">
-        <div class="partner-logo"><img src="../img/Vector (11).png" alt="Binance"></div>
-        <div class="partner-logo"><img src="../img/Vector (12).png" alt="FTX"></div>
-        <div class="partner-logo"><img src="../img/Vector (13).png" alt="Huobi"></div>
-        <div class="partner-logo"><img src="../img/Vector (14).png" alt="OKX"></div>
+        <button class="partner-logo exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
+        <button class="partner-logo exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
+        <button class="partner-logo exchange-select-button" type="button" aria-label="Select Huobi" aria-pressed="false"><img src="../img/Vector (13).png" alt="Huobi"></button>
+        <button class="partner-logo exchange-select-button" type="button" aria-label="Select OKX" aria-pressed="false"><img src="../img/Vector (14).png" alt="OKX"></button>
       </div>
+      <p class="exchange-selection-status" aria-live="polite"></p>
       </section>
 
       <section class="partner-community-section" aria-labelledby="partner-community-title">
@@ -241,24 +243,24 @@
     <section class="subscription-section" id="subscriptions" aria-labelledby="subscription-title">
       <h2 id="subscription-title">subscription</h2>
       <div class="subscription-plans">
-        <article class="subscription-plan">
+        <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
           <h3>Month</h3>
           <p class="subscription-price">$15</p>
           <p class="subscription-caption">Get started right now</p>
         </article>
-        <article class="subscription-plan">
+        <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
           <h3>3 months</h3>
           <p class="subscription-price">$39</p>
           <p class="subscription-monthly">$11.5/mo</p>
           <p class="subscription-caption">$6 economy <span>-13%</span></p>
         </article>
-        <article class="subscription-plan">
+        <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
           <h3>6 months</h3>
           <p class="subscription-price">$69</p>
           <p class="subscription-monthly">$13/mo</p>
           <p class="subscription-caption">$21 economy <span>-23%</span></p>
         </article>
-        <article class="subscription-plan subscription-plan-yearly">
+        <article class="subscription-plan subscription-plan-yearly card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
           <h3>Yearly subscribe</h3>
           <p class="subscription-price">$119</p>
           <p class="subscription-monthly">$9.9/mo</p>
@@ -274,11 +276,12 @@
       <p class="free-use-description">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</p>
       <p class="free-use-instructions">Click on the desired exchange and find out the conditions for connecting to the free plan:</p>
       <div class="free-use-exchanges" aria-label="Exchanges with free access">
-        <div><img src="../img/Vector (11).png" alt="Binance"></div>
-        <div><img src="../img/Vector (12).png" alt="FTX"></div>
-        <div><img src="../img/Vector (13).png" alt="Huobi"></div>
-        <div><img src="../img/Vector (14).png" alt="OKX"></div>
+        <button class="exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
+        <button class="exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
+        <button class="exchange-select-button" type="button" aria-label="Select Huobi" aria-pressed="false"><img src="../img/Vector (13).png" alt="Huobi"></button>
+        <button class="exchange-select-button" type="button" aria-label="Select OKX" aria-pressed="false"><img src="../img/Vector (14).png" alt="OKX"></button>
       </div>
+      <p class="exchange-selection-status" aria-live="polite"></p>
       <div class="free-use-benefits">
         <h3>Regardless of the use case of the platform, you get full access to all the features</h3>
         <p>Including horizontal volume indicator (VPVR), multi-chart mode on one screen (Multichart), as well as the ability to connect up to 7 accounts of each exchange, which is available from Capico. Need more limits? Send us an email: <a href="mailto:support@capico.app">support@capico.app</a></p>
@@ -310,12 +313,20 @@
     </footer>
   </main>
 
+  <div class="modal-backdrop" id="cardDetailsModal" role="dialog" aria-modal="true" aria-labelledby="cardDetailsTitle" onclick="if (event.target === this) closeCardDetails()">
+    <div class="modal-box">
+      <button class="modal-close-icon" type="button" aria-label="Close details" onclick="closeCardDetails()">&times;</button>
+      <h2 class="modal-heading" id="cardDetailsTitle"></h2>
+      <p class="auth-instructions" id="cardDetailsText"></p>
+    </div>
+  </div>
   <div
   class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
     <div class="modal-box">
       <button class="modal-close-icon" type="button" aria-label="Close sign in" onclick="toggleModal(false)">&times;</button>
       <h2 class="modal-heading" id="modalHeading">Sign in</h2>
       <p class="auth-instructions">Enter your email and we’ll send you a secure sign-in link. New accounts are created automatically.</p>
+      <p class="auth-instructions" id="selectedPlanMessage" hidden></p>
       <form class="signin-form">
         <div class="form-field"><label class="field-label" for="login">Email address</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="email" required></div>
         <button type="submit" class="btn-submit-signin">Send sign-in link <span aria-hidden="true">⟶</span></button>
@@ -492,12 +503,60 @@
       progress.style.transform = 'translateX(' + travel * position + 'px)';
     }
 
-    function toggleModal(show) {
+    function toggleModal(show, plan) {
       const modal = document.getElementById('signInModal');
+      const selectedPlanMessage = document.getElementById('selectedPlanMessage');
+      selectedPlanMessage.hidden = !show || !plan;
+      selectedPlanMessage.textContent = plan
+        ? (window.translateText ? window.translateText('Selected plan:') : 'Selected plan:') + ' ' + plan
+        : '';
       modal.style.display = show ? 'flex' : 'none';
       document.body.classList.toggle('modal-open', show);
       if (show) modal.querySelector('input').focus();
     }
+
+    function choosePlan(card) {
+      const title = card.querySelector('h3').textContent.trim();
+      const price = card.querySelector('.subscription-price').textContent.trim();
+      toggleModal(true, title + ' — ' + price);
+    }
+
+    let activeCardDetailsTrigger = null;
+
+    function showCardDetails(card) {
+      activeCardDetailsTrigger = card;
+      document.getElementById('cardDetailsTitle').textContent = card.querySelector('h2, h3').textContent;
+      document.getElementById('cardDetailsText').textContent = card.querySelector('p').textContent;
+      document.getElementById('cardDetailsModal').style.display = 'flex';
+      document.body.classList.add('modal-open');
+      document.querySelector('#cardDetailsModal .modal-close-icon').focus();
+    }
+
+    function closeCardDetails() {
+      document.getElementById('cardDetailsModal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+      if (activeCardDetailsTrigger) {
+        activeCardDetailsTrigger.focus();
+        activeCardDetailsTrigger = null;
+      }
+    }
+
+    document.querySelectorAll('.exchange-select-button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const group = button.parentElement;
+        group.querySelectorAll('.exchange-select-button').forEach(function (item) {
+          const selected = item === button;
+          item.classList.toggle('is-selected', selected);
+          item.setAttribute('aria-pressed', String(selected));
+        });
+        const status = group.nextElementSibling;
+        if (status && status.classList.contains('exchange-selection-status')) {
+          const logo = button.querySelector('img');
+          status.textContent = (window.translateText ? window.translateText('Selected exchange:') : 'Selected exchange:') + ' ' +
+            (logo ? logo.alt : button.textContent.trim());
+        }
+      });
+    });
 
     document.querySelectorAll('.partner-community-button').forEach(function (button) {
       button.addEventListener('click', function () {
@@ -521,6 +580,7 @@
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') {
+        closeCardDetails();
         toggleLanguages(false);
         toggleModal(false);
       }

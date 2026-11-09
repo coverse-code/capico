@@ -31,9 +31,9 @@
         <div class="security-heading"><span class="section-eyebrow">API, 2FA AND TECHNOLOGY</span><h2 id="security-title">high security<br>platform</h2></div>
         <img class="security-art" src="../img/untitled332 1.png" alt="Layered shield and padlock representing account security">
         <div class="security-cards">
-          <article class="security-card"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
-          <article class="security-card"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
-          <article class="security-card"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
+          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about API Keys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
+          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Server" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
+          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about 2FA" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
         </div>
       </section>
     </main>
@@ -41,6 +41,13 @@
       <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
       <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
     </footer>
+  </div>
+  <div class="modal-backdrop" id="cardDetailsModal" role="dialog" aria-modal="true" aria-labelledby="cardDetailsTitle" onclick="if (event.target === this) closeCardDetails()">
+    <div class="modal-box">
+      <button class="modal-close-icon" type="button" aria-label="Close details" onclick="closeCardDetails()">&times;</button>
+      <h2 class="modal-heading" id="cardDetailsTitle"></h2>
+      <p class="auth-instructions" id="cardDetailsText"></p>
+    </div>
   </div>
   <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">
     <div class="modal-box">
@@ -61,6 +68,26 @@
     </div>
   </div>
   <script>
+    let activeCardDetailsTrigger = null;
+
+    function showCardDetails(card) {
+      activeCardDetailsTrigger = card;
+      document.getElementById('cardDetailsTitle').textContent = card.querySelector('h2, h3').textContent;
+      document.getElementById('cardDetailsText').textContent = card.querySelector('p').textContent;
+      document.getElementById('cardDetailsModal').style.display = 'flex';
+      document.body.classList.add('modal-open');
+      document.querySelector('#cardDetailsModal .modal-close-icon').focus();
+    }
+
+    function closeCardDetails() {
+      document.getElementById('cardDetailsModal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+      if (activeCardDetailsTrigger) {
+        activeCardDetailsTrigger.focus();
+        activeCardDetailsTrigger = null;
+      }
+    }
+
     function toggleModal(show) {
       const modal = document.getElementById('signInModal');
       modal.style.display = show ? 'flex' : 'none';
@@ -69,7 +96,10 @@
     }
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') toggleModal(false);
+      if (event.key === 'Escape') {
+        closeCardDetails();
+        toggleModal(false);
+      }
     });
   </script>
   <script src="language.js"></script>

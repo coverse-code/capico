@@ -208,6 +208,15 @@ body {
   gap: 8px;
   backdrop-filter: blur(12px);
   position: relative;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.exchange-select-button.is-selected {
+  border-color: #8d00ff;
+  box-shadow: 0 0 18px rgba(141, 0, 255, .42);
 }
 
 .exchange-card.disabled {
@@ -1452,6 +1461,22 @@ input:focus-visible {
   line-height: 1.4;
 }
 
+.card-clickable {
+  cursor: pointer;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.card-clickable:hover,
+.card-clickable:focus-visible {
+  border-color: #8d00ff;
+  box-shadow: 0 0 18px rgba(141, 0, 255, .2);
+}
+
+.card-clickable:focus-visible {
+  outline: 2px solid #c18cff;
+  outline-offset: 3px;
+}
+
 .progress-bar-line {
   width: 38%;
   margin: 28px 0 0;
@@ -1944,6 +1969,67 @@ input:focus-visible {
   padding: 18px 32px;
 }
 
+.error-page-shell {
+  display: flex;
+  min-height: min(720px, calc(100vh - 16px));
+  flex-direction: column;
+}
+
+.error-page-main {
+  position: relative;
+  display: grid;
+  flex: 1;
+  min-height: 440px;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+  text-align: center;
+}
+
+.error-page-art {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: url("../img/18b86db333fb42703f79be402c0747f7c2c25baa.png") center 48% / cover no-repeat;
+  opacity: .8;
+  pointer-events: none;
+}
+
+.error-page-content {
+  width: min(100% - 32px, 560px);
+  padding: 28px 0 42px;
+}
+
+.error-page-content h1 {
+  color: #eee8ff;
+  font-size: clamp(150px, 24vw, 240px);
+  font-weight: 600;
+  letter-spacing: -.09em;
+  line-height: .82;
+}
+
+.error-page-content h2 {
+  margin-top: 20px;
+  color: #fff;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+
+.error-page-content p {
+  max-width: 430px;
+  margin: 22px auto 26px;
+  color: #c1b4cf;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.error-home-button {
+  min-width: 198px;
+  gap: 20px;
+}
+
 .section-page-navbar .nav-links a[aria-current="page"] {
   color: #c9a8ff;
 }
@@ -2054,6 +2140,8 @@ input:focus-visible {
 }
 
 .security-card {
+  display: flex;
+  flex-direction: column;
   min-height: 220px;
   padding: 22px 20px;
   border: 1px solid #261b32;
@@ -2078,6 +2166,7 @@ input:focus-visible {
   color: #aaa2b2;
   font-size: 11px;
   line-height: 1.45;
+  margin-top: auto;
 }
 
 .partners-section {
@@ -2122,6 +2211,14 @@ input:focus-visible {
   border: 1px solid rgba(221,199,255,.4);
   border-radius: 22px;
   background: rgba(30,8,66,.14);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.partner-logo.is-selected {
+  border-color: #c18cff;
+  box-shadow: 0 0 20px rgba(193, 140, 255, .35);
 }
 
 .partner-logo img {
@@ -2585,6 +2682,17 @@ input:focus-visible {
   background: rgba(149, 124, 201, .38);
 }
 
+.subscription-plan:hover,
+.subscription-plan:focus-visible {
+  border-color: rgba(255,255,255,.75);
+  box-shadow: 0 0 20px rgba(141, 0, 255, .3);
+}
+
+.subscription-plan:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 .subscription-plan h3 {
   color: #fff;
   font-size: 13px;
@@ -2697,18 +2805,38 @@ input:focus-visible {
   gap: 12px;
 }
 
-.free-use-exchanges > div {
+.free-use-exchanges > button {
   display: grid;
   min-height: 92px;
   place-items: center;
+  padding: 8px;
+  border: 1px solid transparent;
   border-radius: 20px;
   background: #0e0b14;
+  cursor: pointer;
+}
+
+.free-use-exchanges > button.is-selected {
+  border-color: #8d00ff;
+  box-shadow: 0 0 18px rgba(141, 0, 255, .42);
+}
+
+.exchange-select-button:focus-visible {
+  outline: 2px solid #c18cff;
+  outline-offset: 3px;
 }
 
 .free-use-exchanges img {
   width: min(65%, 150px);
   max-height: 36px;
   object-fit: contain;
+}
+
+.exchange-selection-status {
+  min-height: 18px;
+  margin-top: 10px;
+  color: #d6c3ef;
+  font-size: 12px;
 }
 
 .free-use-benefits {
@@ -3134,6 +3262,29 @@ input:focus-visible {
     width: 100%;
     margin: 0 auto;
     border-radius: 0;
+  }
+
+  @media (max-width: 620px) {
+    .error-page-shell {
+      min-height: 100vh;
+    }
+
+    .error-page-main {
+      min-height: 470px;
+    }
+
+    .error-page-art {
+      background-position: 45% center;
+    }
+
+    .error-page-content h1 {
+      font-size: clamp(132px, 39vw, 190px);
+    }
+
+    .error-page-content p {
+      max-width: 330px;
+      font-size: 13px;
+    }
   }
 
   .hero-frame {
@@ -3744,7 +3895,7 @@ input:focus-visible {
     gap: 8px;
   }
 
-  .free-use-exchanges > div {
+  .free-use-exchanges > button {
     min-height: 66px;
     border-radius: 14px;
   }

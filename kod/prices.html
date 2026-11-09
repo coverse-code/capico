@@ -50,10 +50,10 @@
       <section class="subscription-section" aria-labelledby="subscription-title">
         <h2 id="subscription-title">subscription</h2>
         <div class="subscription-plans">
-          <article class="subscription-plan"><h3>Month</h3><p class="subscription-price">$15</p><p class="subscription-caption">Get started right now</p></article>
-          <article class="subscription-plan"><h3>3 months</h3><p class="subscription-price">$39</p><p class="subscription-monthly">$13/mo</p><p class="subscription-caption">$6 economy <span>-13%</span></p></article>
-          <article class="subscription-plan"><h3>6 months</h3><p class="subscription-price">$69</p><p class="subscription-monthly">$11.5/mo</p><p class="subscription-caption">$21 economy <span>-23%</span></p></article>
-          <article class="subscription-plan subscription-plan-yearly"><h3>Yearly subscribe</h3><p class="subscription-price">$119</p><p class="subscription-monthly">$9.9/mo</p><p class="subscription-caption">$51 economy <span>-33%</span></p></article>
+          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>Month</h3><p class="subscription-price">$15</p><p class="subscription-caption">Get started right now</p></article>
+          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>3 months</h3><p class="subscription-price">$39</p><p class="subscription-monthly">$13/mo</p><p class="subscription-caption">$6 economy <span>-13%</span></p></article>
+          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>6 months</h3><p class="subscription-price">$69</p><p class="subscription-monthly">$11.5/mo</p><p class="subscription-caption">$21 economy <span>-23%</span></p></article>
+          <article class="subscription-plan subscription-plan-yearly card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>Yearly subscribe</h3><p class="subscription-price">$119</p><p class="subscription-monthly">$9.9/mo</p><p class="subscription-caption">$51 economy <span>-33%</span></p></article>
         </div>
         <p class="subscription-details">More details and payment instructions can be found in the <a href="knowledge.html">knowledge base</a>.</p>
       </section>
@@ -62,8 +62,9 @@
         <p class="free-use-description">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</p>
         <p class="free-use-instructions">Connect to a supported exchange to learn about free access:</p>
         <div class="free-use-exchanges" aria-label="Supported exchanges">
-          <div><img src="../img/Vector (11).png" alt="Binance"></div><div><img src="../img/Vector (12).png" alt="FTX"></div><div><img src="../img/Vector (13).png" alt="Huobi"></div><div><img src="../img/Vector (14).png" alt="OKX"></div>
+          <button class="exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button><button class="exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button><button class="exchange-select-button" type="button" aria-label="Select Huobi" aria-pressed="false"><img src="../img/Vector (13).png" alt="Huobi"></button><button class="exchange-select-button" type="button" aria-label="Select OKX" aria-pressed="false"><img src="../img/Vector (14).png" alt="OKX"></button>
         </div>
+        <p class="exchange-selection-status" aria-live="polite"></p>
       </section>
     </main>
     <footer class="site-footer">
@@ -76,6 +77,7 @@
       <button class="modal-close-icon" type="button" aria-label="Close sign in" onclick="toggleModal(false)">&times;</button>
       <h2 class="modal-heading" id="modalHeading">Sign in</h2>
       <p class="auth-instructions">Enter your email and we’ll send you a secure sign-in link. New accounts are created automatically.</p>
+      <p class="auth-instructions" id="selectedPlanMessage" hidden></p>
       <form class="signin-form">
         <div class="form-field"><label class="field-label" for="login">Email address</label><input id="login" type="email" class="field-input" placeholder="name@example.com" autocomplete="email" required></div>
         <button type="submit" class="btn-submit-signin">Send sign-in link <span aria-hidden="true">⟶</span></button>
@@ -90,12 +92,39 @@
     </div>
   </div>
   <script>
-    function toggleModal(show) {
+    function toggleModal(show, plan) {
       const modal = document.getElementById('signInModal');
+      const selectedPlanMessage = document.getElementById('selectedPlanMessage');
+      selectedPlanMessage.hidden = !show || !plan;
+      selectedPlanMessage.textContent = plan
+        ? (window.translateText ? window.translateText('Selected plan:') : 'Selected plan:') + ' ' + plan
+        : '';
       modal.style.display = show ? 'flex' : 'none';
       document.body.classList.toggle('modal-open', show);
       if (show) modal.querySelector('input').focus();
     }
+
+    function choosePlan(card) {
+      const title = card.querySelector('h3').textContent.trim();
+      const price = card.querySelector('.subscription-price').textContent.trim();
+      toggleModal(true, title + ' — ' + price);
+    }
+
+    document.querySelectorAll('.exchange-select-button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const group = button.parentElement;
+        group.querySelectorAll('.exchange-select-button').forEach(function (item) {
+          const selected = item === button;
+          item.classList.toggle('is-selected', selected);
+          item.setAttribute('aria-pressed', String(selected));
+        });
+        const status = group.nextElementSibling;
+        if (status && status.classList.contains('exchange-selection-status')) {
+          status.textContent = (window.translateText ? window.translateText('Selected exchange:') : 'Selected exchange:') + ' ' +
+            button.querySelector('img').alt;
+        }
+      });
+    });
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') toggleModal(false);

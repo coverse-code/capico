@@ -30,10 +30,10 @@
       <section class="partners-section">
         <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
         <div class="partner-logos">
-          <div class="partner-logo"><img src="../img/Vector (11).png" alt="Binance"></div>
-          <div class="partner-logo"><img src="../img/Vector (12).png" alt="FTX"></div>
-          <div class="partner-logo"><img src="../img/Vector (13).png" alt="Huobi"></div>
-          <div class="partner-logo"><img src="../img/Vector (14).png" alt="OKX"></div>
+          <button class="partner-logo exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
+          <button class="partner-logo exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
+          <button class="partner-logo exchange-select-button" type="button" aria-label="Select Huobi" aria-pressed="false"><img src="../img/Vector (13).png" alt="Huobi"></button>
+          <button class="partner-logo exchange-select-button" type="button" aria-label="Select OKX" aria-pressed="false"><img src="../img/Vector (14).png" alt="OKX"></button>
         </div>
       </section>
       <section class="partner-community-section" aria-labelledby="partner-community-title">
@@ -97,6 +97,16 @@
       document.body.classList.toggle('modal-open', show);
       if (show) modal.querySelector('input').focus();
     }
+
+    document.querySelectorAll('.exchange-select-button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        button.parentElement.querySelectorAll('.exchange-select-button').forEach(function (item) {
+          const selected = item === button;
+          item.classList.toggle('is-selected', selected);
+          item.setAttribute('aria-pressed', String(selected));
+        });
+      });
+    });
 
     document.querySelectorAll('.partner-community-button').forEach(function (button) {
       button.addEventListener('click', function () {
