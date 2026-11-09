@@ -523,13 +523,37 @@
 
     let activeCardDetailsTrigger = null;
 
-    function showCardDetails(card) {
-      activeCardDetailsTrigger = card;
-      document.getElementById('cardDetailsTitle').textContent = card.querySelector('h2, h3').textContent;
-      document.getElementById('cardDetailsText').textContent = card.querySelector('p').textContent;
+    const exchangeDetails = {
+      Binance: 'Binance is a cryptocurrency exchange. Check regional availability and use an API key with trading permissions only. Keep withdrawals disabled.',
+      FTX: 'FTX is no longer operating as a normal exchange after its 2022 bankruptcy. Do not connect API keys based on this page listing.',
+      Huobi: 'Huobi is now branded HTX. Verify the official service and keep withdrawals disabled on any API key.',
+      EXMO: 'EXMO is a cryptocurrency exchange. Check regional availability and API requirements in your account; keep withdrawals disabled.',
+      OKX: 'OKX is a cryptocurrency exchange. Check regional availability and use an API key with trading permissions only.'
+    };
+
+    function openCardDetails(title, text, trigger) {
+      activeCardDetailsTrigger = trigger;
+      document.getElementById('cardDetailsTitle').textContent = title;
+      document.getElementById('cardDetailsText').textContent = text;
       document.getElementById('cardDetailsModal').style.display = 'flex';
       document.body.classList.add('modal-open');
       document.querySelector('#cardDetailsModal .modal-close-icon').focus();
+    }
+
+    function showCardDetails(card) {
+      openCardDetails(
+        card.querySelector('h2, h3').textContent,
+        card.querySelector('p').textContent,
+        card
+      );
+    }
+
+    function showExchangeDetails(button) {
+      const logo = button.querySelector('img');
+      const name = logo ? logo.alt : button.textContent.trim();
+      const details = exchangeDetails[name];
+      if (!details) return;
+      openCardDetails(name, window.translateText ? window.translateText(details) : details, button);
     }
 
     function closeCardDetails() {
@@ -555,6 +579,7 @@
           status.textContent = (window.translateText ? window.translateText('Selected exchange:') : 'Selected exchange:') + ' ' +
             (logo ? logo.alt : button.textContent.trim());
         }
+        showExchangeDetails(button);
       });
     });
 
