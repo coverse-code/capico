@@ -6,55 +6,61 @@
   <meta name="theme-color" content="#160d25">
   <title>Academy — Capico</title>
   <link rel="stylesheet" href="main.css">
+  <script src="admin-shortcut.js" defer></script>
+  <script src="content-store.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <span class="language-state" id="language-en"></span>
+  <span class="language-state" id="language-uz"></span>
+  <span class="language-state" id="language-ru"></span>
   <div class="site-shell">
     <header class="navbar section-page-navbar">
       <a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
-      <div class="language-picker">
-        <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()"><span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span></button>
-        <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
-          <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button><button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button><button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
-        </div>
+      <div class="language-picker" role="group" aria-label="Choose language">
+        <a class="language-en" href="#language-en">EN</a><a class="language-uz" href="#language-uz">UZ</a><a class="language-ru" href="#language-ru">RU</a>
       </div>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="features.html">features</a><a href="prices.html">prices</a><a href="partners.html">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html" aria-current="page">academy</a>
+        <a data-language="en" href="features.html#language-en">features</a><a data-language="uz" href="features.html#language-uz">imkoniyatlar</a><a data-language="ru" href="features.html#language-ru">возможности</a>
+        <a data-language="en" href="prices.html#language-en">prices</a><a data-language="uz" href="prices.html#language-uz">narxlar</a><a data-language="ru" href="prices.html#language-ru">цены</a>
+        <a data-language="en" href="partners.html#language-en">partners</a><a data-language="uz" href="partners.html#language-uz">hamkorlar</a><a data-language="ru" href="partners.html#language-ru">партнёры</a>
+        <a data-language="en" href="knowledge.html#language-en">knowledge base</a><a data-language="uz" href="knowledge.html#language-uz">bilimlar bazasi</a><a data-language="ru" href="knowledge.html#language-ru">база знаний</a>
+        <a data-language="en" href="academy.html#language-en" aria-current="page">academy</a><a data-language="uz" href="academy.html#language-uz" aria-current="page">akademiya</a><a data-language="ru" href="academy.html#language-ru" aria-current="page">академия</a>
       </nav>
-      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)"><span data-language="en">sign in</span><span data-language="uz">kirish</span><span data-language="ru">войти</span> <span aria-hidden="true">⟶</span></button>
     </header>
     <main class="section-page-main">
-      <h1 class="section-page-heading">Academy</h1>
+      <h1 class="section-page-heading"><span data-language="en">Academy</span><span data-language="uz">Akademiya</span><span data-language="ru">Академия</span></h1>
       <section class="academy-section" aria-labelledby="academy-title">
-        <div class="section-topline"><h2 id="academy-title">Learn by doing</h2></div>
+        <div class="section-topline"><h2 id="academy-title"><span data-language="en">Learn by doing</span><span data-language="uz">Amalda o‘rganing</span><span data-language="ru">Учитесь на практике</span></h2></div>
         <div class="academy-learning-path">
           <article class="work-card academy-card">
-            <h3>Demo Account</h3>
+            <h3><span data-language="en">Demo Account</span><span data-language="uz">Demo hisob</span><span data-language="ru">Демо-счёт</span></h3>
             <img src="../img/Vector (3).png" alt="" class="work-icon">
-            <p>Train, learn and test Capico features with a virtual balance, free and without risks.</p>
-            <a href="prices.html">Explore demo account <span aria-hidden="true">⟶</span></a>
+            <p><span data-language="en">Train, learn and test Capico features with a virtual balance, free and without risks.</span><span data-language="uz">Virtual balans bilan Capico imkoniyatlarini bepul va xatarsiz o‘rganing hamda sinab ko‘ring.</span><span data-language="ru">Изучайте и проверяйте возможности Capico на виртуальном балансе — бесплатно и без риска.</span></p>
+            <a href="prices.html"><span data-language="en">Explore demo account</span><span data-language="uz">Demo hisob bilan tanishing</span><span data-language="ru">Подробнее о демо-счёте</span> <span aria-hidden="true">⟶</span></a>
           </article>
           <article class="work-card academy-card">
-            <h3>Explore trading tools</h3>
+            <h3><span data-language="en">Explore trading tools</span><span data-language="uz">Savdo vositalarini o‘rganing</span><span data-language="ru">Изучите инструменты торговли</span></h3>
             <img src="../img/Vector (1).png" alt="" class="work-icon">
-            <p>Learn about trading tools, bots, orders and chart features.</p>
-            <a href="features.html">Browse features <span aria-hidden="true">⟶</span></a>
+            <p><span data-language="en">Learn about trading tools, bots, orders and chart features.</span><span data-language="uz">Savdo vositalari, botlar, buyurtmalar va grafik imkoniyatlari haqida bilib oling.</span><span data-language="ru">Узнайте о торговых инструментах, ботах, ордерах и возможностях графика.</span></p>
+            <a href="features.html"><span data-language="en">Browse features</span><span data-language="uz">Imkoniyatlarni ko‘rish</span><span data-language="ru">Все возможности</span> <span aria-hidden="true">⟶</span></a>
           </article>
           <article class="work-card academy-card">
-            <h3>Learn account security</h3>
+            <h3><span data-language="en">Learn account security</span><span data-language="uz">Hisob xavfsizligini o‘rganing</span><span data-language="ru">Узнайте о безопасности аккаунта</span></h3>
             <img src="../img/Vector (2).png" alt="" class="work-icon">
-            <p>Read how API keys, server protection and two-factor authentication help secure your account.</p>
-            <a href="knowledge.html">Read security guide <span aria-hidden="true">⟶</span></a>
+            <p><span data-language="en">Read how API keys, server protection and two-factor authentication help secure your account.</span><span data-language="uz">API kalitlari, server himoyasi va ikki bosqichli tasdiqlash hisobingizni qanday himoya qilishini o‘qing.</span><span data-language="ru">Узнайте, как API-ключи, защита сервера и двухфакторная аутентификация помогают защитить аккаунт.</span></p>
+            <a href="knowledge.html"><span data-language="en">Read security guide</span><span data-language="uz">Xavfsizlik qo‘llanmasini o‘qing</span><span data-language="ru">Руководство по безопасности</span> <span aria-hidden="true">⟶</span></a>
           </article>
         </div>
-        <button class="btn-primary" type="button" onclick="toggleModal(true)">Create an account <span aria-hidden="true">⟶</span></button>
+        <button class="btn-primary" type="button" onclick="toggleModal(true)"><span class="academy-button-label"><span data-language="en">Create an account</span><span data-language="uz">Hisob yarating</span><span data-language="ru">Создать аккаунт</span></span><span aria-hidden="true">⟶</span></button>
       </section>
     </main>
     <footer class="site-footer">
       <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
-      <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
+      <div class="footer-column"><h3><span data-language="en">Platform</span><span data-language="uz">Platforma</span><span data-language="ru">Платформа</span></h3><a href="features.html"><span data-language="en">Features</span><span data-language="uz">Imkoniyatlar</span><span data-language="ru">Возможности</span></a><a href="prices.html"><span data-language="en">Prices</span><span data-language="uz">Narxlar</span><span data-language="ru">Цены</span></a><a href="partners.html"><span data-language="en">Partners</span><span data-language="uz">Hamkorlar</span><span data-language="ru">Партнёры</span></a><a href="knowledge.html"><span data-language="en">Knowledge base</span><span data-language="uz">Bilimlar bazasi</span><span data-language="ru">База знаний</span></a><a href="academy.html"><span data-language="en">Academy</span><span data-language="uz">Akademiya</span><span data-language="ru">Академия</span></a></div>
     </footer>
   </div>
   <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">

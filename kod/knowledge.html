@@ -6,40 +6,46 @@
   <meta name="theme-color" content="#160d25">
   <title>Knowledge Base — Capico</title>
   <link rel="stylesheet" href="main.css">
+  <script src="admin-shortcut.js" defer></script>
+  <script src="content-store.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <span class="language-state" id="language-en"></span>
+  <span class="language-state" id="language-uz"></span>
+  <span class="language-state" id="language-ru"></span>
   <div class="site-shell">
     <header class="navbar section-page-navbar">
       <a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
-      <div class="language-picker">
-        <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()"><span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span></button>
-        <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
-          <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button><button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button><button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
-        </div>
+      <div class="language-picker" role="group" aria-label="Choose language">
+        <a class="language-en" href="#language-en">EN</a><a class="language-uz" href="#language-uz">UZ</a><a class="language-ru" href="#language-ru">RU</a>
       </div>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="features.html">features</a><a href="prices.html">prices</a><a href="partners.html">partners</a><a href="knowledge.html" aria-current="page">knowledge base</a><a href="academy.html">academy</a>
+        <a data-language="en" href="features.html#language-en">features</a><a data-language="uz" href="features.html#language-uz">imkoniyatlar</a><a data-language="ru" href="features.html#language-ru">возможности</a>
+        <a data-language="en" href="prices.html#language-en">prices</a><a data-language="uz" href="prices.html#language-uz">narxlar</a><a data-language="ru" href="prices.html#language-ru">цены</a>
+        <a data-language="en" href="partners.html#language-en">partners</a><a data-language="uz" href="partners.html#language-uz">hamkorlar</a><a data-language="ru" href="partners.html#language-ru">партнёры</a>
+        <a data-language="en" href="knowledge.html#language-en" aria-current="page">knowledge base</a><a data-language="uz" href="knowledge.html#language-uz" aria-current="page">bilimlar bazasi</a><a data-language="ru" href="knowledge.html#language-ru" aria-current="page">база знаний</a>
+        <a data-language="en" href="academy.html#language-en">academy</a><a data-language="uz" href="academy.html#language-uz">akademiya</a><a data-language="ru" href="academy.html#language-ru">академия</a>
       </nav>
-      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)"><span data-language="en">sign in</span><span data-language="uz">kirish</span><span data-language="ru">войти</span> <span aria-hidden="true">⟶</span></button>
     </header>
     <main class="section-page-main">
-      <h1 class="section-page-heading">Knowledge Base</h1>
+      <h1 class="section-page-heading"><span data-language="en">Knowledge Base</span><span data-language="uz">Bilimlar bazasi</span><span data-language="ru">База знаний</span></h1>
       <section class="security-section" aria-labelledby="security-title">
-        <div class="security-heading"><span class="section-eyebrow">API, 2FA AND TECHNOLOGY</span><h2 id="security-title">high security<br>platform</h2></div>
+        <div class="security-heading"><span class="section-eyebrow"><span data-language="en">API, 2FA AND TECHNOLOGY</span><span data-language="uz">API, 2FA VA TEXNOLOGIYALAR</span><span data-language="ru">API, 2FA И ТЕХНОЛОГИИ</span></span><h2 id="security-title"><span data-language="en">high security<br>platform</span><span data-language="uz">yuqori xavfsizlikka ega<br>platforma</span><span data-language="ru">платформа<br>с высоким уровнем защиты</span></h2></div>
         <img class="security-art" src="../img/untitled332 1.png" alt="Layered shield and padlock representing account security">
         <div class="security-cards">
-          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about API Keys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
-          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Server" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
-          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about 2FA" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
+          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about API Keys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">API Keys</h3><h3 data-language="uz">API kalitlari</h3><h3 data-language="ru">API-ключи</h3><span aria-hidden="true">⌁</span><p data-language="en">Trading takes place through exchange API keys with withdrawals disabled.</p><p data-language="uz">Savdo birjaning API kalitlari orqali amalga oshiriladi, bunda mablag‘ yechib olish o‘chirilgan bo‘ladi.</p><p data-language="ru">Торговля выполняется через API-ключи бирж с отключённым выводом средств.</p></article>
+          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Server" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Server</h3><h3 data-language="uz">Server</h3><h3 data-language="ru">Сервер</h3><span aria-hidden="true">◇</span><p data-language="en">User data is encrypted and stored on an isolated server.</p><p data-language="uz">Foydalanuvchi ma’lumotlari shifrlanib, alohida serverda saqlanadi.</p><p data-language="ru">Данные пользователей шифруются и хранятся на изолированном сервере.</p></article>
+          <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about 2FA" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">2FA</h3><h3 data-language="uz">2FA</h3><h3 data-language="ru">2FA</h3><span aria-hidden="true">▣</span><p data-language="en">Two-factor authentication helps protect your account from unauthorized access.</p><p data-language="uz">Ikki bosqichli tasdiqlash hisobingizni ruxsatsiz kirishdan himoya qilishga yordam beradi.</p><p data-language="ru">Двухфакторная аутентификация помогает защитить аккаунт от несанкционированного доступа.</p></article>
         </div>
       </section>
     </main>
     <footer class="site-footer">
       <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
-      <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
+      <div class="footer-column"><h3><span data-language="en">Platform</span><span data-language="uz">Platforma</span><span data-language="ru">Платформа</span></h3><a href="features.html"><span data-language="en">Features</span><span data-language="uz">Imkoniyatlar</span><span data-language="ru">Возможности</span></a><a href="prices.html"><span data-language="en">Prices</span><span data-language="uz">Narxlar</span><span data-language="ru">Цены</span></a><a href="partners.html"><span data-language="en">Partners</span><span data-language="uz">Hamkorlar</span><span data-language="ru">Партнёры</span></a><a href="knowledge.html"><span data-language="en">Knowledge base</span><span data-language="uz">Bilimlar bazasi</span><span data-language="ru">База знаний</span></a><a href="academy.html"><span data-language="en">Academy</span><span data-language="uz">Akademiya</span><span data-language="ru">Академия</span></a></div>
     </footer>
   </div>
   <div class="modal-backdrop" id="cardDetailsModal" role="dialog" aria-modal="true" aria-labelledby="cardDetailsTitle" onclick="if (event.target === this) closeCardDetails()">

@@ -6,29 +6,35 @@
   <meta name="theme-color" content="#160d25">
   <title>Partners — Capico</title>
   <link rel="stylesheet" href="main.css">
+  <script src="admin-shortcut.js" defer></script>
+  <script src="content-store.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <span class="language-state" id="language-en"></span>
+  <span class="language-state" id="language-uz"></span>
+  <span class="language-state" id="language-ru"></span>
   <div class="site-shell">
     <header class="navbar section-page-navbar">
       <a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
-      <div class="language-picker">
-        <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()"><span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span></button>
-        <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
-          <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button><button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button><button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
-        </div>
+      <div class="language-picker" role="group" aria-label="Choose language">
+        <a class="language-en" href="#language-en">EN</a><a class="language-uz" href="#language-uz">UZ</a><a class="language-ru" href="#language-ru">RU</a>
       </div>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="features.html">features</a><a href="prices.html">prices</a><a href="partners.html" aria-current="page">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html">academy</a>
+        <a data-language="en" href="features.html#language-en">features</a><a data-language="uz" href="features.html#language-uz">imkoniyatlar</a><a data-language="ru" href="features.html#language-ru">возможности</a>
+        <a data-language="en" href="prices.html#language-en">prices</a><a data-language="uz" href="prices.html#language-uz">narxlar</a><a data-language="ru" href="prices.html#language-ru">цены</a>
+        <a data-language="en" href="partners.html#language-en" aria-current="page">partners</a><a data-language="uz" href="partners.html#language-uz" aria-current="page">hamkorlar</a><a data-language="ru" href="partners.html#language-ru" aria-current="page">партнёры</a>
+        <a data-language="en" href="knowledge.html#language-en">knowledge base</a><a data-language="uz" href="knowledge.html#language-uz">bilimlar bazasi</a><a data-language="ru" href="knowledge.html#language-ru">база знаний</a>
+        <a data-language="en" href="academy.html#language-en">academy</a><a data-language="uz" href="academy.html#language-uz">akademiya</a><a data-language="ru" href="academy.html#language-ru">академия</a>
       </nav>
-      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)"><span data-language="en">sign in</span><span data-language="uz">kirish</span><span data-language="ru">войти</span> <span aria-hidden="true">⟶</span></button>
     </header>
     <main class="section-page-main">
-      <h1 class="section-page-heading">Partners</h1>
+      <h1 class="section-page-heading"><span data-language="en">Partners</span><span data-language="uz">Hamkorlar</span><span data-language="ru">Партнёры</span></h1>
       <section class="partners-section">
-        <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
+        <div class="partners-heading"><h2><span data-language="en">our partners</span><span data-language="uz">bizning hamkorlarimiz</span><span data-language="ru">наши партнёры</span></h2><p><span data-language="en">The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</span><span data-language="uz">Capico platformasi yetakchi<br>kriptovalyuta birjalarining<br>rasmiy brokeridir</span><span data-language="ru">Платформа Capico —<br>официальный брокер ведущих<br>криптовалютных бирж</span></p></div>
         <div class="partner-logos">
           <button class="partner-logo exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
           <button class="partner-logo exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
@@ -38,11 +44,11 @@
       </section>
       <section class="partner-community-section" aria-labelledby="partner-community-title">
         <header class="partner-community-heading">
-          <h2 id="partner-community-title">Our<br>partners</h2>
-          <p>Popular crypto communities and well-known traders trade on the Capico platform.</p>
+          <h2 id="partner-community-title"><span data-language="en">Our<br>partners</span><span data-language="uz">Bizning<br>hamkorlarimiz</span><span data-language="ru">Наши<br>партнёры</span></h2>
+          <p><span data-language="en">Popular crypto communities and well-known traders trade on the Capico platform.</span><span data-language="uz">Mashhur kripto hamjamiyatlari va taniqli treyderlar Capico platformasida savdo qiladi.</span><span data-language="ru">Популярные криптосообщества и известные трейдеры торгуют на платформе Capico.</span></p>
         </header>
         <div class="partner-community-panel">
-          <p class="partner-community-intro">Join our partners, read their analytics, and explore the world of trading and cryptocurrencies.</p>
+          <p class="partner-community-intro"><span data-language="en">Join our partners, read their analytics, and explore the world of trading and cryptocurrencies.</span><span data-language="uz">Hamkorlarimizga qo‘shiling, ularning tahlillarini o‘qing va savdo hamda kriptovalyutalar olamini kashf eting.</span><span data-language="ru">Присоединяйтесь к партнёрам, читайте их аналитику и открывайте для себя мир торговли и криптовалют.</span></p>
           <div class="partner-community-content">
             <nav class="partner-community-nav" aria-label="Partner community members">
               <ul>
@@ -59,8 +65,8 @@
             </nav>
             <article class="partner-community-card" aria-live="polite">
               <h3 class="partner-community-title">Cryptomaximum<br>Group</h3>
-              <ul class="partner-community-details"><li>Team of professional traders in the stock and cryptocurrency markets</li><li>Crypto startup advisors</li><li>Training and sales teams</li><li>Cryptocurrency media</li></ul>
-              <p class="partner-community-placeholder" hidden>This partner is listed in Capico’s partner community. More profile details and links will be added when available.</p>
+              <ul class="partner-community-details"><li><span data-language="en">Team of professional traders in the stock and cryptocurrency markets</span><span data-language="uz">Fond va kriptovalyuta bozorlaridagi professional treyderlar jamoasi</span><span data-language="ru">Команда профессиональных трейдеров фондового и криптовалютного рынков</span></li><li><span data-language="en">Crypto startup advisors</span><span data-language="uz">Kripto-startaplar maslahatchilari</span><span data-language="ru">Консультанты криптостартапов</span></li><li><span data-language="en">Training and sales teams</span><span data-language="uz">Ta’lim va savdo jamoalari</span><span data-language="ru">Команды обучения и продаж</span></li><li><span data-language="en">Cryptocurrency media</span><span data-language="uz">Kriptovalyuta OAV</span><span data-language="ru">Криптовалютные СМИ</span></li></ul>
+              <p class="partner-community-placeholder" hidden><span data-language="en">This partner is listed in Capico’s partner community. More profile details and links will be added when available.</span><span data-language="uz">Bu hamkor Capico hamjamiyatida ro‘yxatga olingan. Profil tafsilotlari va havolalar mavjud bo‘lganda qo‘shiladi.</span><span data-language="ru">Этот партнёр представлен в сообществе Capico. Подробности профиля и ссылки будут добавлены позже.</span></p>
               <div class="partner-community-links" aria-label="Cryptomaximum Group social channels"><span aria-label="Twitter">𝕏</span><span aria-label="Facebook">f</span><span aria-label="VK">ᴠκ</span><span class="partner-community-domain">cryptomax.io</span></div>
             </article>
           </div>
@@ -69,7 +75,7 @@
     </main>
     <footer class="site-footer">
       <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
-      <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
+      <div class="footer-column"><h3><span data-language="en">Platform</span><span data-language="uz">Platforma</span><span data-language="ru">Платформа</span></h3><a href="features.html"><span data-language="en">Features</span><span data-language="uz">Imkoniyatlar</span><span data-language="ru">Возможности</span></a><a href="prices.html"><span data-language="en">Prices</span><span data-language="uz">Narxlar</span><span data-language="ru">Цены</span></a><a href="partners.html"><span data-language="en">Partners</span><span data-language="uz">Hamkorlar</span><span data-language="ru">Партнёры</span></a><a href="knowledge.html"><span data-language="en">Knowledge base</span><span data-language="uz">Bilimlar bazasi</span><span data-language="ru">База знаний</span></a><a href="academy.html"><span data-language="en">Academy</span><span data-language="uz">Akademiya</span><span data-language="ru">Академия</span></a></div>
     </footer>
   </div>
   <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">

@@ -6,38 +6,42 @@
   <meta name="theme-color" content="#160d25">
   <title>Capico — Crypto trading with bots and smart tools</title>
   <link rel="stylesheet" href="main.css">
-  <script src="site-content.js" defer></script>
+
+  
+  <script src="admin-shortcut.js" defer></script>
+  <script src="content-store.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <span class="language-state" id="language-en"></span>
+  <span class="language-state" id="language-uz"></span>
+  <span class="language-state" id="language-ru"></span>
   <main class="site-shell">
     <section class="hero-frame" id="top">
       <header class="navbar">
         <a class="logo" href="#top" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
-        <div class="language-picker">
-          <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()">
-            <span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span>
-          </button>
-          <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
-            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button>
-            <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button>
-            <button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
-          </div>
-        </div>
+        <a class="video-crypto-button" href="crypto.html" aria-label="Open Crypto page" title="Crypto">
+          <span class="video-crypto-logo" aria-hidden="true"><img src="../img/Vector (15).png" alt=""></span>
+          <span class="video-crypto-hole" aria-hidden="true"></span>
+        </a>
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="features.html">features</a><a href="prices.html">prices</a><a href="partners.html">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html">academy</a>
+          <a data-language="en" href="features.html#language-en">features</a><a data-language="uz" href="features.html#language-uz">imkoniyatlar</a><a data-language="ru" href="features.html#language-ru">возможности</a>
+          <a data-language="en" href="prices.html#language-en">prices</a><a data-language="uz" href="prices.html#language-uz">narxlar</a><a data-language="ru" href="prices.html#language-ru">цены</a>
+          <a data-language="en" href="partners.html#language-en">partners</a><a data-language="uz" href="partners.html#language-uz">hamkorlar</a><a data-language="ru" href="partners.html#language-ru">партнёры</a>
+          <a data-language="en" href="knowledge.html#language-en">knowledge base</a><a data-language="uz" href="knowledge.html#language-uz">bilimlar bazasi</a><a data-language="ru" href="knowledge.html#language-ru">база знаний</a>
+          <a data-language="en" href="academy.html#language-en">academy</a><a data-language="uz" href="academy.html#language-uz">akademiya</a><a data-language="ru" href="academy.html#language-ru">академия</a>
         </nav>
-        <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+        <button class="btn-signin-nav" type="button" onclick="toggleModal(true)"><span data-language="en">sign in</span><span data-language="uz">kirish</span><span data-language="ru">войти</span> <span aria-hidden="true">⟶</span></button>
       </header>
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <h1 class="hero-title">Crypto trading<br><span>with bots and<br>smart tools</span></h1>
-        <button class="btn-primary" type="button" onclick="toggleModal(true)">Sign up now <span aria-hidden="true">⟶</span></button>
+        <h1 class="hero-title"><span data-language="en">Crypto trading<br>with bots and<br>smart tools</span><span data-language="uz">Kriptovalyuta savdosi<br>botlar va<br>aqlli vositalar bilan</span><span data-language="ru">Торговля криптовалютой<br>с ботами и<br>умными инструментами</span></h1>
+        <button class="btn-primary" type="button" onclick="toggleModal(true)"><span data-language="en">Sign up now</span><span data-language="uz">Ro‘yxatdan o‘ting</span><span data-language="ru">Зарегистрироваться</span> <span aria-hidden="true">⟶</span></button>
       </div>
       <div class="exchanges-wrapper">
-        <p class="exchanges-title">Trade for free on your<br>favorite exchanges</p>
+        <p class="exchanges-title"><span data-language="en">Trade for free on your<br>favorite exchanges</span><span data-language="uz">Sevimli birjalaringizda<br>bepul savdo qiling</span><span data-language="ru">Торгуйте бесплатно<br>на любимых биржах</span></p>
         <div class="exchange-cards" aria-label="Supported exchanges">
           <button class="exchange-card exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
           <button class="exchange-card exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
@@ -55,31 +59,57 @@
     </section>
     <section class="numbers-section" aria-label="Capico platform statistics">
       <img src="../img/003-numbers.png" alt="Capico statistics: 18.5 billion dollars trading volume, 36 million online, 21.5 thousand traders and 325 million deals">
+      <div class="numbers-cta">
+        <a class="btn-primary" href="academy.html" target="_blank" rel="noopener noreferrer">
+          <span data-language="en">Read more</span><span data-language="uz">Batafsil</span><span data-language="ru">Подробнее</span>
+          <span aria-hidden="true">⟶</span>
+        </a>
+      </div>
     </section>
     <section class="benefits-showcase" aria-label="Capico benefits: Interface Builder, MultiChart, Portfolio and Statistics">
       <img src="../img/004.png" alt="Customize your trading interface, view multiple cryptocurrency charts and manage portfolio statistics in one place">
+      <div class="benefits-showcase-copy benefits-showcase-copy-interface">
+        <h2><span data-language="en">Interface<br>Builder</span><span data-language="uz">Interfeys<br>konstruktori</span><span data-language="ru">Конструктор<br>интерфейса</span></h2>
+        <div class="benefits-showcase-description">
+          <p><span data-language="en">Customize your look</span><span data-language="uz">Ko‘rinishni sozlang</span><span data-language="ru">Настройте внешний вид</span></p>
+          <p><span data-language="en">Remove the excess, add what you need.<br>Trade at your convenience.</span><span data-language="uz">Keraksizini olib tashlang, keraklisini qo‘shing.<br>O‘zingizga qulay tarzda savdo qiling.</span><span data-language="ru">Уберите лишнее и добавьте нужное.<br>Торгуйте с комфортом.</span></p>
+        </div>
+      </div>
+      <div class="benefits-showcase-copy benefits-showcase-copy-multichart">
+        <h2>MultiChart</h2>
+        <p><span data-language="en"><strong>Add any trading pairs</strong> from different exchanges and analyze cryptocurrency assets on one screen</span><span data-language="uz"><strong>Istalgan savdo juftliklarini qo‘shing</strong>, turli birjalardan ma’lumot olib, kriptoaktivlarni bir ekranda tahlil qiling</span><span data-language="ru"><strong>Добавляйте любые торговые пары</strong> с разных бирж и анализируйте криптоактивы на одном экране</span></p>
+      </div>
+      <div class="benefits-showcase-top-label"><span data-language="en">benefits</span><span data-language="uz">afzalliklar</span><span data-language="ru">преимущества</span></div>
+      <div class="benefits-showcase-top-note"><span data-language="en">Manage positions on</span><span data-language="uz">Pozitsiyalarni boshqaring</span><span data-language="ru">Управляйте позициями</span></div>
+      <div class="benefits-showcase-copy">
+        <h2><span data-language="en">Portfolio &amp;<br>Statistics</span><span data-language="uz">Portfel va<br>statistika</span><span data-language="ru">Портфель и<br>статистика</span></h2>
+        <div class="benefits-showcase-description">
+          <p><span data-language="en">Your assets on all connected exchanges are collected in one place</span><span data-language="uz">Ulangan barcha birjalardagi aktivlaringiz bir joyda jamlanadi</span><span data-language="ru">Ваши активы со всех подключённых бирж собраны в одном месте</span></p>
+          <p><span data-language="en">Visual statistics of trade.<br>Uploading reports</span><span data-language="uz">Savdoning vizual statistikasi.<br>Hisobotlarni yuklab olish</span><span data-language="ru">Наглядная статистика торговли.<br>Выгрузка отчётов</span></p>
+        </div>
+      </div>
     </section>
 
     <section class="comfortable-work-section">
       <div class="work-header">
-        <h2 class="work-title">Everything for your<br><span class="purple-text">comfortable work</span></h2>
+        <h2 class="work-title"><span data-language="en">Everything for your<br><span class="purple-text">comfortable work</span></span><span data-language="uz">Qulay ishlashingiz<br><span class="purple-text">uchun barcha imkoniyatlar</span></span><span data-language="ru">Всё для вашей<br><span class="purple-text">комфортной работы</span></span></h2>
         <div class="slider-nav-buttons">
           <button class="slider-btn" type="button" aria-label="Previous benefits" onclick="scrollBenefits(-1)">←</button>
           <button class="slider-btn slider-btn-wide" type="button" aria-label="Next benefits" onclick="scrollBenefits(1)">⟶</button>
         </div>
       </div>
       <div class="cards-grid" id="benefitCards">
-        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Speed" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Speed</h3><img src="../img/Vector.png" alt="" class="work-icon"><p>Your assets on all connected exchanges are collected in one place</p></article>
-        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Hotkeys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Hotkeys</h3><img src="../img/Vector (1).png" alt="" class="work-icon"><p>Use hot keys to work faster</p></article>
-        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Notifications" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Notifications</h3><img src="../img/Vector (2).png" alt="" class="work-icon"><p>Get important email and Telegram notifications</p></article>
-        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Cloud Service" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Cloud Service</h3><img src="../img/Vector (26).png" alt="" class="work-icon"><p>Updates are usually invisible. No break from trade.</p></article>
-        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Dark theme" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Dark theme</h3><img src="../img/Vector (27).png" alt="" class="work-icon"><p>Trade anytime. Even at night.</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Speed" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Speed</h3><h3 data-language="uz">Tezlik</h3><h3 data-language="ru">Скорость</h3><img src="../img/Vector.png" alt="" class="work-icon"><p data-language="en">Your assets on all connected exchanges are collected in one place</p><p data-language="uz">Ulangan barcha birjalardagi aktivlaringiz bir joyda jamlanadi</p><p data-language="ru">Ваши активы со всех подключённых бирж собраны в одном месте</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Hotkeys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Hotkeys</h3><h3 data-language="uz">Tezkor tugmalar</h3><h3 data-language="ru">Горячие клавиши</h3><img src="../img/Vector (1).png" alt="" class="work-icon"><p data-language="en">Use hot keys to work faster</p><p data-language="uz">Tezroq ishlash uchun tezkor tugmalardan foydalaning</p><p data-language="ru">Используйте горячие клавиши для быстрой работы</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Notifications" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Notifications</h3><h3 data-language="uz">Bildirishnomalar</h3><h3 data-language="ru">Уведомления</h3><img src="../img/Vector (2).png" alt="" class="work-icon"><p data-language="en">Get important email and Telegram notifications</p><p data-language="uz">Muhim xabarlarni email va Telegram orqali oling</p><p data-language="ru">Получайте важные уведомления по почте и в Telegram</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Cloud Service" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Cloud Service</h3><h3 data-language="uz">Bulutli xizmat</h3><h3 data-language="ru">Облачный сервис</h3><img src="../img/Vector (26).png" alt="" class="work-icon"><p data-language="en">Updates are usually invisible. No break from trade.</p><p data-language="uz">Yangilanishlar odatda sezilmaydi. Savdo to‘xtamaydi.</p><p data-language="ru">Обновления обычно незаметны. Торговля не прерывается.</p></article>
+        <article class="work-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Dark theme" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Dark theme</h3><h3 data-language="uz">Qorong‘i mavzu</h3><h3 data-language="ru">Тёмная тема</h3><img src="../img/Vector (27).png" alt="" class="work-icon"><p data-language="en">Trade anytime. Even at night.</p><p data-language="uz">Istalgan vaqtda, hatto tunda ham savdo qiling.</p><p data-language="ru">Торгуйте в любое время, даже ночью.</p></article>
       </div>
       <div class="progress-bar-line"><div class="progress-active"></div></div>
     </section>
 
     <section class="features-purple-section" id="features">
-      <div class="section-topline"><h2>features</h2></div>
+      <div class="section-topline"><h2><span data-language="en">features</span><span data-language="uz">imkoniyatlar</span><span data-language="ru">возможности</span></h2></div>
       <div class="features-split-layout">
         <div class="feature-wheel">
           <div class="feature-wheel-rotor" id="featureWheelRotor" aria-hidden="true"></div>
@@ -117,7 +147,7 @@
             <div class="active-card-content">
               <div class="card-top-header"><h3 id="featureTitle">Pending<br>orders</h3><span class="orders-icon" id="featureIcon" aria-hidden="true"></span></div>
               <p id="featureDescription">You can create orders both above the current price and below. Funds on the balance sheet are not blocked. Such orders are “not seen” by the exchange.</p>
-              <a class="btn-learn-more" href="prices.html">Learn more <span aria-hidden="true">⟶</span></a>
+              <a class="btn-learn-more" href="prices.html"><span data-language="en">Learn more</span><span data-language="uz">Batafsil</span><span data-language="ru">Подробнее</span> <span aria-hidden="true">⟶</span></a>
             </div>
           </div>
           <div class="vertical-scroll-indicators">
@@ -130,27 +160,27 @@
 
     <section class="mobile-section">
       <div class="mobile-copy">
-        <span class="section-eyebrow">ALL FUNCTIONALITY IS ALWAYS AT HAND</span>
-        <h2>Trade<br>anywhere</h2>
-        <p>The service is fully adapted to work through a browser on your smartphone or tablet.</p>
-        <button class="btn-primary btn-mobile" type="button" onclick="toggleModal(true)">Create an account <span aria-hidden="true">⟶</span></button>
+        <span class="section-eyebrow"><span data-language="en">ALL FUNCTIONALITY IS ALWAYS AT HAND</span><span data-language="uz">BARCHA IMKONIYATLAR DOIMO QO‘L OSTINGIZDA</span><span data-language="ru">ВСЕ ФУНКЦИИ ВСЕГДА ПОД РУКОЙ</span></span>
+        <h2><span data-language="en">Trade<br>anywhere</span><span data-language="uz">Istalgan joyda<br>savdo qiling</span><span data-language="ru">Торгуйте<br>где угодно</span></h2>
+        <p><span data-language="en">The service is fully adapted to work through a browser on your smartphone or tablet.</span><span data-language="uz">Xizmat smartfon yoki planshetingiz brauzerida ishlash uchun to‘liq moslashtirilgan.</span><span data-language="ru">Сервис полностью адаптирован для работы в браузере на смартфоне или планшете.</span></p>
+        <a class="btn-primary btn-mobile" href="https://www.coinbase.com/" aria-label="Visit Coinbase"><span class="btn-mobile-label"><span data-language="en">Create an account</span><span data-language="uz">Hisob yarating</span><span data-language="ru">Создать аккаунт</span></span><span aria-hidden="true">⟶</span></a>
       </div>
       <img class="mobile-art" src="../img/23 1.png" alt="Capico trading dashboard on mobile with cryptocurrency cards">
     </section>
 
     <section class="security-section" id="knowledge">
-      <div class="security-heading"><span class="section-eyebrow">KNOWLEDGE BASE</span><h2>high security<br>platform</h2></div>
+      <div class="security-heading"><span class="section-eyebrow"><span data-language="en">KNOWLEDGE BASE</span><span data-language="uz">BILIMLAR BAZASI</span><span data-language="ru">БАЗА ЗНАНИЙ</span></span><h2><span data-language="en">high security<br>platform</span><span data-language="uz">yuqori xavfsizlikka ega<br>platforma</span><span data-language="ru">платформа<br>с высоким уровнем защиты</span></h2></div>
       <img class="security-art" src="../img/untitled332 1.png" alt="Layered shield and padlock representing account security">
       <div class="security-cards">
-        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about API Keys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>API Keys</h3><span aria-hidden="true">⌁</span><p>Trading takes place through API keys of exchanges with the inability to withdraw funds.</p></article>
-        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Server" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>Server</h3><span aria-hidden="true">◇</span><p>User data is encrypted and stored on an isolated server.</p></article>
-        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about 2FA" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3>2FA</h3><span aria-hidden="true">▣</span><p>Two-factor authentication helps protect your account from unauthorized access.</p></article>
+        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about API Keys" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">API Keys</h3><h3 data-language="uz">API kalitlari</h3><h3 data-language="ru">API-ключи</h3><span aria-hidden="true">⌁</span><p data-language="en">Trading takes place through exchange API keys with withdrawals disabled.</p><p data-language="uz">Savdo birjaning API kalitlari orqali amalga oshiriladi, bunda mablag‘ yechib olish o‘chirilgan bo‘ladi.</p><p data-language="ru">Торговля выполняется через API-ключи бирж с отключённым выводом средств.</p></article>
+        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about Server" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">Server</h3><h3 data-language="uz">Server</h3><h3 data-language="ru">Сервер</h3><span aria-hidden="true">◇</span><p data-language="en">User data is encrypted and stored on an isolated server.</p><p data-language="uz">Foydalanuvchi ma’lumotlari shifrlanib, alohida serverda saqlanadi.</p><p data-language="ru">Данные пользователей шифруются и хранятся на изолированном сервере.</p></article>
+        <article class="security-card card-clickable" role="button" tabindex="0" aria-label="Learn more about 2FA" onclick="showCardDetails(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showCardDetails(this); }"><h3 data-language="en">2FA</h3><h3 data-language="uz">2FA</h3><h3 data-language="ru">2FA</h3><span aria-hidden="true">▣</span><p data-language="en">Two-factor authentication helps protect your account from unauthorized access.</p><p data-language="uz">Ikki bosqichli tasdiqlash hisobingizni ruxsatsiz kirishdan himoya qilishga yordam beradi.</p><p data-language="ru">Двухфакторная аутентификация помогает защитить аккаунт от несанкционированного доступа.</p></article>
       </div>
     </section>
 
     <section id="partners" aria-label="Partners">
       <section class="partners-section">
-      <div class="partners-heading"><h2>our partners</h2><p>The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</p></div>
+      <div class="partners-heading"><h2><span data-language="en">our partners</span><span data-language="uz">bizning hamkorlarimiz</span><span data-language="ru">наши партнёры</span></h2><p><span data-language="en">The Capico platform is the<br>official broker of the leading<br>cryptocurrency exchanges</span><span data-language="uz">Capico platformasi yetakchi<br>kriptovalyuta birjalarining<br>rasmiy brokeridir</span><span data-language="ru">Платформа Capico —<br>официальный брокер ведущих<br>криптовалютных бирж</span></p></div>
       <div class="partner-logos">
         <button class="partner-logo exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
         <button class="partner-logo exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
@@ -162,11 +192,11 @@
 
       <section class="partner-community-section" aria-labelledby="partner-community-title">
       <header class="partner-community-heading">
-        <h2 id="partner-community-title">Our<br>partners</h2>
-        <p>Popular crypto communities and well-known traders trade on the Capico platform.</p>
+        <h2 id="partner-community-title"><span data-language="en">Our<br>partners</span><span data-language="uz">Bizning<br>hamkorlarimiz</span><span data-language="ru">Наши<br>партнёры</span></h2>
+        <p><span data-language="en">Popular crypto communities and well-known traders trade on the Capico platform.</span><span data-language="uz">Mashhur kripto hamjamiyatlari va taniqli treyderlar Capico platformasida savdo qiladi.</span><span data-language="ru">Популярные криптосообщества и известные трейдеры торгуют на платформе Capico.</span></p>
       </header>
       <div class="partner-community-panel">
-        <p class="partner-community-intro">Join our partners, read their analytics, and explore the world of trading and cryptocurrencies.</p>
+        <p class="partner-community-intro"><span data-language="en">Join our partners, read their analytics, and explore the world of trading and cryptocurrencies.</span><span data-language="uz">Hamkorlarimizga qo‘shiling, ularning tahlillarini o‘qing va savdo hamda kriptovalyutalar olamini kashf eting.</span><span data-language="ru">Присоединяйтесь к партнёрам, читайте их аналитику и открывайте для себя мир торговли и криптовалют.</span></p>
         <div class="partner-community-content">
           <nav class="partner-community-nav" aria-label="Partner community members">
             <ul>
@@ -184,12 +214,12 @@
           <article class="partner-community-card" aria-live="polite">
             <h3 class="partner-community-title">Cryptomaximum<br>Group</h3>
             <ul class="partner-community-details">
-              <li>Team of professional traders in the stock and cryptocurrency markets</li>
-              <li>Crypto startup advisors</li>
-              <li>Training and sales teams</li>
-              <li>Cryptocurrency media</li>
+              <li><span data-language="en">Team of professional traders in the stock and cryptocurrency markets</span><span data-language="uz">Fond va kriptovalyuta bozorlaridagi professional treyderlar jamoasi</span><span data-language="ru">Команда профессиональных трейдеров фондового и криптовалютного рынков</span></li>
+              <li><span data-language="en">Crypto startup advisors</span><span data-language="uz">Kripto-startaplar maslahatchilari</span><span data-language="ru">Консультанты криптостартапов</span></li>
+              <li><span data-language="en">Training and sales teams</span><span data-language="uz">Ta’lim va savdo jamoalari</span><span data-language="ru">Команды обучения и продаж</span></li>
+              <li><span data-language="en">Cryptocurrency media</span><span data-language="uz">Kriptovalyuta OAV</span><span data-language="ru">Криптовалютные СМИ</span></li>
             </ul>
-            <p class="partner-community-placeholder" hidden>This partner is listed in Capico’s partner community. More profile details and links will be added when available.</p>
+            <p class="partner-community-placeholder" hidden><span data-language="en">This partner is listed in Capico’s partner community. More profile details and links will be added when available.</span><span data-language="uz">Bu hamkor Capico hamjamiyatida ro‘yxatga olingan. Profil tafsilotlari va havolalar mavjud bo‘lganda qo‘shiladi.</span><span data-language="ru">Этот партнёр представлен в сообществе Capico. Подробности профиля и ссылки будут добавлены позже.</span></p>
             <div class="partner-community-links" aria-label="Cryptomaximum Group social channels">
               <span aria-label="Twitter">𝕏</span>
               <span aria-label="Facebook">f</span>
@@ -204,25 +234,25 @@
 
     <section id="prices" aria-label="Prices">
     <section class="pricing-section" aria-labelledby="pricing-title">
-      <h2 class="pricing-title" id="pricing-title">Prices</h2>
+      <h2 class="pricing-title" id="pricing-title"><span data-language="en">Prices</span><span data-language="uz">Narxlar</span><span data-language="ru">Цены</span></h2>
       <div class="demo-pricing-panel">
         <div class="demo-pricing-copy">
-          <h3>demo account</h3>
-          <p>Available immediately <span>after registering with Capico.</span></p>
-          <a href="#trial-period">Read more <span aria-hidden="true">⟶</span></a>
+          <h3><span data-language="en">demo account</span><span data-language="uz">demo hisob</span><span data-language="ru">демо-счёт</span></h3>
+          <p><span data-language="en">Available immediately after registering with Capico.</span><span data-language="uz">Capico’da ro‘yxatdan o‘tishingiz bilan foydalanish mumkin.</span><span data-language="ru">Доступен сразу после регистрации в Capico.</span></p>
+          <a href="#trial-period"><span data-language="en">Read more</span><span data-language="uz">Batafsil</span><span data-language="ru">Подробнее</span> <span aria-hidden="true">⟶</span></a>
         </div>
         <div class="demo-pricing-features">
           <article class="demo-feature demo-feature-balance">
             <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="20"/><path d="M22 25c5-7 19-7 22 0 3 8-7 9-12 11-7 2-8 7-2 10 5 3 14 1 18-3M32 17v30M12 32a20 20 0 0 1 34-14M52 32a20 20 0 0 1-34 14"/></svg>
-            <p>Virtual 10,000 USDT<br>on balance</p>
+            <p><span data-language="en">Virtual 10,000 USDT<br>on balance</span><span data-language="uz">Balansda virtual<br>10 000 USDT</span><span data-language="ru">На балансе<br>10 000 виртуальных USDT</span></p>
           </article>
           <article class="demo-feature">
             <svg viewBox="0 0 64 64" aria-hidden="true"><path d="m32 7 6 3 6-1 4 6 6 3v7l4 5-4 6v7l-6 3-4 6-6-1-6 3-6-3-6 1-4-6-6-3v-7l-4-5 4-6v-7l6-3 4-6 6 1z"/><circle cx="32" cy="32" r="11"/><path d="M27 32h10M32 27v10"/></svg>
-            <p>Works without subscription<br>and time limits</p>
+            <p><span data-language="en">Works without subscription<br>and time limits</span><span data-language="uz">Obunasiz va vaqt<br>cheklovisiz ishlaydi</span><span data-language="ru">Работает без подписки<br>и ограничений по времени</span></p>
           </article>
           <article class="demo-feature">
             <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="22" r="10"/><path d="M14 54c1-10 8-16 18-16s17 6 18 16M8 8h48v48H8zM17 48h6m8 0h6m8 0h6"/></svg>
-            <p>You can create multiple<br>accounts for different purposes</p>
+            <p><span data-language="en">You can create multiple<br>accounts for different purposes</span><span data-language="uz">Turli maqsadlar uchun<br>bir nechta hisob yarating</span><span data-language="ru">Создавайте несколько счетов<br>для разных целей</span></p>
           </article>
         </div>
         <div class="demo-orbit demo-orbit-one" aria-hidden="true"></div>
@@ -232,9 +262,9 @@
     </section>
 
     <section class="trial-section" id="trial-period" aria-labelledby="trial-title">
-      <h2 id="trial-title">trial period</h2>
-      <p>When adding an API key from a real exchange, a 7-day trial period starts. Upon completion, you can have a paid subscription or continue working at a free rate.</p>
-      <button class="btn-primary trial-button" type="button" onclick="toggleModal(true)">Try Capico free <span aria-hidden="true">⟶</span></button>
+      <h2 id="trial-title"><span data-language="en">trial period</span><span data-language="uz">sinov muddati</span><span data-language="ru">пробный период</span></h2>
+      <p><span data-language="en">When adding an API key from a real exchange, a 7-day trial period starts. Upon completion, you can have a paid subscription or continue working at a free rate.</span><span data-language="uz">Haqiqiy birjaning API kalitini qo‘shganingizda 7 kunlik sinov muddati boshlanadi. U tugagach, pulli obunani tanlashingiz yoki bepul tarifda davom etishingiz mumkin.</span><span data-language="ru">После добавления API-ключа реальной биржи начинается 7-дневный пробный период. По его окончании можно оформить платную подписку или продолжить работу на бесплатном тарифе.</span></p>
+      <button class="btn-primary trial-button" type="button" onclick="toggleModal(true)"><span data-language="en">Try Capico free</span><span data-language="uz">Capico’dan bepul foydalaning</span><span data-language="ru">Попробовать Capico бесплатно</span> <span aria-hidden="true">⟶</span></button>
       <div class="trial-orbit trial-orbit-one" aria-hidden="true"></div>
       <div class="trial-orbit trial-orbit-two" aria-hidden="true"></div>
       <div class="trial-orbit trial-orbit-three" aria-hidden="true"></div>
@@ -242,40 +272,40 @@
     </section>
 
     <section class="subscription-section" id="subscriptions" aria-labelledby="subscription-title">
-      <h2 id="subscription-title">subscription</h2>
+      <h2 id="subscription-title"><span data-language="en">subscription</span><span data-language="uz">obuna</span><span data-language="ru">подписка</span></h2>
       <div class="subscription-plans">
         <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
-          <h3>Month</h3>
+          <h3 data-language="en">Month</h3><h3 data-language="uz">1 oy</h3><h3 data-language="ru">1 месяц</h3>
           <p class="subscription-price">$15</p>
-          <p class="subscription-caption">Get started right now</p>
+          <p class="subscription-caption"><span data-language="en">Get started right now</span><span data-language="uz">Hoziroq boshlang</span><span data-language="ru">Начните прямо сейчас</span></p>
         </article>
         <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
-          <h3>3 months</h3>
+          <h3 data-language="en">3 months</h3><h3 data-language="uz">3 oy</h3><h3 data-language="ru">3 месяца</h3>
           <p class="subscription-price">$39</p>
           <p class="subscription-monthly">$11.5/mo</p>
-          <p class="subscription-caption">$6 economy <span>-13%</span></p>
+          <p class="subscription-caption"><span data-language="en">$6 economy</span><span data-language="uz">$6 tejaysiz</span><span data-language="ru">Экономия $6</span> <span>-13%</span></p>
         </article>
         <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
-          <h3>6 months</h3>
+          <h3 data-language="en">6 months</h3><h3 data-language="uz">6 oy</h3><h3 data-language="ru">6 месяцев</h3>
           <p class="subscription-price">$69</p>
           <p class="subscription-monthly">$13/mo</p>
-          <p class="subscription-caption">$21 economy <span>-23%</span></p>
+          <p class="subscription-caption"><span data-language="en">$21 economy</span><span data-language="uz">$21 tejaysiz</span><span data-language="ru">Экономия $21</span> <span>-23%</span></p>
         </article>
         <article class="subscription-plan subscription-plan-yearly card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }">
-          <h3>Yearly subscribe</h3>
+          <h3 data-language="en">Yearly subscription</h3><h3 data-language="uz">Yillik obuna</h3><h3 data-language="ru">Годовая подписка</h3>
           <p class="subscription-price">$119</p>
           <p class="subscription-monthly">$9.9/mo</p>
-          <p class="subscription-caption">$51 economy <span>-33%</span></p>
+          <p class="subscription-caption"><span data-language="en">$51 economy</span><span data-language="uz">$51 tejaysiz</span><span data-language="ru">Экономия $51</span> <span>-33%</span></p>
         </article>
       </div>
-      <p class="subscription-renewal">You can subscribe and renew your<br>subscription in <a href="#signInModal" onclick="toggleModal(true); return false;">your account</a></p>
-      <p class="subscription-details">More details and payment instructions can be found in <a href="knowledge.html">this article</a></p>
+      <p class="subscription-renewal"><span data-language="en">You can subscribe and renew your<br>subscription in </span><span data-language="uz">Obunani rasmiylashtirish va uzaytirish uchun </span><span data-language="ru">Оформить и продлить подписку можно в </span><a href="#signInModal" onclick="toggleModal(true); return false;"><span data-language="en">your account</span><span data-language="uz">hisobingizga kiring</span><span data-language="ru">личном кабинете</span></a></p>
+      <p class="subscription-details"><span data-language="en">More details and payment instructions can be found in </span><span data-language="uz">Batafsil ma’lumot va to‘lov yo‘riqnomasi </span><span data-language="ru">Подробную информацию и инструкции по оплате можно найти в </span><a href="knowledge.html"><span data-language="en">this article</span><span data-language="uz">ushbu maqolada</span><span data-language="ru">этой статье</span></a></p>
     </section>
 
     <section class="free-use-section" id="free-use" aria-labelledby="free-use-title">
-      <h2 id="free-use-title">free use</h2>
-      <p class="free-use-description">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</p>
-      <p class="free-use-instructions">Click on the desired exchange and find out the conditions for connecting to the free plan:</p>
+      <h2 id="free-use-title"><span data-language="en">free use</span><span data-language="uz">bepul foydalanish</span><span data-language="ru">бесплатное использование</span></h2>
+      <p class="free-use-description"><span data-language="en">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</span><span data-language="uz">Capico taniqli kriptovalyuta birjalari bilan hamkorlik orqali platformadan bepul foydalanish imkonini beradi. Yashirin to‘lovlar yoki funksional cheklovlar yo‘q.</span><span data-language="ru">Capico предоставляет бесплатный доступ к платформе благодаря партнёрству с известными криптовалютными биржами. Скрытых платежей и ограничений функций нет.</span></p>
+      <p class="free-use-instructions"><span data-language="en">Click on the desired exchange and find out the conditions for connecting to the free plan:</span><span data-language="uz">Bepul tarifga ulanish shartlarini bilish uchun kerakli birjani tanlang:</span><span data-language="ru">Выберите нужную биржу, чтобы узнать условия подключения к бесплатному тарифу:</span></p>
       <div class="free-use-exchanges" aria-label="Exchanges with free access">
         <button class="exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button>
         <button class="exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button>
@@ -284,33 +314,48 @@
       </div>
       <p class="exchange-selection-status" aria-live="polite"></p>
       <div class="free-use-benefits">
-        <h3>Regardless of the use case of the platform, you get full access to all the features</h3>
-        <p>Including horizontal volume indicator (VPVR), multi-chart mode on one screen (Multichart), as well as the ability to connect up to 7 accounts of each exchange, which is available from Capico. Need more limits? Send us an email: <a href="mailto:support@capico.app">support@capico.app</a></p>
+        <h3><span data-language="en">Regardless of the use case of the platform, you get full access to all the features</span><span data-language="uz">Platformadan qanday foydalanishingizdan qat’i nazar, barcha imkoniyatlardan to‘liq foydalanasiz</span><span data-language="ru">Вам доступны все функции платформы независимо от сценария использования</span></h3>
+        <p><span data-language="en">Including horizontal volume indicator (VPVR), multi-chart mode on one screen (Multichart), as well as the ability to connect up to 7 accounts of each exchange, which is available from Capico. Need more limits? Send us an email: </span><span data-language="uz">Jumladan, gorizontal hajm indikatori (VPVR), bir ekranda bir nechta grafik (Multichart) va Capico’da har bir birjadan 7 tagacha hisob ulash imkoniyati. Ko‘proq limit kerakmi? Bizga yozing: </span><span data-language="ru">В том числе горизонтальный индикатор объёма (VPVR), режим нескольких графиков (Multichart) и подключение до 7 аккаунтов каждой биржи в Capico. Нужны увеличенные лимиты? Напишите нам: </span><a href="mailto:support@capico.app">support@capico.app</a></p>
       </div>
     </section>
     </section>
 
     <section class="academy-section" id="academy" aria-labelledby="academy-title">
-      <div class="section-topline"><h2 id="academy-title">academy</h2></div>
-      <article class="work-card academy-card">
-        <h3>Demo Account</h3>
-        <img src="../img/Vector (3).png" alt="" class="work-icon">
-        <p>Train. Learn. Test any features. Free and without risks</p>
-      </article>
+      <div class="section-topline"><h2 id="academy-title"><span data-language="en">academy</span><span data-language="uz">akademiya</span><span data-language="ru">академия</span></h2></div>
+      <div class="academy-learning-path">
+        <article class="work-card academy-card">
+          <h3><span data-language="en">Demo Account</span><span data-language="uz">Demo hisob</span><span data-language="ru">Демо-счёт</span></h3>
+          <img src="../img/Vector (3).png" alt="" class="work-icon">
+          <p><span data-language="en">Train, learn and test Capico features with a virtual balance, free and without risks.</span><span data-language="uz">Virtual balans bilan Capico imkoniyatlarini bepul va xatarsiz o‘rganing hamda sinab ko‘ring.</span><span data-language="ru">Изучайте и проверяйте возможности Capico на виртуальном балансе — бесплатно и без риска.</span></p>
+          <a href="prices.html"><span data-language="en">Explore demo account</span><span data-language="uz">Demo hisob bilan tanishing</span><span data-language="ru">Подробнее о демо-счёте</span> <span aria-hidden="true">⟶</span></a>
+        </article>
+        <article class="work-card academy-card">
+          <h3><span data-language="en">Explore trading tools</span><span data-language="uz">Savdo vositalarini o‘rganing</span><span data-language="ru">Изучите инструменты торговли</span></h3>
+          <img src="../img/Vector (1).png" alt="" class="work-icon">
+          <p><span data-language="en">Learn about trading tools, bots, orders and chart features.</span><span data-language="uz">Savdo vositalari, botlar, buyurtmalar va grafik imkoniyatlari haqida bilib oling.</span><span data-language="ru">Узнайте о торговых инструментах, ботах, ордерах и возможностях графика.</span></p>
+          <a href="features.html"><span data-language="en">Browse features</span><span data-language="uz">Imkoniyatlarni ko‘rish</span><span data-language="ru">Все возможности</span> <span aria-hidden="true">⟶</span></a>
+        </article>
+        <article class="work-card academy-card">
+          <h3><span data-language="en">Learn account security</span><span data-language="uz">Hisob xavfsizligini o‘rganing</span><span data-language="ru">Узнайте о безопасности аккаунта</span></h3>
+          <img src="../img/Vector (2).png" alt="" class="work-icon">
+          <p><span data-language="en">Read how API keys, server protection and two-factor authentication help secure your account.</span><span data-language="uz">API kalitlari, server himoyasi va ikki bosqichli tasdiqlash hisobingizni qanday himoya qilishini o‘qing.</span><span data-language="ru">Узнайте, как API-ключи, защита сервера и двухфакторная аутентификация помогают защитить аккаунт.</span></p>
+          <a href="knowledge.html"><span data-language="en">Read security guide</span><span data-language="uz">Xavfsizlik qo‘llanmasini o‘qing</span><span data-language="ru">Руководство по безопасности</span> <span aria-hidden="true">⟶</span></a>
+        </article>
+      </div>
     </section>
 
     <section class="final-cta">
       <img src="../img/18b86db333fb42703f79be402c0747f7c2c25baa.png" alt="" aria-hidden="true">
-      <h2>Try Capico for free per month</h2>
-      <button class="btn-primary btn-final" type="button" onclick="toggleModal(true)">Create an account <span aria-hidden="true">⟶</span></button>
+      <h2><span data-language="en">Try Capico for free per month</span><span data-language="uz">Capico’dan bir oy bepul foydalanib ko‘ring</span><span data-language="ru">Попробуйте Capico бесплатно в течение месяца</span></h2>
+      <button class="btn-primary btn-final" type="button" onclick="toggleModal(true)"><span data-language="en">Create an account</span><span data-language="uz">Hisob yarating</span><span data-language="ru">Создать аккаунт</span> <span aria-hidden="true">⟶</span></button>
     </section>
 
     <footer class="site-footer">
       <div class="footer-brand"><a class="logo" href="#top" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
-      <div class="footer-column"><h3>We are in social networks</h3><div class="social-links"><a href="partners.html" aria-label="Twitter">𝕏</a><a href="partners.html" aria-label="Facebook">f</a><a href="partners.html" aria-label="YouTube">▶</a><a href="partners.html" aria-label="Telegram">➤</a></div><a href="mailto:info@capico.app">info@capico.app</a></div>
-      <div class="footer-column"><h3>Documents</h3><a href="knowledge.html">Terms of use</a><a href="knowledge.html">Privacy Policy</a><a href="knowledge.html">Referral Agreement</a></div>
-      <div class="footer-column"><h3>Platform</h3><a href="features.html">Functions</a><a href="prices.html">Tariffs</a><a href="partners.html">Partners</a><a href="academy.html">Academy</a><a href="knowledge.html">Knowledge base</a></div>
-      <div class="footer-column"><h3><button type="button" class="footer-signin" onclick="toggleModal(true)">Sign in</button></h3><button type="button" class="footer-signin" onclick="toggleModal(true)">Create an account</button></div>
+      <div class="footer-column"><h3><span data-language="en">We are in social networks</span><span data-language="uz">Ijtimoiy tarmoqlardamiz</span><span data-language="ru">Мы в социальных сетях</span></h3><div class="social-links"><a href="partners.html" aria-label="Twitter">𝕏</a><a href="partners.html" aria-label="Facebook">f</a><a href="partners.html" aria-label="YouTube">▶</a><a href="partners.html" aria-label="Telegram">➤</a></div><a href="mailto:info@capico.app">info@capico.app</a></div>
+      <div class="footer-column"><h3><span data-language="en">Documents</span><span data-language="uz">Hujjatlar</span><span data-language="ru">Документы</span></h3><a href="knowledge.html"><span data-language="en">Terms of use</span><span data-language="uz">Foydalanish shartlari</span><span data-language="ru">Условия использования</span></a><a href="knowledge.html"><span data-language="en">Privacy Policy</span><span data-language="uz">Maxfiylik siyosati</span><span data-language="ru">Политика конфиденциальности</span></a><a href="knowledge.html"><span data-language="en">Referral Agreement</span><span data-language="uz">Referal shartnomasi</span><span data-language="ru">Реферальное соглашение</span></a></div>
+      <div class="footer-column"><h3><span data-language="en">Platform</span><span data-language="uz">Platforma</span><span data-language="ru">Платформа</span></h3><a href="features.html"><span data-language="en">Functions</span><span data-language="uz">Funksiyalar</span><span data-language="ru">Функции</span></a><a href="prices.html"><span data-language="en">Tariffs</span><span data-language="uz">Tariflar</span><span data-language="ru">Тарифы</span></a><a href="partners.html"><span data-language="en">Partners</span><span data-language="uz">Hamkorlar</span><span data-language="ru">Партнёры</span></a><a href="academy.html"><span data-language="en">Academy</span><span data-language="uz">Akademiya</span><span data-language="ru">Академия</span></a><a href="knowledge.html"><span data-language="en">Knowledge base</span><span data-language="uz">Bilimlar bazasi</span><span data-language="ru">База знаний</span></a></div>
+      <div class="footer-column"><h3><button type="button" class="footer-signin" onclick="toggleModal(true)"><span data-language="en">Sign in</span><span data-language="uz">Kirish</span><span data-language="ru">Войти</span></button></h3><button type="button" class="footer-signin" onclick="toggleModal(true)"><span data-language="en">Create an account</span><span data-language="uz">Hisob yarating</span><span data-language="ru">Создать аккаунт</span></button></div>
     </footer>
   </main>
 
@@ -520,17 +565,31 @@
     function toggleModal(show, plan) {
       const modal = document.getElementById('signInModal');
       const selectedPlanMessage = document.getElementById('selectedPlanMessage');
+      const authMessage = document.getElementById('authMessage');
+      if (show && modal.style.display !== 'flex') {
+        signInModalTrigger = document.activeElement;
+      }
       selectedPlanMessage.hidden = !show || !plan;
       selectedPlanMessage.textContent = plan
         ? (window.translateText ? window.translateText('Selected plan:') : 'Selected plan:') + ' ' + plan
         : '';
+      if (show) authMessage.hidden = true;
       modal.style.display = show ? 'flex' : 'none';
       document.body.classList.toggle('modal-open', show);
       if (show) modal.querySelector('input').focus();
+      else if (signInModalTrigger) {
+        signInModalTrigger.focus();
+        signInModalTrigger = null;
+      }
     }
 
+    let signInModalTrigger = null;
+
     function choosePlan(card) {
-      const title = card.querySelector('h3').textContent.trim();
+      const titleElement = Array.from(card.querySelectorAll('h3')).find(function (item) {
+        return getComputedStyle(item).display !== 'none';
+      }) || card.querySelector('h3');
+      const title = titleElement.textContent.trim();
       const price = card.querySelector('.subscription-price').textContent.trim();
       toggleModal(true, title + ' — ' + price);
     }
@@ -555,9 +614,15 @@
     }
 
     function showCardDetails(card) {
+      const heading = Array.from(card.querySelectorAll('h2, h3')).find(function (item) {
+        return getComputedStyle(item).display !== 'none';
+      });
+      const description = Array.from(card.querySelectorAll('p')).find(function (item) {
+        return getComputedStyle(item).display !== 'none';
+      });
       openCardDetails(
-        card.querySelector('h2, h3').textContent,
-        card.querySelector('p').textContent,
+        heading ? heading.textContent.trim() : '',
+        description ? description.textContent.trim() : '',
         card
       );
     }
@@ -617,16 +682,30 @@
       });
     });
 
+    const cryptoButton = document.querySelector('.video-crypto-button');
+    cryptoButton.addEventListener('click', function (event) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      if (cryptoButton.classList.contains('is-animating')) return;
+      cryptoButton.classList.add('is-animating');
+      cryptoButton.setAttribute('aria-disabled', 'true');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = reducedMotion ? 100 : 650;
+      window.setTimeout(function () {
+        window.location.assign(cryptoButton.href);
+      }, duration);
+      const logo = cryptoButton.querySelector('.video-crypto-logo');
+      const hole = cryptoButton.querySelector('.video-crypto-hole');
+      logo.animate([{ transform: 'translate(-50%, -50%) scale(1)', opacity: 1 }, { transform: 'translate(40px, -20%) scale(.2)', opacity: 0 }], { duration, easing: 'ease-in', fill: 'forwards' });
+      hole.animate([{ height: '9px' }, { height: '12px' }], { duration: Math.min(duration, 250), fill: 'forwards' });
+      cryptoButton.animate([{ backgroundColor: '#100d16' }, { backgroundColor: '#171320' }], { duration: Math.min(duration, 250), fill: 'forwards' });
+    });
+
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') {
         closeCardDetails();
-        toggleLanguages(false);
         toggleModal(false);
       }
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!event.target.closest('.language-picker')) toggleLanguages(false);
     });
 
     rotateFeatureWheelTo(activeFeatureIndex, false);
@@ -635,9 +714,5 @@
     window.addEventListener('resize', updateBenefitsProgress);
     updateBenefitsProgress();
   </script>
-  <script src="language.js"></script>
-  <script src="auth-config.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="auth.js"></script>
 </body>
 </html>

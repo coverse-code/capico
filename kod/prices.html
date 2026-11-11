@@ -6,61 +6,67 @@
   <meta name="theme-color" content="#160d25">
   <title>Prices — Capico</title>
   <link rel="stylesheet" href="main.css">
+  <script src="admin-shortcut.js" defer></script>
+  <script src="content-store.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <span class="language-state" id="language-en"></span>
+  <span class="language-state" id="language-uz"></span>
+  <span class="language-state" id="language-ru"></span>
   <div class="site-shell">
     <header class="navbar section-page-navbar">
       <a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a>
-      <div class="language-picker">
-        <button class="lang-selector" type="button" aria-label="Language: English" aria-expanded="false" aria-controls="languageOptions" onclick="toggleLanguages()"><span id="currentLanguage">en</span><span class="language-arrow" aria-hidden="true">⌄</span></button>
-        <div class="language-options" id="languageOptions" role="group" aria-label="Choose language" hidden>
-          <button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('uz')">uz</button><button type="button" class="language-option" aria-pressed="false" onclick="selectLanguage('ru')">ru</button><button type="button" class="language-option active" aria-pressed="true" onclick="selectLanguage('en')">en</button>
-        </div>
+      <div class="language-picker" role="group" aria-label="Choose language">
+        <a class="language-en" href="#language-en">EN</a><a class="language-uz" href="#language-uz">UZ</a><a class="language-ru" href="#language-ru">RU</a>
       </div>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="features.html">features</a><a href="prices.html" aria-current="page">prices</a><a href="partners.html">partners</a><a href="knowledge.html">knowledge base</a><a href="academy.html">academy</a>
+        <a data-language="en" href="features.html#language-en">features</a><a data-language="uz" href="features.html#language-uz">imkoniyatlar</a><a data-language="ru" href="features.html#language-ru">возможности</a>
+        <a data-language="en" href="prices.html#language-en" aria-current="page">prices</a><a data-language="uz" href="prices.html#language-uz" aria-current="page">narxlar</a><a data-language="ru" href="prices.html#language-ru" aria-current="page">цены</a>
+        <a data-language="en" href="partners.html#language-en">partners</a><a data-language="uz" href="partners.html#language-uz">hamkorlar</a><a data-language="ru" href="partners.html#language-ru">партнёры</a>
+        <a data-language="en" href="knowledge.html#language-en">knowledge base</a><a data-language="uz" href="knowledge.html#language-uz">bilimlar bazasi</a><a data-language="ru" href="knowledge.html#language-ru">база знаний</a>
+        <a data-language="en" href="academy.html#language-en">academy</a><a data-language="uz" href="academy.html#language-uz">akademiya</a><a data-language="ru" href="academy.html#language-ru">академия</a>
       </nav>
-      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)">sign in <span aria-hidden="true">⟶</span></button>
+      <button class="btn-signin-nav" type="button" onclick="toggleModal(true)"><span data-language="en">sign in</span><span data-language="uz">kirish</span><span data-language="ru">войти</span> <span aria-hidden="true">⟶</span></button>
     </header>
     <main class="section-page-main">
-      <h1 class="section-page-heading">Prices</h1>
+      <h1 class="section-page-heading"><span data-language="en">Prices</span><span data-language="uz">Narxlar</span><span data-language="ru">Цены</span></h1>
       <section class="pricing-section" aria-labelledby="pricing-title">
-        <h2 class="pricing-title" id="pricing-title">Demo account</h2>
+        <h2 class="pricing-title" id="pricing-title"><span data-language="en">Demo account</span><span data-language="uz">Demo hisob</span><span data-language="ru">Демо-счёт</span></h2>
         <div class="demo-pricing-panel">
           <div class="demo-pricing-copy">
-            <h3>demo account</h3>
-            <p>Available immediately <span>after registering with Capico.</span></p>
-            <a href="academy.html">Learn how to get started <span aria-hidden="true">⟶</span></a>
+            <h3><span data-language="en">demo account</span><span data-language="uz">demo hisob</span><span data-language="ru">демо-счёт</span></h3>
+            <p><span data-language="en">Available immediately after registering with Capico.</span><span data-language="uz">Capico’da ro‘yxatdan o‘tishingiz bilan foydalanish mumkin.</span><span data-language="ru">Доступен сразу после регистрации в Capico.</span></p>
+            <a href="academy.html"><span data-language="en">Learn how to get started</span><span data-language="uz">Boshlashni o‘rganing</span><span data-language="ru">Узнайте, с чего начать</span> <span aria-hidden="true">⟶</span></a>
           </div>
           <div class="demo-pricing-features">
-            <article class="demo-feature demo-feature-balance"><p>Virtual 10,000 USDT<br>on balance</p></article>
-            <article class="demo-feature"><p>Works without subscription<br>and time limits</p></article>
-            <article class="demo-feature"><p>Create multiple accounts<br>for different purposes</p></article>
+            <article class="demo-feature demo-feature-balance"><p><span data-language="en">Virtual 10,000 USDT<br>on balance</span><span data-language="uz">Balansda virtual<br>10 000 USDT</span><span data-language="ru">На балансе<br>10 000 виртуальных USDT</span></p></article>
+            <article class="demo-feature"><p><span data-language="en">Works without subscription<br>and time limits</span><span data-language="uz">Obunasiz va vaqt<br>cheklovisiz ishlaydi</span><span data-language="ru">Работает без подписки<br>и ограничений по времени</span></p></article>
+            <article class="demo-feature"><p><span data-language="en">Create multiple accounts<br>for different purposes</span><span data-language="uz">Turli maqsadlar uchun<br>bir nechta hisob yarating</span><span data-language="ru">Создавайте несколько счетов<br>для разных целей</span></p></article>
           </div>
         </div>
       </section>
       <section class="trial-section" aria-labelledby="trial-title">
-        <h2 id="trial-title">trial period</h2>
-        <p>When adding an API key from a real exchange, a 7-day trial period starts. Upon completion, you can have a paid subscription or continue working at a free rate.</p>
-        <button class="btn-primary trial-button" type="button" onclick="toggleModal(true)">Try Capico free <span aria-hidden="true">⟶</span></button>
+        <h2 id="trial-title"><span data-language="en">trial period</span><span data-language="uz">sinov muddati</span><span data-language="ru">пробный период</span></h2>
+        <p><span data-language="en">When adding an API key from a real exchange, a 7-day trial period starts. Upon completion, you can have a paid subscription or continue working at a free rate.</span><span data-language="uz">Haqiqiy birjaning API kalitini qo‘shganingizda 7 kunlik sinov muddati boshlanadi. U tugagach, pulli obunani tanlashingiz yoki bepul tarifda davom etishingiz mumkin.</span><span data-language="ru">После добавления API-ключа реальной биржи начинается 7-дневный пробный период. По его окончании можно оформить платную подписку или продолжить работу на бесплатном тарифе.</span></p>
+        <button class="btn-primary trial-button" type="button" onclick="toggleModal(true)"><span data-language="en">Try Capico free</span><span data-language="uz">Capico’dan bepul foydalaning</span><span data-language="ru">Попробовать Capico бесплатно</span> <span aria-hidden="true">⟶</span></button>
       </section>
       <section class="subscription-section" aria-labelledby="subscription-title">
-        <h2 id="subscription-title">subscription</h2>
+        <h2 id="subscription-title"><span data-language="en">subscription</span><span data-language="uz">obuna</span><span data-language="ru">подписка</span></h2>
         <div class="subscription-plans">
-          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>Month</h3><p class="subscription-price">$15</p><p class="subscription-caption">Get started right now</p></article>
-          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>3 months</h3><p class="subscription-price">$39</p><p class="subscription-monthly">$13/mo</p><p class="subscription-caption">$6 economy <span>-13%</span></p></article>
-          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>6 months</h3><p class="subscription-price">$69</p><p class="subscription-monthly">$11.5/mo</p><p class="subscription-caption">$21 economy <span>-23%</span></p></article>
-          <article class="subscription-plan subscription-plan-yearly card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3>Yearly subscribe</h3><p class="subscription-price">$119</p><p class="subscription-monthly">$9.9/mo</p><p class="subscription-caption">$51 economy <span>-33%</span></p></article>
+          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3 data-language="en">Month</h3><h3 data-language="uz">1 oy</h3><h3 data-language="ru">1 месяц</h3><p class="subscription-price">$15</p><p class="subscription-caption"><span data-language="en">Get started right now</span><span data-language="uz">Hoziroq boshlang</span><span data-language="ru">Начните прямо сейчас</span></p></article>
+          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3 data-language="en">3 months</h3><h3 data-language="uz">3 oy</h3><h3 data-language="ru">3 месяца</h3><p class="subscription-price">$39</p><p class="subscription-monthly">$13/mo</p><p class="subscription-caption"><span data-language="en">$6 economy</span><span data-language="uz">$6 tejaysiz</span><span data-language="ru">Экономия $6</span> <span>-13%</span></p></article>
+          <article class="subscription-plan card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3 data-language="en">6 months</h3><h3 data-language="uz">6 oy</h3><h3 data-language="ru">6 месяцев</h3><p class="subscription-price">$69</p><p class="subscription-monthly">$11.5/mo</p><p class="subscription-caption"><span data-language="en">$21 economy</span><span data-language="uz">$21 tejaysiz</span><span data-language="ru">Экономия $21</span> <span>-23%</span></p></article>
+          <article class="subscription-plan subscription-plan-yearly card-clickable" role="button" tabindex="0" onclick="choosePlan(this)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choosePlan(this); }"><h3 data-language="en">Yearly subscription</h3><h3 data-language="uz">Yillik obuna</h3><h3 data-language="ru">Годовая подписка</h3><p class="subscription-price">$119</p><p class="subscription-monthly">$9.9/mo</p><p class="subscription-caption"><span data-language="en">$51 economy</span><span data-language="uz">$51 tejaysiz</span><span data-language="ru">Экономия $51</span> <span>-33%</span></p></article>
         </div>
-        <p class="subscription-details">More details and payment instructions can be found in the <a href="knowledge.html">knowledge base</a>.</p>
+        <p class="subscription-details"><span data-language="en">More details and payment instructions can be found in the </span><span data-language="uz">Batafsil ma’lumot va to‘lov yo‘riqnomasi </span><span data-language="ru">Подробную информацию и инструкции по оплате можно найти в </span><a href="knowledge.html"><span data-language="en">knowledge base</span><span data-language="uz">bilimlar bazasida</span><span data-language="ru">базе знаний</span></a>.</p>
       </section>
       <section class="free-use-section" aria-labelledby="free-use-title">
-        <h2 id="free-use-title">free use</h2>
-        <p class="free-use-description">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</p>
-        <p class="free-use-instructions">Connect to a supported exchange to learn about free access:</p>
+        <h2 id="free-use-title"><span data-language="en">free use</span><span data-language="uz">bepul foydalanish</span><span data-language="ru">бесплатное использование</span></h2>
+        <p class="free-use-description"><span data-language="en">Capico provides free access to the platform through partnerships with well-known cryptocurrency exchanges. There are no hidden fees or functionality limitations.</span><span data-language="uz">Capico taniqli kriptovalyuta birjalari bilan hamkorlik orqali platformadan bepul foydalanish imkonini beradi. Yashirin to‘lovlar yoki funksional cheklovlar yo‘q.</span><span data-language="ru">Capico предоставляет бесплатный доступ к платформе благодаря партнёрству с известными криптовалютными биржами. Скрытых платежей и ограничений функций нет.</span></p>
+        <p class="free-use-instructions"><span data-language="en">Connect to a supported exchange to learn about free access:</span><span data-language="uz">Bepul foydalanish haqida bilish uchun qo‘llab-quvvatlanadigan birjaga ulaning:</span><span data-language="ru">Подключитесь к поддерживаемой бирже, чтобы узнать о бесплатном доступе:</span></p>
         <div class="free-use-exchanges" aria-label="Supported exchanges">
           <button class="exchange-select-button" type="button" aria-label="Select Binance" aria-pressed="false"><img src="../img/Vector (11).png" alt="Binance"></button><button class="exchange-select-button" type="button" aria-label="Select FTX" aria-pressed="false"><img src="../img/Vector (12).png" alt="FTX"></button><button class="exchange-select-button" type="button" aria-label="Select Huobi" aria-pressed="false"><img src="../img/Vector (13).png" alt="Huobi"></button><button class="exchange-select-button" type="button" aria-label="Select OKX" aria-pressed="false"><img src="../img/Vector (14).png" alt="OKX"></button>
         </div>
@@ -69,7 +75,7 @@
     </main>
     <footer class="site-footer">
       <div class="footer-brand"><a class="logo" href="cc.html" aria-label="Capico home"><img src="../img/Vector (15).png" alt="capico"></a><p>© 2022 Capico ltd.</p></div>
-      <div class="footer-column"><h3>Platform</h3><a href="features.html">Features</a><a href="prices.html">Prices</a><a href="partners.html">Partners</a><a href="knowledge.html">Knowledge base</a><a href="academy.html">Academy</a></div>
+      <div class="footer-column"><h3><span data-language="en">Platform</span><span data-language="uz">Platforma</span><span data-language="ru">Платформа</span></h3><a href="features.html"><span data-language="en">Features</span><span data-language="uz">Imkoniyatlar</span><span data-language="ru">Возможности</span></a><a href="prices.html"><span data-language="en">Prices</span><span data-language="uz">Narxlar</span><span data-language="ru">Цены</span></a><a href="partners.html"><span data-language="en">Partners</span><span data-language="uz">Hamkorlar</span><span data-language="ru">Партнёры</span></a><a href="knowledge.html"><span data-language="en">Knowledge base</span><span data-language="uz">Bilimlar bazasi</span><span data-language="ru">База знаний</span></a><a href="academy.html"><span data-language="en">Academy</span><span data-language="uz">Akademiya</span><span data-language="ru">Академия</span></a></div>
     </footer>
   </div>
   <div class="modal-backdrop" id="signInModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" onclick="if (event.target === this) toggleModal(false)">

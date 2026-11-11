@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d25">
+  <title>Admin panel | Capico</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="content-store.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="crypto-page admin-demo-page">
+  <main class="admin-demo-shell">
+    <header class="admin-demo-header">
+      <a class="admin-demo-brand" href="cc.html#top" aria-label="Capico bosh sahifasi">
+        <img src="../img/Vector (15).png" alt="Capico">
+        <span>Admin panel</span>
+      </a>
+      <a class="admin-demo-back" href="crypto.html">Crypto sahifasiga qaytish</a>
+    </header>
+    <section class="admin-demo-content" aria-labelledby="admin-title">
+      <p class="admin-demo-label">Namoyish versiyasi</p>
+      <h1 id="admin-title">Boshqaruv paneli</h1>
+      <p class="admin-demo-description">Sahifani tanlang va elementni belgilang. Matnni tahrirlang yoki element joylashuvini X/Y qiymatlari bilan o‘zgartiring; o‘zgarishlar shu brauzerda saqlanadi.</p>
+      <div class="admin-workspace">
+        <section class="admin-controls" aria-label="Sayt kontentini tahrirlash">
+          <label for="admin-page">Sahifa</label>
+          <select id="admin-page">
+            <option value="cc.html">Bosh sahifa</option>
+            <option value="crypto.html">Crypto</option>
+            <option value="features.html">Imkoniyatlar</option>
+            <option value="prices.html">Narxlar</option>
+            <option value="partners.html">Hamkorlar</option>
+            <option value="knowledge.html">Bilimlar bazasi</option>
+            <option value="academy.html">Akademiya</option>
+            <option value="../404.html">404 sahifasi</option>
+          </select>
+
+          <button class="admin-action-secondary" id="admin-visual-mode" type="button" aria-pressed="false">Kursor bilan element tanlash</button>
+          <p class="admin-selection-label" id="admin-selection-label">Hozircha element tanlanmagan.</p>
+
+          <label for="admin-type">Tahrirlash turi</label>
+          <select id="admin-type">
+            <option value="text">Matn</option>
+            <option value="link">Havola manzili</option>
+            <option value="image">Rasm</option>
+            <option value="style">Ko‘rinish uslubi</option>
+            <option value="position">Joylashuv</option>
+          </select>
+
+          <label for="admin-search">Elementni qidirish</label>
+          <input id="admin-search" type="search" placeholder="Element qidiring">
+          <label for="admin-item">Element</label>
+          <select id="admin-item" size="7" aria-label="Qidiruv natijalari"></select>
+
+          <div id="admin-text-field">
+            <label for="admin-text">Yangi matn</label>
+            <textarea id="admin-text" rows="4"></textarea>
+          </div>
+          <div id="admin-link-field" hidden>
+            <label for="admin-link">Havola manzili</label>
+            <input id="admin-link" type="text">
+          </div>
+          <div id="admin-selected-link-field" hidden>
+            <label for="admin-selected-link">Tanlangan element havolasi</label>
+            <input id="admin-selected-link" type="text">
+            <button class="admin-action-secondary" id="admin-save-selected-link" type="button">Havolani saqlash</button>
+          </div>
+          <div id="admin-image-field" hidden>
+            <label for="admin-image-src">Rasm manzili</label>
+            <input id="admin-image-src" type="text">
+            <label for="admin-image-alt">Rasm tavsifi</label>
+            <input id="admin-image-alt" type="text">
+          </div>
+          <div id="admin-style-field" hidden>
+            <label for="admin-style-color">Matn rangi</label>
+            <input id="admin-style-color" type="text" placeholder="#ffffff">
+            <label for="admin-style-background">Fon rangi</label>
+            <input id="admin-style-background" type="text" placeholder="#160d25">
+            <label for="admin-style-font-size">Matn o‘lchami</label>
+            <input id="admin-style-font-size" type="text" placeholder="18px">
+            <label for="admin-style-width">Kenglik</label>
+            <input id="admin-style-width" type="text" placeholder="240px yoki 100%">
+            <label for="admin-style-height">Balandlik</label>
+            <input id="admin-style-height" type="text" placeholder="48px">
+            <label for="admin-style-radius">Burchak yumaloqligi</label>
+            <input id="admin-style-radius" type="text" placeholder="12px">
+            <label for="admin-style-padding">Ichki masofa</label>
+            <input id="admin-style-padding" type="text" placeholder="12px 20px">
+          </div>
+          <div id="admin-position-field" hidden>
+            <label for="admin-position-x">Gorizontal siljish (X, px)</label>
+            <input id="admin-position-x" type="number" step="1" value="0">
+            <label for="admin-position-y">Vertikal siljish (Y, px)</label>
+            <input id="admin-position-y" type="number" step="1" value="0">
+            <button class="admin-action-secondary" id="admin-drag-mode" type="button" aria-pressed="false">Preview’da sudrash</button>
+          </div>
+
+          <button class="admin-action-primary" id="admin-save" type="button">Saqlash</button>
+          <button class="admin-action-secondary" id="admin-reset-item" type="button">Tanlangan o‘zgarishni bekor qilish</button>
+          <button class="admin-action-secondary" id="admin-reset-page" type="button">Shu sahifa o‘zgarishlarini bekor qilish</button>
+          <button class="admin-action-danger" id="admin-reset-all" type="button">Barcha o‘zgarishlarni bekor qilish</button>
+          <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
+        </section>
+        <section class="admin-preview" aria-label="Sahifa ko‘rinishi">
+          <h2>Oldindan ko‘rish</h2>
+          <iframe id="admin-preview-frame" title="Tahrirlanayotgan sahifa"></iframe>
+        </section>
+      </div>
+      <p class="admin-demo-notice">Matn va joylashuv o‘zgarishlari faqat shu brauzerda saqlanadi; serverga yuborilmaydi. Ctrl+S — saqlash, Ctrl+Z — oxirgi saqlangan o‘zgarishni bekor qilish.</p>
+    </section>
+  </main>
+  <script>
+    const pageSelect = document.getElementById('admin-page');
+    const typeSelect = document.getElementById('admin-type');
+    const itemSelect = document.getElementById('admin-item');
+    const searchInput = document.getElementById('admin-search');
+    const previewFrame = document.getElementById('admin-preview-frame');
+    const status = document.getElementById('admin-status');
+    const visualModeButton = document.getElementById('admin-visual-mode');
+    const selectionLabel = document.getElementById('admin-selection-label');
+    const positionXInput = document.getElementById('admin-position-x');
+    const positionYInput = document.getElementById('admin-position-y');
+    const dragModeButton = document.getElementById('admin-drag-mode');
+    let entries = [];
+    let selectedElement = null;
+    let dragMode = false;
+    let positionDrag = null;
+
+    function manager() {
+      return previewFrame.contentWindow && previewFrame.contentWindow.SiteContentManager;
+    }
+
+    function setStatus(message, isError) {
+      status.textContent = message;
+      status.classList.toggle('is-error', Boolean(isError));
+    }
+
+    function handleKeyboardShortcut(event) {
+      if (!(event.ctrlKey || event.metaKey) || event.altKey) return;
+      const key = event.key.toLowerCase();
+      if (key === 's') {
+        event.preventDefault();
+        document.getElementById('admin-save').click();
+        return;
+      }
+      if (key !== 'z' || event.shiftKey) return;
+      const target = event.target;
+      if (target instanceof Element && (target.matches('input, textarea, select') || target.isContentEditable)) return;
+      event.preventDefault();
+      const contentManager = manager();
+      if (!contentManager) {
+        setStatus('Bekor qilish uchun preview sahifasi yuklanishini kuting.', true);
+        return;
+      }
+      try {
+        setStatus(contentManager.undoLast()
+          ? 'Oxirgi saqlangan o‘zgarish bekor qilindi.'
+          : 'Bekor qilinadigan saqlangan o‘zgarish yo‘q.', false);
+      } catch (error) {
+        console.error('Could not undo the latest site edit', error);
+        setStatus('Oxirgi o‘zgarishni bekor qilib bo‘lmadi.', true);
+      }
+    }
+
+    function refreshEntries() {
+      const contentManager = manager();
+      if (!contentManager) {
+        setStatus('Sahifa tahrirlash vositasi yuklanmadi. Sahifani qayta ochib ko‘ring.', true);
+        return;
+      }
+      try {
+        entries = contentManager.entriesFor(typeSelect.value);
+        renderEntries();
+      } catch (error) {
+        console.error('Could not load editable site content', error);
+        setStatus('Elementlarni yuklab bo‘lmadi. Brauzer xotirasi yoki ruxsatni tekshiring.', true);
+      }
+    }
+
+    function renderEntries() {
+      const query = searchInput.value.trim().toLocaleLowerCase();
+      const filtered = entries.map(function (entry, index) {
+        return { entry, index };
+      }).filter(function (item) {
+        return !query || (item.entry.label + ' ' + item.entry.value + ' ' + (item.entry.alt || '')).toLocaleLowerCase().includes(query);
+      });
+      itemSelect.replaceChildren();
+      filtered.forEach(function (item) {
+        const option = document.createElement('option');
+        option.value = String(item.index);
+        option.textContent = item.entry.label.length > 68
+          ? item.entry.label.slice(0, 65).trimEnd() + '...'
+          : item.entry.label;
+        option.title = item.entry.label;
+        itemSelect.append(option);
+      });
+      updateEditor();
+      setStatus(filtered.length ? filtered.length + ' ta element ko‘rsatilmoqda.' : 'Mos element topilmadi.', !filtered.length);
+    }
+
+    function selectEntry(path) {
+      const index = entries.findIndex(function (entry) { return entry.path === path; });
+      if (index < 0) return false;
+      searchInput.value = '';
+      renderEntries();
+      itemSelect.value = String(index);
+      updateEditor();
+      return true;
+    }
+
+    function updateEditor() {
+      const entry = itemSelect.value === '' ? null : entries[Number(itemSelect.value)];
+      const type = typeSelect.value;
+      document.getElementById('admin-text-field').hidden = type !== 'text';
+      document.getElementById('admin-link-field').hidden = type !== 'link';
+      document.getElementById('admin-image-field').hidden = type !== 'image';
+      document.getElementById('admin-style-field').hidden = type !== 'style';
+      document.getElementById('admin-position-field').hidden = type !== 'position';
+      document.getElementById('admin-selected-link-field').hidden = !selectedElement || !selectedElement.linkPath;
+      const styleSelected = type === 'style' && selectedElement;
+      const positionSelected = type === 'position' && selectedElement;
+      document.getElementById('admin-save').disabled = type === 'style' ? !styleSelected
+        : type === 'position' ? !positionSelected : !entry;
+      document.getElementById('admin-reset-item').disabled = type === 'style' ? !styleSelected
+        : type === 'position' ? !positionSelected : !entry;
+      if (positionSelected) {
+        const position = manager().positionFor(selectedElement.path) || { x: 0, y: 0 };
+        positionXInput.value = String(position.x);
+        positionYInput.value = String(position.y);
+      }
+      if (!entry) return;
+      if (type === 'text') document.getElementById('admin-text').value = entry.value;
+      if (type === 'link') document.getElementById('admin-link').value = entry.value;
+      if (type === 'image') {
+        document.getElementById('admin-image-src').value = entry.value;
+        document.getElementById('admin-image-alt').value = entry.alt;
+      }
+    }
+
+    function setVisualMode(enabled) {
+      const contentManager = manager();
+      if (!contentManager) {
+        setStatus('Sahifa tanlash rejimini yoqib bo‘lmadi.', true);
+        return;
+      }
+      const active = Boolean(enabled);
+      contentManager.setVisualMode(active, onVisualSelection);
+      visualModeButton.setAttribute('aria-pressed', String(active));
+      visualModeButton.textContent = active ? 'Tanlash rejimini o‘chirish' : 'Kursor bilan element tanlash';
+      setStatus(active ? 'Oldindan ko‘rishdan matn, tugma yoki boshqa elementni bosing.' : 'Tanlash rejimi o‘chirildi.', false);
+    }
+
+    function onVisualSelection(selection) {
+      selectedElement = selection;
+      selectionLabel.textContent = 'Tanlandi: <' + selection.tag + '> ' + (selection.label || '(matnsiz element)');
+      setVisualMode(false);
+      document.getElementById('admin-selected-link').value = selection.href || '';
+
+      if (typeSelect.value === 'position') {
+        updateEditor();
+      } else if (selection.imagePath) {
+        typeSelect.value = 'image';
+        refreshEntries();
+        selectEntry(selection.imagePath);
+      } else if (selection.textPath) {
+        typeSelect.value = 'text';
+        refreshEntries();
+        selectEntry(selection.textPath);
+      } else if (selection.linkPath) {
+        typeSelect.value = 'link';
+        refreshEntries();
+        selectEntry(selection.linkPath);
+      } else {
+        typeSelect.value = 'style';
+        refreshEntries();
+      }
+
+      document.getElementById('admin-style-color').value = selection.styles.color;
+      document.getElementById('admin-style-background').value = selection.styles.backgroundColor;
+      document.getElementById('admin-style-font-size').value = selection.styles.fontSize;
+      document.getElementById('admin-style-width').value = selection.styles.width;
+      document.getElementById('admin-style-height').value = selection.styles.height;
+      document.getElementById('admin-style-radius').value = selection.styles.borderRadius;
+      document.getElementById('admin-style-padding').value = selection.styles.padding;
+      setStatus('Element tanlandi. Matn, havola, ko‘rinish yoki joylashuvini o‘zgartiring.', false);
+    }
+
+    function validUrl(value, type) {
+      const trimmed = value.trim();
+      if (!trimmed || /^(javascript|vbscript|data):/i.test(trimmed)) return false;
+      try {
+        const url = new URL(trimmed, previewFrame.contentWindow.location.href);
+        if (type === 'image') return ['http:', 'https:', 'file:'].includes(url.protocol);
+        return ['http:', 'https:', 'file:', 'mailto:', 'tel:'].includes(url.protocol) || trimmed.startsWith('#');
+      } catch {
+        return false;
+      }
+    }
+
+    function updatePreviewPosition() {
+      if (!selectedElement || typeSelect.value !== 'position') return;
+      const x = Number(positionXInput.value);
+      const y = Number(positionYInput.value);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) {
+        setStatus('X va Y qiymatlari raqam bo‘lishi kerak.', true);
+        return;
+      }
+      try {
+        manager().previewPosition(selectedElement.path, x, y);
+      } catch (error) {
+        console.error('Could not preview element position', error);
+        setStatus('Element joylashuvini ko‘rsatib bo‘lmadi.', true);
+      }
+    }
+
+    function bindDragMode() {
+      const doc = previewFrame.contentDocument;
+      if (!doc) return;
+      doc.addEventListener('keydown', handleKeyboardShortcut, true);
+      doc.addEventListener('pointerdown', function (event) {
+        if (!dragMode || !selectedElement || !(event.target instanceof doc.defaultView.Element)) return;
+        const target = doc.querySelector(selectedElement.path);
+        if (!target || (target !== event.target && !target.contains(event.target))) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const current = manager().positionFor(selectedElement.path) || { x: 0, y: 0 };
+        positionDrag = {
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          originX: Number(positionXInput.value) || current.x,
+          originY: Number(positionYInput.value) || current.y
+        };
+        if (doc.documentElement.setPointerCapture) {
+          doc.documentElement.setPointerCapture(event.pointerId);
+        }
+      }, true);
+      doc.addEventListener('pointermove', function (event) {
+        if (!positionDrag || event.pointerId !== positionDrag.pointerId) return;
+        positionXInput.value = String(Math.round(positionDrag.originX + event.clientX - positionDrag.startX));
+        positionYInput.value = String(Math.round(positionDrag.originY + event.clientY - positionDrag.startY));
+        updatePreviewPosition();
+      }, true);
+      doc.addEventListener('pointerup', function (event) {
+        if (positionDrag && event.pointerId === positionDrag.pointerId) positionDrag = null;
+      }, true);
+      doc.addEventListener('pointercancel', function () {
+        positionDrag = null;
+      }, true);
+      doc.addEventListener('click', function (event) {
+        if (!dragMode) return;
+        event.preventDefault();
+        event.stopPropagation();
+      }, true);
+    }
+
+    dragModeButton.addEventListener('click', function () {
+      dragMode = !dragMode;
+      dragModeButton.setAttribute('aria-pressed', String(dragMode));
+      dragModeButton.textContent = dragMode ? 'Sudrash rejimini o‘chirish' : 'Preview’da sudrash';
+      const doc = previewFrame.contentDocument;
+      if (doc && doc.body) doc.body.classList.toggle('admin-position-selecting', dragMode);
+      setStatus(dragMode
+        ? 'Tanlangan elementni preview’da sudrang, so‘ng saqlashni bosing.'
+        : 'Sudrash rejimi o‘chirildi.', false);
+    });
+
+    positionXInput.addEventListener('input', updatePreviewPosition);
+    positionYInput.addEventListener('input', updatePreviewPosition);
+    document.addEventListener('keydown', handleKeyboardShortcut, true);
+
+    previewFrame.addEventListener('load', refreshEntries);
+    previewFrame.addEventListener('load', bindDragMode);
+    pageSelect.addEventListener('change', function () {
+      setVisualMode(false);
+      dragMode = false;
+      positionDrag = null;
+      dragModeButton.setAttribute('aria-pressed', 'false');
+      dragModeButton.textContent = 'Preview’da sudrash';
+      selectedElement = null;
+      selectionLabel.textContent = 'Hozircha element tanlanmagan.';
+      previewFrame.src = pageSelect.value;
+      setStatus('Sahifa yuklanmoqda…', false);
+    });
+    typeSelect.addEventListener('change', refreshEntries);
+    searchInput.addEventListener('input', renderEntries);
+    itemSelect.addEventListener('change', updateEditor);
+    visualModeButton.addEventListener('click', function () {
+      setVisualMode(visualModeButton.getAttribute('aria-pressed') !== 'true');
+    });
+
+    document.getElementById('admin-save').addEventListener('click', function () {
+      if (typeSelect.value === 'position') {
+        if (!selectedElement) return;
+        const x = Number(positionXInput.value);
+        const y = Number(positionYInput.value);
+        if (!Number.isFinite(x) || !Number.isFinite(y)) {
+          setStatus('X va Y qiymatlari raqam bo‘lishi kerak.', true);
+          return;
+        }
+        try {
+          manager().savePosition(selectedElement.path, x, y);
+          setStatus('Element joylashuvi shu brauzerda saqlandi.', false);
+        } catch (error) {
+          console.error('Could not save element position', error);
+          setStatus('Joylashuvni saqlab bo‘lmadi. Brauzer xotirasi uchun joy va ruxsatni tekshiring.', true);
+        }
+        return;
+      }
+      if (typeSelect.value === 'style') {
+        if (!selectedElement) return;
+        const values = {
+          color: document.getElementById('admin-style-color').value.trim(),
+          backgroundColor: document.getElementById('admin-style-background').value.trim(),
+          fontSize: document.getElementById('admin-style-font-size').value.trim(),
+          width: document.getElementById('admin-style-width').value.trim(),
+          height: document.getElementById('admin-style-height').value.trim(),
+          borderRadius: document.getElementById('admin-style-radius').value.trim(),
+          padding: document.getElementById('admin-style-padding').value.trim()
+        };
+        const styles = {};
+        for (const [property, value] of Object.entries(values)) {
+          if (!value) continue;
+          const cssProperty = property.replace(/[A-Z]/g, function (letter) { return '-' + letter.toLowerCase(); });
+          if (!CSS.supports(cssProperty, value)) {
+            setStatus('Qiymat yaroqsiz: ' + value, true);
+            return;
+          }
+          if (value !== selectedElement.styles[property]) styles[property] = value;
+        }
+        if (!Object.keys(styles).length) {
+          setStatus('Saqlashdan oldin kamida bitta uslub qiymatini o‘zgartiring.', true);
+          return;
+        }
+        try {
+          manager().saveStyles(selectedElement.path, styles);
+          setStatus('Element uslubi shu brauzerda saqlandi.', false);
+        } catch (error) {
+          console.error('Could not save element styles', error);
+          setStatus('Uslubni saqlab bo‘lmadi.', true);
+        }
+        return;
+      }
+
+      const entry = itemSelect.value === '' ? null : entries[Number(itemSelect.value)];
+      if (!entry) return;
+      const type = typeSelect.value;
+      const value = type === 'text' ? document.getElementById('admin-text').value
+        : type === 'link' ? document.getElementById('admin-link').value
+          : document.getElementById('admin-image-src').value;
+      const alt = type === 'image' ? document.getElementById('admin-image-alt').value : '';
+      if (type !== 'text' && !validUrl(value, type)) {
+        setStatus('Havola yoki rasm manzili yaroqsiz.', true);
+        return;
+      }
+      try {
+        manager().save(entry.path, type, value, alt);
+        refreshEntries();
+        setStatus('O‘zgarish shu brauzerda saqlandi.', false);
+      } catch (error) {
+        console.error('Could not save site content', error);
+        setStatus('O‘zgarishni saqlab bo‘lmadi. Brauzer xotirasi uchun joy va ruxsatni tekshiring.', true);
+      }
+    });
+
+    document.getElementById('admin-save-selected-link').addEventListener('click', function () {
+      if (!selectedElement || !selectedElement.linkPath) return;
+      const value = document.getElementById('admin-selected-link').value.trim();
+      if (!validUrl(value, 'link')) {
+        setStatus('Havola manzili yaroqsiz.', true);
+        return;
+      }
+      try {
+        manager().save(selectedElement.linkPath, 'link', value);
+        selectedElement.href = value;
+        setStatus('Tugma havolasi shu brauzerda saqlandi.', false);
+      } catch (error) {
+        console.error('Could not save selected link', error);
+        setStatus('Havolani saqlab bo‘lmadi.', true);
+      }
+    });
+
+    document.getElementById('admin-reset-item').addEventListener('click', function () {
+      if ((typeSelect.value === 'style' || typeSelect.value === 'position') && selectedElement) {
+        const label = typeSelect.value === 'style' ? 'uslubini' : 'joylashuvini';
+        if (window.confirm('Tanlangan element ' + label + ' tiklaysizmi?')) {
+          manager().reset(selectedElement.path, typeSelect.value);
+          if (typeSelect.value === 'position') {
+            positionXInput.value = '0';
+            positionYInput.value = '0';
+          }
+        }
+        return;
+      }
+      const entry = itemSelect.value === '' ? null : entries[Number(itemSelect.value)];
+      if (entry && window.confirm('Tanlangan o‘zgarishni bekor qilasizmi?')) manager().reset(entry.path, typeSelect.value);
+    });
+    document.getElementById('admin-reset-page').addEventListener('click', function () {
+      if (window.confirm('Shu sahifadagi barcha o‘zgarishlarni bekor qilasizmi?')) manager().resetPage();
+    });
+    document.getElementById('admin-reset-all').addEventListener('click', function () {
+      if (window.confirm('Barcha sahifalardagi saqlangan o‘zgarishlarni bekor qilasizmi?')) manager().resetAll();
+    });
+
+    previewFrame.src = pageSelect.value;
+  </script>
+</body>
+</html>
