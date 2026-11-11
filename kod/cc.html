@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#160d25">
   <title>Capico — Crypto trading with bots and smart tools</title>
   <link rel="stylesheet" href="main.css">
+  <script src="site-content.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -405,6 +406,19 @@
         container.insertBefore(container.lastElementChild, container.firstElementChild);
       }
     }
+
+    function showAuthUnavailable() {
+      const message = document.getElementById('authMessage');
+      message.textContent = 'Sign-in is not configured on this page. Please contact support@capico.app.';
+      message.hidden = false;
+    }
+
+    document.querySelector('.signin-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      showAuthUnavailable();
+    });
+
+    document.getElementById('googleSignInButton').addEventListener('click', showAuthUnavailable);
 
     function rotateFeatureWheelTo(index, animate) {
       const options = document.querySelector('.feature-wheel-options');
