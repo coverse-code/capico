@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d25">
+  <title>Aksiyalar savdosi | Capico</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="crypto-page">
+  <main class="crypto-shell">
+    <header class="navbar section-page-navbar crypto-navbar">
+      <a class="logo" href="cc.html#top" aria-label="Capico bosh sahifasi"><img src="../img/Vector (15).png" alt="Capico"></a>
+      <nav class="nav-links" aria-label="Asosiy menyu">
+        <a data-language="en" href="features.html">features</a><a data-language="uz" href="features.html">imkoniyatlar</a><a data-language="ru" href="features.html">возможности</a>
+        <a data-language="en" href="prices.html">prices</a><a data-language="uz" href="prices.html">narxlar</a><a data-language="ru" href="prices.html">цены</a>
+        <a data-language="en" href="partners.html">partners</a><a data-language="uz" href="partners.html">hamkorlar</a><a data-language="ru" href="partners.html">партнёры</a>
+        <a data-language="en" href="knowledge.html">knowledge base</a><a data-language="uz" href="knowledge.html">bilimlar bazasi</a><a data-language="ru" href="knowledge.html">база знаний</a>
+        <a data-language="en" href="academy.html">academy</a><a data-language="uz" href="academy.html">akademiya</a><a data-language="ru" href="academy.html">академия</a>
+        <a data-language="en" href="stocks.html" aria-current="page">stocks</a><a data-language="uz" href="stocks.html" aria-current="page">aksiyalar</a><a data-language="ru" href="stocks.html" aria-current="page">акции</a>
+      </nav>
+      <a class="btn-signin-nav crypto-home-link" href="cc.html#top">
+        <span data-language="uz">Capico bosh sahifasi</span>
+        <span aria-hidden="true">⟶</span>
+      </a>
+    </header>
+
+    <div class="stock-ticker" aria-label="Aksiya kurslari">
+      <div class="stock-ticker-track">
+        <span>AAPL <strong>22 450 so‘m</strong> <b class="positive">+1.84%</b></span>
+        <span>TSLA <strong>41 800 so‘m</strong> <b class="negative">-0.62%</b></span>
+        <span>NVDA <strong>15 120 so‘m</strong> <b class="positive">+2.31%</b></span>
+        <span>AAPL <strong>22 450 so‘m</strong> <b class="positive">+1.84%</b></span>
+        <span>TSLA <strong>41 800 so‘m</strong> <b class="negative">-0.62%</b></span>
+        <span>NVDA <strong>15 120 so‘m</strong> <b class="positive">+2.31%</b></span>
+      </div>
+    </div>
+
+    <section class="stock-trading" id="stock-trading" aria-labelledby="stock-trading-title">
+      <div class="crypto-section-heading">
+        <p class="crypto-eyebrow"><span aria-hidden="true"></span>AKSIYALAR SAVDOSI</p>
+        <h2 id="stock-trading-title">Aksiyalarni xarid qiling va soting</h2>
+      </div>
+      <div class="stock-trading-grid">
+        <div class="stock-market-panel">
+          <div class="stock-market-heading">
+            <h3>Bozor</h3>
+            <span class="stock-market-status"><span aria-hidden="true"></span> Demo bozor</span>
+          </div>
+          <section class="stock-chart-panel" aria-labelledby="stock-chart-title">
+            <div class="stock-chart-heading">
+              <div>
+                <h3 id="stock-chart-title">AAPL kursi</h3>
+                <span id="stock-chart-price">22 450 so‘m</span>
+              </div>
+              <span id="stock-chart-change" class="stock-change positive">+1.84%</span>
+            </div>
+            <div class="stock-chart" id="stock-chart" role="img" aria-label="Aksiya kursi grafigi"></div>
+          </section>
+          <div class="stock-list" role="list">
+            <button class="stock-row is-active" type="button" data-symbol="AAPL" data-name="Apple" data-price="22450" role="listitem">
+              <span><strong>AAPL</strong><small>Apple</small></span>
+              <span><strong>22 450 so‘m</strong><small class="stock-change positive">+1.84%</small></span>
+            </button>
+            <button class="stock-row" type="button" data-symbol="TSLA" data-name="Tesla" data-price="41800" role="listitem">
+              <span><strong>TSLA</strong><small>Tesla</small></span>
+              <span><strong>41 800 so‘m</strong><small class="stock-change negative">-0.62%</small></span>
+            </button>
+            <button class="stock-row" type="button" data-symbol="NVDA" data-name="NVIDIA" data-price="15120" role="listitem">
+              <span><strong>NVDA</strong><small>NVIDIA</small></span>
+              <span><strong>15 120 so‘m</strong><small class="stock-change positive">+2.31%</small></span>
+            </button>
+          </div>
+        </div>
+        <div class="stock-order-panel">
+          <div class="stock-selected">
+            <span>
+              <small>Tanlangan aksiya</small>
+              <strong id="stock-selected-name">Apple (AAPL)</strong>
+            </span>
+            <strong id="stock-selected-price">22 450 so‘m</strong>
+          </div>
+          <label for="stock-quantity">Miqdor</label>
+          <input id="stock-quantity" type="number" min="1" step="1" value="1" inputmode="numeric">
+          <div class="stock-order-total">
+            <span>Jami summa</span>
+            <strong id="stock-order-total">22 450 so‘m</strong>
+          </div>
+          <div class="stock-actions">
+            <button class="stock-buy" id="stock-buy" type="button">Sotib olish</button>
+            <button class="stock-sell" id="stock-sell" type="button">Sotish</button>
+          </div>
+          <p class="stock-status" id="stock-status" role="status" aria-live="polite"></p>
+          <div class="stock-account">
+            <span>Demo balans <strong id="stock-balance">10 000 000 so‘m</strong></span>
+            <span>Sizda <strong id="stock-holding">0 dona</strong></span>
+          </div>
+        </div>
+      </div>
+      <p class="stock-disclaimer">Bu namoyish rejimi bo‘lib, real pul yoki real aksiya savdosini bajarmaydi.</p>
+    </section>
+  </main>
+  <script>
+    const moneyFormatter = new Intl.NumberFormat('uz-UZ', { maximumFractionDigits: 0 });
+    const stockState = {
+      balance: 10000000,
+      selectedSymbol: 'AAPL',
+      selectedName: 'Apple',
+      selectedPrice: 22450,
+      holdings: { AAPL: 0, TSLA: 0, NVDA: 0 }
+    };
+    const stockHistory = {
+      AAPL: [22450, 22620, 22510, 22780, 22640, 22450],
+      TSLA: [41800, 42140, 41920, 41680, 42010, 41800],
+      NVDA: [15120, 14980, 15240, 15320, 15410, 15120]
+    };
+    const quantityInput = document.getElementById('stock-quantity');
+    const totalElement = document.getElementById('stock-order-total');
+    const statusElement = document.getElementById('stock-status');
+
+    function formatMoney(amount) {
+      return moneyFormatter.format(amount) + ' so‘m';
+    }
+
+    function renderStockChart() {
+      const chart = document.getElementById('stock-chart');
+      const history = stockHistory[stockState.selectedSymbol];
+      const namespace = 'http://www.w3.org/2000/svg';
+      const width = 700;
+      const height = 150;
+      const left = 24;
+      const right = 676;
+      const top = 12;
+      const bottom = 118;
+      const maximum = Math.max(...history);
+      const minimum = Math.min(...history);
+      const range = maximum - minimum || 1;
+      const xAt = function (index) {
+        return left + (right - left) * index / (history.length - 1);
+      };
+      const yAt = function (value) {
+        return bottom - ((value - minimum) / range) * (bottom - top);
+      };
+
+      chart.replaceChildren();
+      const svg = document.createElementNS(namespace, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+      svg.setAttribute('preserveAspectRatio', 'none');
+      svg.setAttribute('class', 'stock-line-chart');
+
+      for (let grid = 0; grid <= 4; grid += 1) {
+        const y = top + (bottom - top) * grid / 4;
+        const line = document.createElementNS(namespace, 'line');
+        line.setAttribute('x1', String(left));
+        line.setAttribute('x2', String(right));
+        line.setAttribute('y1', String(y));
+        line.setAttribute('y2', String(y));
+        line.setAttribute('class', 'stock-chart-grid');
+        svg.append(line);
+      }
+
+      const points = history.map(function (value, index) {
+        return xAt(index) + ',' + yAt(value);
+      }).join(' ');
+      const path = document.createElementNS(namespace, 'polyline');
+      path.setAttribute('points', points);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', '#c9a7ff');
+      path.setAttribute('stroke-width', '3');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      svg.append(path);
+
+      history.forEach(function (value, index) {
+        const circle = document.createElementNS(namespace, 'circle');
+        circle.setAttribute('cx', String(xAt(index)));
+        circle.setAttribute('cy', String(yAt(value)));
+        circle.setAttribute('r', '4');
+        circle.setAttribute('fill', '#d7c0fa');
+        svg.append(circle);
+      });
+
+      chart.append(svg);
+      document.getElementById('stock-chart-title').textContent =
+        stockState.selectedSymbol + ' kursi';
+      document.getElementById('stock-chart-price').textContent =
+        formatMoney(stockState.selectedPrice);
+    }
+
+    function updateStockPanel() {
+      const quantity = Math.max(1, Number(quantityInput.value) || 1);
+      document.getElementById('stock-selected-name').textContent =
+        stockState.selectedName + ' (' + stockState.selectedSymbol + ')';
+      document.getElementById('stock-selected-price').textContent = formatMoney(stockState.selectedPrice);
+      totalElement.textContent = formatMoney(quantity * stockState.selectedPrice);
+      document.getElementById('stock-balance').textContent = formatMoney(stockState.balance);
+      document.getElementById('stock-holding').textContent =
+        stockState.holdings[stockState.selectedSymbol] + ' dona';
+    }
+
+    document.querySelectorAll('.stock-row').forEach(function (row) {
+      row.addEventListener('click', function () {
+        document.querySelectorAll('.stock-row').forEach(function (item) {
+          item.classList.remove('is-active');
+        });
+        row.classList.add('is-active');
+        stockState.selectedSymbol = row.dataset.symbol;
+        stockState.selectedName = row.dataset.name;
+        stockState.selectedPrice = Number(row.dataset.price);
+        statusElement.textContent = '';
+        statusElement.classList.remove('is-error');
+        updateStockPanel();
+        renderStockChart();
+      });
+    });
+
+    quantityInput.addEventListener('input', updateStockPanel);
+
+    document.getElementById('stock-buy').addEventListener('click', function () {
+      const quantity = Math.floor(Number(quantityInput.value));
+      if (!Number.isInteger(quantity) || quantity < 1) {
+        statusElement.textContent = 'Miqdor kamida 1 dona bo‘lishi kerak.';
+        statusElement.classList.add('is-error');
+        return;
+      }
+      const total = quantity * stockState.selectedPrice;
+      if (total > stockState.balance) {
+        statusElement.textContent = 'Demo balansda mablag‘ yetarli emas.';
+        statusElement.classList.add('is-error');
+        return;
+      }
+      stockState.balance -= total;
+      stockState.holdings[stockState.selectedSymbol] += quantity;
+      statusElement.textContent = quantity + ' dona ' + stockState.selectedSymbol + ' sotib olindi.';
+      statusElement.classList.remove('is-error');
+      updateStockPanel();
+    });
+
+    document.getElementById('stock-sell').addEventListener('click', function () {
+      const quantity = Math.floor(Number(quantityInput.value));
+      if (!Number.isInteger(quantity) || quantity < 1) {
+        statusElement.textContent = 'Miqdor kamida 1 dona bo‘lishi kerak.';
+        statusElement.classList.add('is-error');
+        return;
+      }
+      if (quantity > stockState.holdings[stockState.selectedSymbol]) {
+        statusElement.textContent = 'Sotish uchun bunday miqdor aksiya yo‘q.';
+        statusElement.classList.add('is-error');
+        return;
+      }
+      stockState.balance += quantity * stockState.selectedPrice;
+      stockState.holdings[stockState.selectedSymbol] -= quantity;
+      statusElement.textContent = quantity + ' dona ' + stockState.selectedSymbol + ' sotildi.';
+      statusElement.classList.remove('is-error');
+      updateStockPanel();
+    });
+
+    function updateDemoPrices() {
+      document.querySelectorAll('.stock-row').forEach(function (row) {
+        const oldPrice = Number(row.dataset.price);
+        const changePercent = Math.random() * 1.8 - 0.9;
+        const newPrice = Math.max(100, Math.round(oldPrice * (1 + changePercent / 100)));
+        const changeElement = row.querySelector('.stock-change');
+        row.dataset.price = String(newPrice);
+        row.querySelectorAll('span')[1].querySelector('strong').textContent = formatMoney(newPrice);
+        changeElement.textContent = (changePercent >= 0 ? '+' : '') + changePercent.toFixed(2) + '%';
+        changeElement.classList.toggle('positive', changePercent >= 0);
+        changeElement.classList.toggle('negative', changePercent < 0);
+        if (row.dataset.symbol === stockState.selectedSymbol) {
+          stockState.selectedPrice = newPrice;
+          stockHistory[stockState.selectedSymbol].push(newPrice);
+          if (stockHistory[stockState.selectedSymbol].length > 24) {
+            stockHistory[stockState.selectedSymbol].shift();
+          }
+          const chartChange = document.getElementById('stock-chart-change');
+          chartChange.textContent = (changePercent >= 0 ? '+' : '') + changePercent.toFixed(2) + '%';
+          chartChange.classList.toggle('positive', changePercent >= 0);
+          chartChange.classList.toggle('negative', changePercent < 0);
+        }
+      });
+      updateStockPanel();
+      renderStockChart();
+    }
+
+    window.setInterval(updateDemoPrices, 3000);
+    updateStockPanel();
+    renderStockChart();
+  </script>
+</body>
+</html>
