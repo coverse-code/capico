@@ -1,7 +1,9 @@
+import os
 import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from server import create_app
 
@@ -106,6 +108,17 @@ class AuthApiTests(unittest.TestCase):
             json={"username": "missinguser", "password": "SecurePass987"},
         )
         self.assertEqual(wrong_login.status_code, 401)
+
+    def test_vercel_requires_a_persistent_database(self):
+        with patch.dict(os.environ, {"VERCEL": "1"}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, "DATABASE_URL"):
+                create_app()
+
+    def test_static_site_files_are_served_by_the_app(self):
+        response = self.client.get("/kod/stocks.html")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("text/html", response.content_type)
+        response.close()
 
 
 if __name__ == "__main__":

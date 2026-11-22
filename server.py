@@ -140,7 +140,7 @@ def create_app(database_url: str | None = None, cookie_secure: bool | None = Non
 
     configured_url = database_url or os.environ.get("DATABASE_URL")
     if not configured_url:
-        if os.environ.get("RENDER"):
+        if os.environ.get("RENDER") or os.environ.get("VERCEL"):
             raise RuntimeError("DATABASE_URL must be set on the deployed service.")
         database_path = Path(
             os.environ.get("CAPICO_DATABASE_PATH", ROOT_DIR / "data" / "capico.sqlite3")
