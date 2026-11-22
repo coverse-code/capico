@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d25">
+  <title>Demo ma’lumotlar bazasi | Capico</title>
+  <link rel="stylesheet" href="main.css">
+  <script>
+    (function () {
+      const sessionKey = 'capico-admin-demo-session-v1';
+      let authenticated = false;
+      try {
+        authenticated = window.sessionStorage.getItem(sessionKey) === '1';
+      } catch (error) {
+        document.documentElement.classList.add('admin-auth-pending');
+        window.location.replace('admin-login.html');
+        return;
+      }
+
+      if (!authenticated) {
+        document.documentElement.classList.add('admin-auth-pending');
+        window.location.replace('admin-login.html');
+        return;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const logout = document.getElementById('admin-logout');
+        if (logout) {
+          logout.addEventListener('click', function () {
+            window.sessionStorage.removeItem(sessionKey);
+            window.location.replace('admin-login.html');
+          });
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      const storageKey = 'capico-stock-ledger-users-v1';
+      const legacyStorageKey = 'capico-stock-ledger-v1';
+      const symbols = ['AAPL', 'TSLA', 'NVDA'];
+
+      function createEmptyState() {
+        return {
+          version: 1,
+          balance: 10000000,
+          holdings: { AAPL: 0, TSLA: 0, NVDA: 0 },
+          transactions: []
+        };
+      }
+
+      function isValidState(state) {
+        return state &&
+          state.version === 1 &&
+          Number.isSafeInteger(state.balance) &&
+          state.balance >= 0 &&
+          state.holdings &&
+          symbols.every(function (symbol) {
+            return Number.isSafeInteger(state.holdings[symbol]) && state.holdings[symbol] >= 0;
+          }) &&
+          Array.isArray(state.transactions) &&
+          state.transactions.every(function (transaction) {
+            return transaction &&
+              (transaction.type === 'buy' || transaction.type === 'sell') &&
+              symbols.indexOf(transaction.symbol) !== -1 &&
+              Number.isSafeInteger(transaction.quantity) &&
+              transaction.quantity > 0 &&
+              Number.isSafeInteger(transaction.amount) &&
+              transaction.amount > 0 &&
+              typeof transaction.timestamp === 'string' &&
+              !Number.isNaN(Date.parse(transaction.timestamp));
+          });
+      }
+
+      function readStore() {
+        const stored = window.localStorage.getItem(storageKey);
+        if (stored === null) return { version: 1, accounts: {} };
+        let store;
+        try {
+          store = JSON.parse(stored);
+        } catch (error) {
+          throw new Error('Foydalanuvchi savdo ma’lumotlari buzilgan.');
+        }
+        if (!store || store.version !== 1 || !store.accounts || typeof store.accounts !== 'object' ||
+            Array.isArray(store.accounts) ||
+            !Object.keys(store.accounts).every(function (username) {
+              return /^[a-z0-9._-]{3,24}$/.test(username) && isValidState(store.accounts[username]);
+            })) {
+          throw new Error('Foydalanuvchi savdo ma’lumotlari formati noto‘g‘ri.');
+        }
+        return store;
+      }
+
+      function read() {
+        const store = readStore();
+        const transactions = [];
+        const legacy = window.localStorage.getItem(legacyStorageKey);
+        if (legacy !== null) {
+          let legacyState;
+          try {
+            legacyState = JSON.parse(legacy);
+          } catch (error) {
+            throw new Error('Eski savdo ma’lumotlari buzilgan.');
+          }
+          if (!isValidState(legacyState)) throw new Error('Eski savdo ma’lumotlari formati noto‘g‘ri.');
+          transactions.push.apply(transactions, legacyState.transactions);
+        }
+        Object.keys(store.accounts).forEach(function (username) {
+          transactions.push.apply(transactions, store.accounts[username].transactions);
+        });
+        const aggregate = createEmptyState();
+        aggregate.transactions = transactions;
+        return aggregate;
+      }
+
+      window.CapicoStockLedger = { key: storageKey, read: read };
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="crypto-page admin-demo-page">
+  <main class="admin-demo-shell">
+    <header class="admin-demo-header">
+      <a class="admin-demo-brand" href="cc.html#top" aria-label="Capico bosh sahifasi">
+        <img src="../img/Vector (15).png" alt="Capico">
+      </a>
+      <a class="admin-site-entry" href="admin.html">Admin hisobotiga qaytish</a>
+      <button class="admin-site-entry admin-logout" id="admin-logout" type="button">Chiqish</button>
+    </header>
+    <section class="admin-demo-content" aria-labelledby="database-title">
+      <div class="analytics-heading">
+        <div>
+          <h1 id="database-title">Demo ma’lumotlar bazasi</h1>
+          <p class="admin-demo-description">Aksiya xarid va sotuvlari ro‘yxati.</p>
+        </div>
+        <span class="analytics-mode-label">BRAUZERDA SAQLANGAN</span>
+      </div>
+      <div class="admin-login-warning" role="note">Bu sinov ma’lumotlari faqat shu brauzerda saqlanadi. HTML ichida haqiqiy, qurilmalararo umumiy baza yaratib bo‘lmaydi; buning uchun server kerak.</div>
+      <section class="analytics-pages" aria-labelledby="database-table-title">
+        <h2 id="database-table-title">Savdo yozuvlari</h2>
+        <p id="database-empty">Hozircha yozuv mavjud emas.</p>
+        <p class="analytics-finance-disclaimer is-error" id="database-error" role="status" aria-live="polite" hidden></p>
+        <div class="analytics-table-wrap">
+          <table>
+            <thead>
+              <tr><th>Sana</th><th>Aksiya</th><th>Harakat</th><th>Miqdor</th><th>Summa</th></tr>
+            </thead>
+            <tbody id="database-transactions"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const money = new Intl.NumberFormat('uz-UZ', { maximumFractionDigits: 0 });
+      const body = document.getElementById('database-transactions');
+      const empty = document.getElementById('database-empty');
+      const error = document.getElementById('database-error');
+
+      function renderTransactions() {
+        try {
+          const transactions = window.CapicoStockLedger.read().transactions;
+          body.replaceChildren();
+          empty.hidden = transactions.length > 0;
+          error.hidden = true;
+          transactions.slice().reverse().forEach(function (transaction) {
+            const date = new Date(transaction.timestamp);
+            const row = document.createElement('tr');
+            [
+              date.toLocaleString('uz-UZ'),
+              transaction.symbol,
+              transaction.type === 'buy' ? 'Xarid (chiqim)' : 'Sotuv (kirim)',
+              String(transaction.quantity) + ' dona',
+              money.format(transaction.amount) + ' so‘m'
+            ].forEach(function (value) {
+              const cell = document.createElement('td');
+              cell.textContent = value;
+              row.append(cell);
+            });
+            body.append(row);
+          });
+        } catch (cause) {
+          error.textContent = cause.message || 'Savdo yozuvlarini o‘qib bo‘lmadi.';
+          error.hidden = false;
+        }
+      }
+
+      window.addEventListener('storage', function (event) {
+        if (event.key === window.CapicoStockLedger.key) renderTransactions();
+      });
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) renderTransactions();
+      });
+      renderTransactions();
+    })();
+  </script>
+</body>
+</html>

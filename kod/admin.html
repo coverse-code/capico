@@ -6,6 +6,120 @@
   <meta name="theme-color" content="#160d25">
   <title>Sayt tahlillari | Capico</title>
   <link rel="stylesheet" href="main.css">
+  <script>
+    (function () {
+      const storageKey = 'capico-stock-ledger-users-v1';
+      const legacyStorageKey = 'capico-stock-ledger-v1';
+      const symbols = ['AAPL', 'TSLA', 'NVDA'];
+
+      function createEmptyState() {
+        return {
+          version: 1,
+          balance: 10000000,
+          holdings: { AAPL: 0, TSLA: 0, NVDA: 0 },
+          transactions: []
+        };
+      }
+
+      function isValidState(state) {
+        return state &&
+          state.version === 1 &&
+          Number.isSafeInteger(state.balance) &&
+          state.balance >= 0 &&
+          state.holdings &&
+          symbols.every(function (symbol) {
+            return Number.isSafeInteger(state.holdings[symbol]) && state.holdings[symbol] >= 0;
+          }) &&
+          Array.isArray(state.transactions) &&
+          state.transactions.every(function (transaction) {
+            return transaction &&
+              (transaction.type === 'buy' || transaction.type === 'sell') &&
+              symbols.indexOf(transaction.symbol) !== -1 &&
+              Number.isSafeInteger(transaction.quantity) &&
+              transaction.quantity > 0 &&
+              Number.isSafeInteger(transaction.amount) &&
+              transaction.amount > 0 &&
+              typeof transaction.timestamp === 'string' &&
+              !Number.isNaN(Date.parse(transaction.timestamp));
+          });
+      }
+
+      function readStore() {
+        const stored = window.localStorage.getItem(storageKey);
+        if (stored === null) return { version: 1, accounts: {} };
+        let store;
+        try {
+          store = JSON.parse(stored);
+        } catch (error) {
+          throw new Error('Foydalanuvchi savdo ma’lumotlari buzilgan.');
+        }
+        if (!store || store.version !== 1 || !store.accounts || typeof store.accounts !== 'object' ||
+            Array.isArray(store.accounts) ||
+            !Object.keys(store.accounts).every(function (username) {
+              return /^[a-z0-9._-]{3,24}$/.test(username) && isValidState(store.accounts[username]);
+            })) {
+          throw new Error('Foydalanuvchi savdo ma’lumotlari formati noto‘g‘ri.');
+        }
+        return store;
+      }
+
+      function read() {
+        const store = readStore();
+        const transactions = [];
+        const legacy = window.localStorage.getItem(legacyStorageKey);
+        if (legacy !== null) {
+          let legacyState;
+          try {
+            legacyState = JSON.parse(legacy);
+          } catch (error) {
+            throw new Error('Eski savdo ma’lumotlari buzilgan.');
+          }
+          if (!isValidState(legacyState)) throw new Error('Eski savdo ma’lumotlari formati noto‘g‘ri.');
+          transactions.push.apply(transactions, legacyState.transactions);
+        }
+        Object.keys(store.accounts).forEach(function (username) {
+          transactions.push.apply(transactions, store.accounts[username].transactions);
+        });
+        const aggregate = createEmptyState();
+        aggregate.transactions = transactions;
+        return aggregate;
+      }
+
+      window.CapicoStockLedger = {
+        key: storageKey,
+        read: read
+      };
+    })();
+  </script>
+  <script>
+    (function () {
+      const sessionKey = 'capico-admin-demo-session-v1';
+      let authenticated = false;
+      try {
+        authenticated = window.sessionStorage.getItem(sessionKey) === '1';
+      } catch (error) {
+        document.documentElement.classList.add('admin-auth-pending');
+        window.location.replace('admin-login.html');
+        return;
+      }
+
+      if (!authenticated) {
+        document.documentElement.classList.add('admin-auth-pending');
+        window.location.replace('admin-login.html');
+        return;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const logout = document.getElementById('admin-logout');
+        if (logout) {
+          logout.addEventListener('click', function () {
+            window.sessionStorage.removeItem(sessionKey);
+            window.location.replace('admin-login.html');
+          });
+        }
+      });
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,6 +134,7 @@
         <span>Saytga qaytish</span>
         <span aria-hidden="true">⟶</span>
       </a>
+      <button class="admin-site-entry admin-logout" id="admin-logout" type="button">Chiqish</button>
     </header>
     <section class="admin-demo-content" id="siteAnalyticsDashboard" aria-labelledby="analytics-title">
       <div class="analytics-heading">
@@ -85,9 +200,11 @@
         <div class="analytics-finance-heading">
           <div>
             <h2 id="analytics-finance-title">Moliyaviy kirim-chiqim</h2>
-            <p>So‘nggi 7 kun uchun taxminiy hisobot.</p>
+            <p>Oxirgi 7 kun: sotuvlar kirim, xaridlar chiqim sifatida hisoblanadi.</p>
           </div>
-          <span class="analytics-mode-label">SO‘M</span>
+          <div class="analytics-finance-actions">
+            <span class="analytics-mode-label">DEMO · SO‘M</span>
+          </div>
         </div>
         <div class="analytics-summary">
           <article class="analytics-card"><span>Jami kirim</span><strong id="finance-income">0 so‘m</strong></article>
@@ -111,6 +228,7 @@
                 <tbody id="analytics-finance-daily"></tbody>
               </table>
             </div>
+            <p class="analytics-finance-disclaimer" id="analytics-finance-status" role="status" aria-live="polite"></p>
           </section>
         </div>
       </section>
@@ -252,29 +370,55 @@
       setText('analytics-offline-users', String(total - online));
     }
     function renderFinance() {
-      const finance = [];
+      const status = document.getElementById('analytics-finance-status');
+      const body = document.getElementById('analytics-finance-daily');
+      let transactions;
+      try {
+        transactions = window.CapicoStockLedger.read().transactions;
+      } catch (error) {
+        if (status) status.textContent = error.message || 'Moliyaviy hisobotni o‘qib bo‘lmadi.';
+        if (status) status.classList.add('is-error');
+        setText('finance-income', 'Hisoblab bo‘lmadi');
+        setText('finance-expenses', 'Hisoblab bo‘lmadi');
+        setText('finance-balance', 'Hisoblab bo‘lmadi');
+        if (body) body.replaceChildren();
+        renderLineChart('analytics-finance-chart', [], [
+          ['income', '#79d6a8'],
+          ['expenses', '#e48ba3']
+        ]);
+        return;
+      }
+      const totalsByDate = {};
       let income = 0;
       let expenses = 0;
       for (let index = 6; index >= 0; index -= 1) {
         const date = new Date();
         date.setDate(date.getDate() - index);
-        const dayIncome = random(500000, 5000000);
-        const dayExpenses = random(100000, 3000000);
-        finance.push({
+        const key = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') +
+          '-' + String(date.getDate()).padStart(2, '0');
+        totalsByDate[key] = {
           label: String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0'),
-          income: dayIncome,
-          expenses: dayExpenses
-        });
-        income += dayIncome;
-        expenses += dayExpenses;
+          income: 0,
+          expenses: 0
+        };
       }
+      transactions.forEach(function (transaction) {
+        const date = new Date(transaction.timestamp);
+        const key = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') +
+          '-' + String(date.getDate()).padStart(2, '0');
+        if (!totalsByDate[key]) return;
+        const amountKey = transaction.type === 'sell' ? 'income' : 'expenses';
+        totalsByDate[key][amountKey] += transaction.amount;
+        if (transaction.type === 'sell') income += transaction.amount;
+        else expenses += transaction.amount;
+      });
+      const finance = Object.keys(totalsByDate).map(function (key) { return totalsByDate[key]; });
       setText('finance-income', money.format(income) + ' so‘m');
       setText('finance-expenses', money.format(expenses) + ' so‘m');
       const balance = income - expenses;
       setText('finance-balance', money.format(balance) + ' so‘m');
       const balanceElement = document.getElementById('finance-balance');
       if (balanceElement) balanceElement.classList.toggle('is-negative', balance < 0);
-      const body = document.getElementById('analytics-finance-daily');
       if (body) {
         body.replaceChildren();
         finance.forEach(function (day) {
@@ -292,16 +436,28 @@
         ['income', '#79d6a8'],
         ['expenses', '#e48ba3']
       ]);
+      if (status) {
+        status.classList.remove('is-error');
+        status.textContent = transactions.length
+          ? 'Moliyaviy ma’lumotlar shu brauzerda saqlangan demo savdo yozuvlaridan olindi.'
+          : 'Hozircha savdo yozuvlari yo‘q. Sotib olish yoki sotishdan keyin kunlik hisobot yangilanadi.';
+      }
     }
     function renderAll() {
       renderTraffic();
       renderPages();
       renderUsers();
       renderFinance();
-      setText('siteAnalyticsStatus', 'Raqamlar taxminiy ko‘rsatkichlar bo‘lib, namoyish maqsadida yaratiladi.');
+      setText('siteAnalyticsStatus', 'Tashrif va foydalanuvchi raqamlari taxminiy. Moliyaviy hisobot savdo yozuvlaridan olinadi.');
     }
     const refresh = document.getElementById('analytics-refresh');
     if (refresh) refresh.addEventListener('click', renderAll);
+    window.addEventListener('storage', function (event) {
+      if (event.key === window.CapicoStockLedger.key) renderFinance();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) renderFinance();
+    });
     renderAll();
   })();
   </script>

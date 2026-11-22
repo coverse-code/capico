@@ -4422,6 +4422,38 @@ input:focus-visible {
   text-decoration: none;
 }
 
+.crypto-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.crypto-hero-stock-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 12px 18px;
+  border: 1px solid rgba(201, 167, 255, .35);
+  border-radius: 999px;
+  color: #e7dafa;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.crypto-hero-stock-link:hover,
+.crypto-hero-stock-link:focus-visible {
+  border-color: #c9a7ff;
+  background: rgba(141, 104, 216, .16);
+}
+
+.crypto-hero-stock-link:focus-visible {
+  outline: 2px solid #c9a7ff;
+  outline-offset: 3px;
+}
+
 .crypto-hero-art {
   position: relative;
   width: min(100%, 430px);
@@ -4698,6 +4730,232 @@ input:focus-visible {
   color: #d7c0fa;
 }
 
+body.stock-auth-open {
+  overflow: hidden;
+}
+
+.stock-auth-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(8, 6, 13, .82);
+  backdrop-filter: blur(8px);
+}
+
+.stock-auth-panel[hidden] {
+  display: none;
+}
+
+.stock-auth-card {
+  width: min(100%, 420px);
+  padding: 24px;
+  box-sizing: border-box;
+  border: 1px solid rgba(188, 148, 236, .2);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #1c1526, #0d0b12);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .48);
+}
+
+.stock-auth-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stock-auth-heading h3 {
+  margin: 0;
+  color: #f4effb;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.stock-auth-form {
+  display: grid;
+  gap: 8px;
+}
+
+.stock-auth-form[hidden],
+.stock-register-step[hidden],
+.stock-auth-actions [hidden],
+.stock-session-panel[hidden] {
+  display: none;
+}
+
+.stock-register-step {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.stock-session-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 12px;
+  border: 1px solid rgba(188, 148, 236, .2);
+  border-radius: 10px;
+  color: #b6adbf;
+  font-size: 12px;
+}
+
+.stock-session-panel strong {
+  color: #d7c0fa;
+}
+
+.stock-auth-form label {
+  margin: 2px 0 0;
+  color: #b6adbf;
+  font-size: 12px;
+}
+
+.stock-auth-form input {
+  width: 100%;
+  height: 42px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.stock-phone-entry {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 12px;
+  border: 1px solid rgba(188, 148, 236, .22);
+  border-radius: 8px;
+  background: #100d16;
+  color: #d7c0fa;
+}
+
+.stock-phone-entry span {
+  font-size: 14px;
+}
+
+.stock-phone-entry input {
+  min-width: 0;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f4effb;
+}
+
+.stock-phone-entry:focus-within {
+  outline: 2px solid #c9a7ff;
+  outline-offset: 1px;
+}
+
+.stock-auth-form small,
+.stock-auth-step,
+.stock-auth-note {
+  margin: 0;
+  color: #a49bad;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.stock-auth-step {
+  color: #c9a7ff;
+}
+
+.stock-auth-primary,
+.stock-auth-secondary,
+.stock-auth-link {
+  min-height: 38px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.stock-auth-primary {
+  margin-top: 5px;
+  background: #7042a8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.stock-auth-primary:hover:not(:disabled) {
+  background: #8151bc;
+}
+
+.stock-auth-secondary {
+  padding: 0 12px;
+  border: 1px solid rgba(188, 148, 236, .22);
+  background: transparent;
+  color: #d7c0fa;
+}
+
+.stock-auth-link {
+  min-height: 30px;
+  padding: 4px 0;
+  background: transparent;
+  color: #c9a7ff;
+  text-align: left;
+}
+
+.stock-auth-home-button {
+  display: block;
+  margin-top: 16px;
+  padding: 11px 14px;
+  border: 1px solid rgba(188, 148, 236, .24);
+  border-radius: 8px;
+  color: #c9a7ff;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.stock-auth-home-button:hover {
+  background: rgba(188, 148, 236, .1);
+}
+
+.stock-auth-primary:focus-visible,
+.stock-auth-secondary:focus-visible,
+.stock-auth-link:focus-visible,
+.stock-auth-home-button:focus-visible {
+  outline: 2px solid #c9a7ff;
+  outline-offset: 2px;
+}
+
+.stock-auth-actions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+}
+
+.stock-auth-actions [hidden] {
+  display: none;
+}
+
+.stock-auth-status {
+  min-height: 17px;
+  margin: 8px 0 0;
+  color: #79d6a8;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.stock-auth-status.is-error {
+  color: #f0a8b5;
+}
+
+.stock-auth-note {
+  margin-top: 7px;
+  color: #80778b;
+}
+
 .stock-selected span {
   display: grid;
   gap: 5px;
@@ -4755,6 +5013,11 @@ input:focus-visible {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+}
+
+.stock-actions button:disabled {
+  cursor: not-allowed;
+  opacity: .48;
 }
 
 .stock-buy {
@@ -5009,6 +5272,56 @@ input:focus-visible {
   box-shadow: 0 0 0 3px rgba(154, 107, 224, .13);
 }
 
+.admin-password-field {
+  position: relative;
+}
+
+.admin-login-card form .admin-password-field input {
+  padding-right: 48px;
+}
+
+.admin-login-card form .admin-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  margin: 0;
+  padding: 8px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #b6adbf;
+  cursor: pointer;
+}
+
+.admin-login-card form .admin-password-toggle:hover {
+  background: rgba(188, 148, 236, .12);
+  color: #f4effb;
+}
+
+.admin-login-card form .admin-password-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.admin-password-toggle .admin-password-eye-slash {
+  opacity: 1;
+  transition: opacity .15s ease;
+}
+
+.admin-password-toggle.is-visible .admin-password-eye-slash {
+  opacity: 0;
+}
+
 .admin-login-card form button {
   margin-top: 14px;
   padding: 12px;
@@ -5018,7 +5331,52 @@ input:focus-visible {
   color: #f4effb;
   font: inherit;
   font-size: 13px;
+  cursor: pointer;
+  transition: background .2s ease, opacity .2s ease;
+}
+
+.admin-login-card form button:hover:not(:disabled) {
+  background: #8151bc;
+}
+
+.admin-login-card form button:disabled {
+  cursor: wait;
   opacity: .62;
+}
+
+.admin-login-card form button:focus-visible,
+.admin-login-card form input:focus-visible {
+  outline: 2px solid #c9a7ff;
+  outline-offset: 3px;
+}
+
+.admin-login-card form .admin-password-toggle:focus-visible {
+  outline: 2px solid #c9a7ff;
+  outline-offset: 1px;
+}
+
+.admin-login-card form #admin-password-confirm-group[hidden] {
+  display: none;
+}
+
+.admin-login-status {
+  min-height: 18px;
+  margin: 2px 0 0;
+  color: #a7d7b4;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.admin-login-status.is-error {
+  color: #f0a8b5;
+}
+
+.admin-login-warning {
+  margin-bottom: 20px;
+}
+
+html.admin-auth-pending body {
+  visibility: hidden;
 }
 
 .admin-login-warning {
@@ -5111,6 +5469,11 @@ input:focus-visible {
 .admin-site-entry:focus-visible {
   outline: 2px solid #c9a7ff;
   outline-offset: 3px;
+}
+
+.admin-logout {
+  cursor: pointer;
+  font: inherit;
 }
 
 .admin-demo-back {
@@ -5445,7 +5808,16 @@ input:focus-visible {
 
 .analytics-finance-disclaimer {
   margin-top: 12px;
+  }
+
+  .admin-login-card form input {
+  min-height: 46px;
+  font-size: 16px;
   color: #c9a7ff;
+}
+
+.analytics-finance-disclaimer.is-error {
+  color: #f0a8b5;
 }
 
 .analytics-card strong.is-negative {
@@ -6010,7 +6382,11 @@ input:focus-visible {
   }
 
   .analytics-summary {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .analytics-summary > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .admin-preview iframe {

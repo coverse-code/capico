@@ -6,12 +6,131 @@
   <meta name="theme-color" content="#160d25">
   <title>Aksiyalar savdosi | Capico</title>
   <link rel="stylesheet" href="main.css">
+  <script>
+    (function () {
+      const storageKey = 'capico-stock-ledger-users-v1';
+      const legacyStorageKey = 'capico-stock-ledger-v1';
+      const symbols = ['AAPL', 'TSLA', 'NVDA'];
+
+      function createEmptyState() {
+        return {
+          version: 1,
+          balance: 10000000,
+          holdings: { AAPL: 0, TSLA: 0, NVDA: 0 },
+          transactions: []
+        };
+      }
+
+      function isValidState(state) {
+        return state &&
+          state.version === 1 &&
+          Number.isSafeInteger(state.balance) &&
+          state.balance >= 0 &&
+          state.holdings &&
+          symbols.every(function (symbol) {
+            return Number.isSafeInteger(state.holdings[symbol]) && state.holdings[symbol] >= 0;
+          }) &&
+          Array.isArray(state.transactions) &&
+          state.transactions.every(function (transaction) {
+            return transaction &&
+              (transaction.type === 'buy' || transaction.type === 'sell') &&
+              symbols.indexOf(transaction.symbol) !== -1 &&
+              Number.isSafeInteger(transaction.quantity) &&
+              transaction.quantity > 0 &&
+              Number.isSafeInteger(transaction.amount) &&
+              transaction.amount > 0 &&
+              typeof transaction.timestamp === 'string' &&
+              !Number.isNaN(Date.parse(transaction.timestamp));
+          });
+      }
+
+      function readStore() {
+        const stored = window.localStorage.getItem(storageKey);
+        if (stored === null) return { version: 1, accounts: {} };
+
+        let store;
+        try {
+          store = JSON.parse(stored);
+        } catch (error) {
+          throw new Error('Foydalanuvchi savdo ma’lumotlari buzilgan.');
+        }
+
+        if (!store || store.version !== 1 || !store.accounts || typeof store.accounts !== 'object' ||
+            Array.isArray(store.accounts) ||
+            !Object.keys(store.accounts).every(function (username) {
+              return /^[a-z0-9._-]{3,24}$/.test(username) && isValidState(store.accounts[username]);
+            })) {
+          throw new Error('Foydalanuvchi savdo ma’lumotlari formati noto‘g‘ri.');
+        }
+        return store;
+      }
+
+      function readLegacyState() {
+        const stored = window.localStorage.getItem(legacyStorageKey);
+        if (stored === null) return createEmptyState();
+        let state;
+        try {
+          state = JSON.parse(stored);
+        } catch (error) {
+          throw new Error('Eski savdo ma’lumotlari buzilgan.');
+        }
+        if (!isValidState(state)) throw new Error('Eski savdo ma’lumotlari formati noto‘g‘ri.');
+        return state;
+      }
+
+      function read(username) {
+        const store = readStore();
+        if (typeof username === 'string') {
+          const normalizedUsername = username.trim().toLowerCase();
+          if (!/^[a-z0-9._-]{3,24}$/.test(normalizedUsername)) {
+            throw new Error('Foydalanuvchi logini noto‘g‘ri.');
+          }
+          return store.accounts[normalizedUsername] || createEmptyState();
+        }
+        const allTransactions = readLegacyState().transactions;
+        Object.keys(store.accounts).forEach(function (accountName) {
+          allTransactions.push.apply(allTransactions, store.accounts[accountName].transactions);
+        });
+        const aggregate = createEmptyState();
+        aggregate.transactions = allTransactions;
+        return aggregate;
+      }
+
+      function save(username, state) {
+        if (typeof username !== 'string' || !/^[a-z0-9._-]{3,24}$/.test(username)) {
+          throw new Error('Savdo yozuvini foydalanuvchi hisobiga bog‘lab bo‘lmadi.');
+        }
+        const persistedState = {
+          version: 1,
+          balance: state.balance,
+          holdings: {
+            AAPL: state.holdings.AAPL,
+            TSLA: state.holdings.TSLA,
+            NVDA: state.holdings.NVDA
+          },
+          transactions: state.transactions
+        };
+        if (!isValidState(persistedState)) {
+          throw new Error('Savdo ma’lumotlarini saqlash uchun qiymatlar noto‘g‘ri.');
+        }
+        const store = readStore();
+        store.accounts[username] = persistedState;
+        window.localStorage.setItem(storageKey, JSON.stringify(store));
+      }
+
+      window.CapicoStockLedger = {
+        key: storageKey,
+        read: read,
+        save: save
+      };
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="crypto-page">
-  <main class="crypto-shell">
+<body class="crypto-page stock-auth-open">
+  <main class="crypto-shell" inert>
     <header class="navbar section-page-navbar crypto-navbar">
       <a class="logo" href="cc.html#top" aria-label="Capico bosh sahifasi"><img src="../img/Vector (15).png" alt="Capico"></a>
       <nav class="nav-links" aria-label="Asosiy menyu">
@@ -76,6 +195,10 @@
           </div>
         </div>
         <div class="stock-order-panel">
+          <div class="stock-session-panel" id="stock-session-panel" hidden>
+            <span>Siz <strong id="stock-current-user"></strong> sifatida kirdingiz.</span>
+            <button class="stock-auth-link" id="stock-logout" type="button">Chiqish</button>
+          </div>
           <div class="stock-selected">
             <span>
               <small>Tanlangan aksiya</small>
@@ -90,8 +213,8 @@
             <strong id="stock-order-total">22 450 so‘m</strong>
           </div>
           <div class="stock-actions">
-            <button class="stock-buy" id="stock-buy" type="button">Sotib olish</button>
-            <button class="stock-sell" id="stock-sell" type="button">Sotish</button>
+            <button class="stock-buy" id="stock-buy" type="button" disabled>Sotib olish</button>
+            <button class="stock-sell" id="stock-sell" type="button" disabled>Sotish</button>
           </div>
           <p class="stock-status" id="stock-status" role="status" aria-live="polite"></p>
           <div class="stock-account">
@@ -100,29 +223,252 @@
           </div>
         </div>
       </div>
-      <p class="stock-disclaimer">Bu namoyish rejimi bo‘lib, real pul yoki real aksiya savdosini bajarmaydi.</p>
+      <p class="stock-disclaimer">Bu demo rejim: real pul yoki aksiya savdosi bajarilmaydi. Savdo yozuvlari faqat shu brauzerda saqlanadi.</p>
     </section>
   </main>
+  <section class="stock-auth-panel" id="stock-auth-panel" role="dialog" aria-modal="true" aria-labelledby="stock-auth-title">
+    <div class="stock-auth-card">
+      <div class="stock-auth-heading">
+        <h3 id="stock-auth-title">Aksiyalar bo‘limiga kirish</h3>
+      </div>
+      <form class="stock-auth-form" id="stock-login-form">
+        <label for="stock-login-username">Login</label>
+        <input id="stock-login-username" name="username" type="text" autocomplete="username" autofocus required>
+        <label for="stock-login-password">Parol</label>
+        <input id="stock-login-password" name="password" type="password" autocomplete="current-password" minlength="7" required>
+        <button class="stock-auth-primary" type="submit">Kirish</button>
+        <button class="stock-auth-link" id="stock-show-register" type="button">Yangi hisob yaratish</button>
+      </form>
+      <form class="stock-auth-form" id="stock-register-form" hidden>
+        <p class="stock-auth-step" id="stock-register-step-label">1 / 3 · Telefon raqami</p>
+        <div class="stock-register-step" data-register-step="0">
+          <label for="stock-register-phone">Telefon raqami</label>
+          <div class="stock-phone-entry">
+            <span aria-hidden="true">+998</span>
+            <input id="stock-register-phone" name="phone" type="tel" autocomplete="tel-national" placeholder="90 123 45 67" required>
+          </div>
+        </div>
+        <div class="stock-register-step" data-register-step="1" hidden>
+          <label for="stock-register-username">Yangi login</label>
+          <input id="stock-register-username" name="new-username" type="text" autocomplete="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9._\-]{3,24}" required>
+          <small>3–24 belgi: lotin harflari, raqam, nuqta, _ yoki -.</small>
+        </div>
+        <div class="stock-register-step" data-register-step="2" hidden>
+          <label for="stock-register-password">Yangi parol</label>
+          <input id="stock-register-password" name="new-password" type="password" autocomplete="new-password" minlength="7" required>
+          <label for="stock-register-password-confirm">Parolni tasdiqlang</label>
+          <input id="stock-register-password-confirm" name="password-confirm" type="password" autocomplete="new-password" minlength="7" required>
+        </div>
+        <div class="stock-auth-actions">
+          <button class="stock-auth-secondary" id="stock-register-back" type="button" hidden>Orqaga</button>
+          <button class="stock-auth-primary" id="stock-register-next" type="button">Davom etish</button>
+          <button class="stock-auth-primary" id="stock-register-submit" type="submit" hidden>Hisob yaratish</button>
+        </div>
+        <button class="stock-auth-link" id="stock-show-login" type="button">Mavjud hisob bilan kirish</button>
+      </form>
+      <a class="stock-auth-home-button" href="cc.html#top">Bosh sahifaga qaytish</a>
+      <p class="stock-auth-status" id="stock-auth-status" role="status" aria-live="polite"></p>
+      <p class="stock-auth-note">Hisob ma’lumotlari server bazasida saqlanadi. Telefon raqami SMS bilan tasdiqlanmaydi; savdo demo rejimida.</p>
+    </div>
+  </section>
   <script>
     const moneyFormatter = new Intl.NumberFormat('uz-UZ', { maximumFractionDigits: 0 });
-    const stockState = {
+    let stockState = {
       balance: 10000000,
       selectedSymbol: 'AAPL',
       selectedName: 'Apple',
       selectedPrice: 22450,
-      holdings: { AAPL: 0, TSLA: 0, NVDA: 0 }
+      holdings: { AAPL: 0, TSLA: 0, NVDA: 0 },
+      transactions: []
     };
     const stockHistory = {
       AAPL: [22450, 22620, 22510, 22780, 22640, 22450],
       TSLA: [41800, 42140, 41920, 41680, 42010, 41800],
       NVDA: [15120, 14980, 15240, 15320, 15410, 15120]
     };
+    const userStorageKey = 'capico-stock-users-v1';
+    const passwordIterations = 120000;
     const quantityInput = document.getElementById('stock-quantity');
     const totalElement = document.getElementById('stock-order-total');
     const statusElement = document.getElementById('stock-status');
+    const authStatus = document.getElementById('stock-auth-status');
+    const authPanel = document.getElementById('stock-auth-panel');
+    const mainContent = document.querySelector('main');
+    const loginForm = document.getElementById('stock-login-form');
+    const registerForm = document.getElementById('stock-register-form');
+    const registerSteps = Array.from(document.querySelectorAll('.stock-register-step'));
+    let currentUser = null;
+    let registrationStep = 0;
+    let registrationDraft = {};
+
+    function normalizeUsername(username) {
+      return username.trim().toLowerCase();
+    }
+
+    function readUsers() {
+      const saved = window.localStorage.getItem(userStorageKey);
+      if (saved === null) return [];
+      let users;
+      try {
+        users = JSON.parse(saved);
+      } catch (error) {
+        throw new Error('Hisoblar ma’lumoti buzilgan. Ro‘yxatdan o‘tish ma’lumotlarini o‘qib bo‘lmadi.');
+      }
+      if (!Array.isArray(users) || !users.every(function (user) {
+        return user &&
+          typeof user.username === 'string' &&
+          /^[a-z0-9._-]{3,24}$/.test(user.username) &&
+          typeof user.phone === 'string' &&
+          typeof user.salt === 'string' &&
+          /^[a-f0-9]{32}$/i.test(user.salt) &&
+          typeof user.hash === 'string' &&
+          /^[a-f0-9]{64}$/i.test(user.hash);
+      })) {
+        throw new Error('Hisoblar ma’lumoti formati noto‘g‘ri.');
+      }
+      return users;
+    }
+
+    function toHex(bytes) {
+      return Array.from(bytes).map(function (byte) {
+        return byte.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function fromHex(value) {
+      const bytes = new Uint8Array(value.length / 2);
+      for (let index = 0; index < bytes.length; index += 1) {
+        bytes[index] = parseInt(value.slice(index * 2, index * 2 + 2), 16);
+      }
+      return bytes;
+    }
+
+    async function hashPassword(password, salt) {
+      const key = await window.crypto.subtle.importKey(
+        'raw',
+        new TextEncoder().encode(password),
+        'PBKDF2',
+        false,
+        ['deriveBits']
+      );
+      const result = await window.crypto.subtle.deriveBits({
+        name: 'PBKDF2',
+        salt: salt,
+        iterations: passwordIterations,
+        hash: 'SHA-256'
+      }, key, 256);
+      return toHex(new Uint8Array(result));
+    }
+
+    function hashesMatch(actual, expected) {
+      if (actual.length !== expected.length) return false;
+      let difference = 0;
+      for (let index = 0; index < actual.length; index += 1) {
+        difference |= actual.charCodeAt(index) ^ expected.charCodeAt(index);
+      }
+      return difference === 0;
+    }
+
+    function showAuthMessage(message, isError) {
+      authStatus.textContent = message;
+      authStatus.classList.toggle('is-error', Boolean(isError));
+    }
+
+    async function requestApi(path, payload) {
+      const response = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
+      });
+      let result;
+      try {
+        result = await response.json();
+      } catch (error) {
+        throw new Error('Serverdan javobni o‘qib bo‘lmadi.');
+      }
+      if (!response.ok) {
+        const apiError = new Error(result.error || 'So‘rov bajarilmadi.');
+        apiError.status = response.status;
+        throw apiError;
+      }
+      return result;
+    }
+
+    function setLoggedIn(username) {
+      const accountState = window.CapicoStockLedger.read(username);
+      currentUser = username;
+      document.body.classList.remove('stock-auth-open');
+      mainContent.inert = false;
+      authPanel.hidden = true;
+      stockState = Object.assign(stockState, accountState);
+      document.getElementById('stock-login-form').hidden = true;
+      registerForm.hidden = true;
+      document.getElementById('stock-session-panel').hidden = false;
+      document.getElementById('stock-current-user').textContent = username;
+      document.getElementById('stock-buy').disabled = false;
+      document.getElementById('stock-sell').disabled = false;
+      showAuthMessage('', false);
+      updateStockPanel();
+    }
+
+    function renderRegistrationStep() {
+      registerSteps.forEach(function (step, index) {
+        step.hidden = index !== registrationStep;
+      });
+      document.getElementById('stock-register-step-label').textContent =
+        (registrationStep + 1) + ' / 3 · ' +
+        ['Telefon raqami', 'Yangi login', 'Parol'][registrationStep];
+      document.getElementById('stock-register-back').hidden = registrationStep === 0;
+      document.getElementById('stock-register-next').hidden = registrationStep === 2;
+      document.getElementById('stock-register-submit').hidden = registrationStep !== 2;
+    }
+
+    function validateRegistrationStep() {
+      if (registrationStep === 0) {
+        const phone = document.getElementById('stock-register-phone');
+        const enteredDigits = phone.value.replace(/\D/g, '');
+        const nationalDigits = enteredDigits.startsWith('998') ? enteredDigits.slice(3) : enteredDigits;
+        if (!/^[0-9]{9}$/.test(nationalDigits)) {
+          phone.setCustomValidity('Telefon raqamini +998 dan keyin 9 ta raqam bilan kiriting.');
+          phone.reportValidity();
+          phone.setCustomValidity('');
+          return false;
+        }
+        registrationDraft.phone = '+998' + nationalDigits;
+      } else if (registrationStep === 1) {
+        const usernameInput = document.getElementById('stock-register-username');
+        const username = normalizeUsername(usernameInput.value);
+        if (!/^[a-z0-9._-]{3,24}$/.test(username)) {
+          usernameInput.setCustomValidity('Login 3–24 belgi bo‘lsin: lotin harflari, raqam, nuqta, _ yoki -.');
+          usernameInput.reportValidity();
+          usernameInput.setCustomValidity('');
+          return false;
+        }
+        registrationDraft.username = username;
+      }
+      return true;
+    }
 
     function formatMoney(amount) {
       return moneyFormatter.format(amount) + ' so‘m';
+    }
+
+    function saveTransaction(type, quantity, amount) {
+      const transaction = {
+        type: type,
+        symbol: stockState.selectedSymbol,
+        quantity: quantity,
+        amount: amount,
+        timestamp: new Date().toISOString()
+      };
+      const nextState = {
+        balance: stockState.balance,
+        holdings: Object.assign({}, stockState.holdings),
+        transactions: stockState.transactions.concat(transaction)
+      };
+      window.CapicoStockLedger.save(currentUser, nextState);
+      stockState = Object.assign(stockState, nextState);
     }
 
     function renderStockChart() {
@@ -201,6 +547,149 @@
         stockState.holdings[stockState.selectedSymbol] + ' dona';
     }
 
+    loginForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      showAuthMessage('', false);
+      const username = normalizeUsername(document.getElementById('stock-login-username').value);
+      const password = document.getElementById('stock-login-password').value;
+      if (!/^[a-z0-9._-]{3,24}$/.test(username) || password.length < 7) {
+        showAuthMessage('Login yoki parol noto‘g‘ri.', true);
+        return;
+      }
+
+      const submit = loginForm.querySelector('[type="submit"]');
+      submit.disabled = true;
+      try {
+        let result;
+        try {
+          result = await requestApi('/api/login', { username: username, password: password });
+        } catch (error) {
+          if (error.status !== 401) throw error;
+          const users = readUsers();
+          const oldUser = users.find(function (entry) { return entry.username === username; });
+          if (!oldUser || !hashesMatch(await hashPassword(password, fromHex(oldUser.salt)), oldUser.hash)) {
+            throw error;
+          }
+          result = await requestApi('/api/register', {
+            phone: oldUser.phone,
+            username: oldUser.username,
+            password: password
+          });
+          window.localStorage.setItem(userStorageKey, JSON.stringify(users.filter(function (entry) {
+            return entry.username !== oldUser.username;
+          })));
+        }
+        setLoggedIn(result.username);
+        document.getElementById('stock-login-password').value = '';
+      } catch (error) {
+        showAuthMessage(error.message || 'Serverga ulanib bo‘lmadi. Keyinroq qayta urinib ko‘ring.', true);
+      } finally {
+        submit.disabled = false;
+      }
+    });
+
+    document.getElementById('stock-show-register').addEventListener('click', function () {
+      showAuthMessage('', false);
+      registrationStep = 0;
+      registrationDraft = {};
+      loginForm.hidden = true;
+      registerForm.hidden = false;
+      document.getElementById('stock-auth-title').textContent = 'Yangi hisob yaratish';
+      renderRegistrationStep();
+      document.getElementById('stock-register-phone').focus();
+    });
+
+    document.getElementById('stock-show-login').addEventListener('click', function () {
+      registerForm.hidden = true;
+      loginForm.hidden = false;
+      document.getElementById('stock-auth-title').textContent = 'Savdo uchun kiring';
+      showAuthMessage('', false);
+      document.getElementById('stock-login-username').focus();
+    });
+
+    document.getElementById('stock-register-next').addEventListener('click', function () {
+      showAuthMessage('', false);
+      if (!validateRegistrationStep()) return;
+      registrationStep += 1;
+      renderRegistrationStep();
+      const nextInput = registerSteps[registrationStep].querySelector('input');
+      if (nextInput) nextInput.focus();
+    });
+
+    document.getElementById('stock-register-back').addEventListener('click', function () {
+      showAuthMessage('', false);
+      if (registrationStep === 0) return;
+      registrationStep -= 1;
+      renderRegistrationStep();
+      const previousInput = registerSteps[registrationStep].querySelector('input');
+      if (previousInput) previousInput.focus();
+    });
+
+    registerForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      showAuthMessage('', false);
+      if (registrationStep !== 2) return;
+      const password = document.getElementById('stock-register-password').value;
+      const passwordConfirm = document.getElementById('stock-register-password-confirm').value;
+      if (password.length < 7) {
+        showAuthMessage('Parol kamida 7 belgidan iborat bo‘lishi kerak.', true);
+        return;
+      }
+      if (password !== passwordConfirm) {
+        showAuthMessage('Parollar bir-biriga mos kelmadi.', true);
+        return;
+      }
+
+      const submit = document.getElementById('stock-register-submit');
+      submit.disabled = true;
+      try {
+        const result = await requestApi('/api/register', {
+          phone: registrationDraft.phone,
+          username: registrationDraft.username,
+          password: password
+        });
+        setLoggedIn(result.username);
+        document.getElementById('stock-register-password').value = '';
+        document.getElementById('stock-register-password-confirm').value = '';
+      } catch (error) {
+        showAuthMessage(error.message || 'Serverga ulanib bo‘lmadi. Keyinroq qayta urinib ko‘ring.', true);
+      } finally {
+        submit.disabled = false;
+      }
+    });
+
+    document.getElementById('stock-logout').addEventListener('click', async function () {
+      const logoutButton = document.getElementById('stock-logout');
+      logoutButton.disabled = true;
+      try {
+        await requestApi('/api/logout', {});
+      } catch (error) {
+        showAuthMessage(error.message || 'Serverdan chiqib bo‘lmadi.', true);
+        return;
+      } finally {
+        logoutButton.disabled = false;
+      }
+      currentUser = null;
+      stockState = {
+        balance: 10000000,
+        selectedSymbol: stockState.selectedSymbol,
+        selectedName: stockState.selectedName,
+        selectedPrice: stockState.selectedPrice,
+        holdings: { AAPL: 0, TSLA: 0, NVDA: 0 },
+        transactions: []
+      };
+      document.getElementById('stock-session-panel').hidden = true;
+      document.getElementById('stock-login-form').hidden = false;
+      document.getElementById('stock-auth-title').textContent = 'Aksiyalar bo‘limiga kirish';
+      document.body.classList.add('stock-auth-open');
+      mainContent.inert = true;
+      authPanel.hidden = false;
+      document.getElementById('stock-buy').disabled = true;
+      document.getElementById('stock-sell').disabled = true;
+      showAuthMessage('Hisobdan chiqdingiz.', false);
+      updateStockPanel();
+    });
+
     document.querySelectorAll('.stock-row').forEach(function (row) {
       row.addEventListener('click', function () {
         document.querySelectorAll('.stock-row').forEach(function (item) {
@@ -220,6 +709,10 @@
     quantityInput.addEventListener('input', updateStockPanel);
 
     document.getElementById('stock-buy').addEventListener('click', function () {
+      if (!currentUser) {
+        showAuthMessage('Xarid qilishdan oldin hisobga kiring.', true);
+        return;
+      }
       const quantity = Math.floor(Number(quantityInput.value));
       if (!Number.isInteger(quantity) || quantity < 1) {
         statusElement.textContent = 'Miqdor kamida 1 dona bo‘lishi kerak.';
@@ -232,14 +725,28 @@
         statusElement.classList.add('is-error');
         return;
       }
+      const previousBalance = stockState.balance;
       stockState.balance -= total;
       stockState.holdings[stockState.selectedSymbol] += quantity;
+      try {
+        saveTransaction('buy', quantity, total);
+      } catch (error) {
+        stockState.balance = previousBalance;
+        stockState.holdings[stockState.selectedSymbol] -= quantity;
+        statusElement.textContent = error.message || 'Xaridni saqlab bo‘lmadi.';
+        statusElement.classList.add('is-error');
+        return;
+      }
       statusElement.textContent = quantity + ' dona ' + stockState.selectedSymbol + ' sotib olindi.';
       statusElement.classList.remove('is-error');
       updateStockPanel();
     });
 
     document.getElementById('stock-sell').addEventListener('click', function () {
+      if (!currentUser) {
+        showAuthMessage('Sotishdan oldin hisobga kiring.', true);
+        return;
+      }
       const quantity = Math.floor(Number(quantityInput.value));
       if (!Number.isInteger(quantity) || quantity < 1) {
         statusElement.textContent = 'Miqdor kamida 1 dona bo‘lishi kerak.';
@@ -251,11 +758,33 @@
         statusElement.classList.add('is-error');
         return;
       }
-      stockState.balance += quantity * stockState.selectedPrice;
+      const amount = quantity * stockState.selectedPrice;
+      const previousBalance = stockState.balance;
+      stockState.balance += amount;
       stockState.holdings[stockState.selectedSymbol] -= quantity;
+      try {
+        saveTransaction('sell', quantity, amount);
+      } catch (error) {
+        stockState.balance = previousBalance;
+        stockState.holdings[stockState.selectedSymbol] += quantity;
+        statusElement.textContent = error.message || 'Sotuvni saqlab bo‘lmadi.';
+        statusElement.classList.add('is-error');
+        return;
+      }
       statusElement.textContent = quantity + ' dona ' + stockState.selectedSymbol + ' sotildi.';
       statusElement.classList.remove('is-error');
       updateStockPanel();
+    });
+
+    window.addEventListener('storage', function (event) {
+      if (!currentUser || event.key !== window.CapicoStockLedger.key) return;
+      try {
+        stockState = Object.assign(stockState, window.CapicoStockLedger.read(currentUser));
+        updateStockPanel();
+      } catch (error) {
+        statusElement.textContent = error.message || 'Saqlangan savdo ma’lumotlarini yangilab bo‘lmadi.';
+        statusElement.classList.add('is-error');
+      }
     });
 
     function updateDemoPrices() {

@@ -16,10 +16,187 @@
       <img src="../img/Vector (15).png" alt="Capico">
     </a>
     <p class="admin-demo-label">Admin panel</p>
-    <h1>Sayt boshqaruvi</h1>
-    <p class="admin-login-description">Admin panelga kirish va saytni tahrirlash uchun quyidagi tugmani bosing. Panel alohida oynada ochiladi, tugma esa bu sahifada qoladi.</p>
-    <a class="admin-login-demo-link" href="admin.html" target="capico-admin">Admin panelni ochish</a>
+    <h1 id="admin-login-title">Admin paneliga kirish</h1>
+    <p class="admin-login-description" id="admin-login-description">Davom etish uchun admin parolini kiriting.</p>
+    <form id="adminLoginForm" novalidate>
+      <label for="admin-password">Admin paroli</label>
+      <div class="admin-password-field">
+        <input id="admin-password" name="password" type="password" autocomplete="current-password" minlength="7" required>
+        <button class="admin-password-toggle" type="button" aria-label="Parolni ko‘rsatish" aria-pressed="false" aria-controls="admin-password">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+            <path class="admin-password-eye-slash" d="M4 20 20 4"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="admin-password-confirm-group" hidden>
+        <label for="admin-password-confirm">Parolni qayta kiriting</label>
+        <div class="admin-password-field">
+          <input id="admin-password-confirm" name="password-confirm" type="password" autocomplete="new-password" minlength="10">
+          <button class="admin-password-toggle" type="button" aria-label="Parolni ko‘rsatish" aria-pressed="false" aria-controls="admin-password-confirm">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+              <path class="admin-password-eye-slash" d="M4 20 20 4"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <button id="admin-login-submit" type="submit">Kirish</button>
+      <p class="admin-login-status" id="admin-login-status" role="status" aria-live="polite"></p>
+    </form>
     <a class="admin-login-back" href="crypto.html">Crypto sahifasiga qaytish</a>
   </main>
+  <script>
+    (function () {
+      const credentialKey = 'capico-admin-demo-credential-v1';
+      const presetVersionKey = 'capico-admin-preset-version-v1';
+      const sessionKey = 'capico-admin-demo-session-v1';
+      const presetPassword = 'hell7755';
+      const presetVersion = '3';
+      const iterations = 120000;
+      const form = document.getElementById('adminLoginForm');
+      const passwordInput = document.getElementById('admin-password');
+      const confirmGroup = document.getElementById('admin-password-confirm-group');
+      const confirmInput = document.getElementById('admin-password-confirm');
+      const submitButton = document.getElementById('admin-login-submit');
+      const description = document.getElementById('admin-login-description');
+      const status = document.getElementById('admin-login-status');
+
+      document.querySelectorAll('.admin-password-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          const input = document.getElementById(toggle.getAttribute('aria-controls'));
+          const isVisible = input.type === 'password';
+          input.type = isVisible ? 'text' : 'password';
+          toggle.setAttribute('aria-pressed', String(isVisible));
+          toggle.setAttribute('aria-label', isVisible ? 'Parolni yashirish' : 'Parolni ko‘rsatish');
+          toggle.classList.toggle('is-visible', isVisible);
+        });
+      });
+
+      function showError(message) {
+        status.textContent = message;
+        status.classList.add('is-error');
+      }
+
+      function toHex(bytes) {
+        return Array.from(bytes).map(function (byte) {
+          return byte.toString(16).padStart(2, '0');
+        }).join('');
+      }
+
+      function fromHex(value) {
+        const bytes = new Uint8Array(value.length / 2);
+        for (let index = 0; index < bytes.length; index += 1) {
+          bytes[index] = parseInt(value.slice(index * 2, index * 2 + 2), 16);
+        }
+        return bytes;
+      }
+
+      async function hashPassword(password, salt) {
+        const key = await window.crypto.subtle.importKey(
+          'raw',
+          new TextEncoder().encode(password),
+          'PBKDF2',
+          false,
+          ['deriveBits']
+        );
+        const result = await window.crypto.subtle.deriveBits({
+          name: 'PBKDF2',
+          salt: salt,
+          iterations: iterations,
+          hash: 'SHA-256'
+        }, key, 256);
+        return toHex(new Uint8Array(result));
+      }
+
+      function readCredential() {
+        const saved = window.localStorage.getItem(credentialKey);
+        if (saved === null) return null;
+
+        let credential;
+        try {
+          credential = JSON.parse(saved);
+        } catch (error) {
+          throw new Error('Saqlangan login ma’lumoti buzilgan. Brauzer xotirasini tekshiring.');
+        }
+
+        if (!credential || credential.version !== 1 || credential.iterations !== iterations ||
+            typeof credential.salt !== 'string' || !/^[a-f0-9]{32}$/i.test(credential.salt) ||
+            typeof credential.hash !== 'string' || !/^[a-f0-9]{64}$/i.test(credential.hash)) {
+          throw new Error('Saqlangan login ma’lumoti formati noto‘g‘ri.');
+        }
+        return credential;
+      }
+
+      let credential;
+      try {
+        if (!window.crypto || !window.crypto.subtle) {
+          throw new Error('Parol himoyasi uchun zamonaviy brauzerda sahifani oching.');
+        }
+        credential = readCredential();
+      } catch (error) {
+        showError(error.message || 'Login ma’lumotlarini o‘qib bo‘lmadi.');
+        submitButton.disabled = true;
+        return;
+      }
+
+      async function initializePresetCredential() {
+        if (credential !== null && window.localStorage.getItem(presetVersionKey) === presetVersion) return;
+
+        const salt = window.crypto.getRandomValues(new Uint8Array(16));
+        credential = {
+          version: 1,
+          iterations: iterations,
+          salt: toHex(salt),
+          hash: await hashPassword(presetPassword, salt)
+        };
+        window.localStorage.setItem(credentialKey, JSON.stringify(credential));
+        window.localStorage.setItem(presetVersionKey, presetVersion);
+      }
+
+      confirmGroup.hidden = true;
+      confirmInput.required = false;
+      passwordInput.autocomplete = 'current-password';
+      submitButton.textContent = 'Kirish';
+      description.textContent = 'Admin paneliga kirish uchun maxsus parolni kiriting.';
+
+      initializePresetCredential().catch(function (error) {
+        showError(error.message || 'Maxsus parolni sozlab bo‘lmadi.');
+        submitButton.disabled = true;
+      });
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        status.textContent = '';
+        status.classList.remove('is-error');
+        const password = passwordInput.value;
+
+        if (password.length < 7) {
+          showError('Parol kamida 7 belgidan iborat bo‘lishi kerak.');
+          return;
+        }
+        submitButton.disabled = true;
+        try {
+          await initializePresetCredential();
+          const actualHash = await hashPassword(password, fromHex(credential.salt));
+          if (actualHash !== credential.hash) {
+            showError('Parol noto‘g‘ri.');
+            passwordInput.value = '';
+            passwordInput.focus();
+            return;
+          }
+
+          window.sessionStorage.setItem(sessionKey, '1');
+          window.location.replace('admin.html');
+        } catch (error) {
+          showError(error.message || 'Parolni saqlash yoki tekshirish amalga oshmadi.');
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
