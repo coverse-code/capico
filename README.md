@@ -13,3 +13,4 @@ Vercel fayl tizimi doimiy emas; shuning uchun deployda SQLite ishlatilmaydi va `
 ## Mahalliy ishga tushirish
 
 Python 3.10+ va `requirements.txt` dagi paketlarni o‘rnating, so‘ng loyiha papkasida `python server.py` buyrug‘ini bajaring. Mahalliy sinov uchun SQLite avtomatik ishlatiladi.
+# capico
